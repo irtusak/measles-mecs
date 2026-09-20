@@ -6,13 +6,18 @@
 #
 # Run: Rscript -e 'shiny::runApp("app.R", port = 7788)'
 #
-# The app reads only local files in data/tidy/, written by R/prepare_data.R.
+# The app reads only local files in data/tidy/, written by scripts/prepare_data.R.
 # It makes no network requests at runtime.
 
 suppressPackageStartupMessages({
   library(shiny); library(bslib); library(ggplot2)
   library(dplyr); library(tidyr); library(readr); library(jsonlite)
 })
+
+# jsonlite also exports validate(), and being attached after shiny it wins.
+# shiny::validate is therefore always called by its full name below; without
+# that, every validation message in the app fails with
+# "is.character(txt) is not TRUE" instead of explaining the problem.
 
 app_dir <- getwd()
 source(file.path(app_dir, "R", "model.R"))
@@ -40,6 +45,11 @@ latest_coverage <- coverage |>
   ungroup()
 
 cov_lookup <- function(geo_sel, age_sel) {
+  # Inputs can be NULL while a session is initialising. Without this guard the
+  # filter below is handed a zero-length value, throws, and the error takes
+  # down every other output in the session.
+  if (length(geo_sel) != 1 || length(age_sel) != 1 ||
+      is.na(geo_sel) || is.na(age_sel)) return(NULL)
   row <- latest_coverage |> filter(geo == geo_sel, age_group == age_sel)
   if (nrow(row) == 0) return(NULL)
   as.list(row[1, ])
@@ -339,7 +349,7 @@ server <- function(input, output, session) {
   output$plot_weekly <- renderPlot({
     req(length(input$surv_pts) > 0)
     p <- plot_weekly_cases(weekly, meta, AS_OF, input$surv_pts, input$surv_stack)
-    validate(need(!is.null(p), "No reported cases for the selected jurisdictions."))
+    shiny::validate(shiny::need(!is.null(p), "No reported cases for the selected jurisdictions."))
     p
   })
 
@@ -435,7 +445,7 @@ server <- function(input, output, session) {
   output$plot_cov_trend <- renderPlot({
     p <- plot_coverage_trend(coverage, input$sim_geo, input$sim_age,
                              input$sim_r0, as.numeric(input$sim_ve))
-    validate(need(!is.null(p), "No coverage series for this selection."))
+    shiny::validate(shiny::need(!is.null(p), "No coverage series for this selection."))
     p
   })
 
@@ -486,7 +496,7 @@ server <- function(input, output, session) {
 
   output$plot_equity <- renderPlot({
     p <- plot_equity(eq_calc())
-    validate(need(!is.null(p), paste(
+    shiny::validate(shiny::need(!is.null(p), paste(
       "This combination is impossible: to average out to the observed provincial",
       "figure, coverage in the rest of the population would have to exceed 100%.",
       "Reduce the size of the community or raise its coverage.")))

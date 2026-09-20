@@ -137,3 +137,64 @@ during the build are marked **[M]** and should be reviewed by Kasturi.
   2 provinces, and 2026 year-to-date stands at 1,038 confirmed and 81 probable cases. The dashboard reflects
   the current situation, and treats the 12-month interruption clock as a **live computed indicator** rather
   than a static statement.
+
+### Build and verification decisions
+
+- **[M]** The dashboard is one Shiny app (`app.R`) with six tabs: Overview, Surveillance, Coverage
+  simulator, Equity & clustering, Policy brief, Methods & data. The brief asked for three modules; the
+  Overview and Methods tabs were added because a PHAC reader needs the headline situation up front and the
+  assumptions documented in the app itself, not only in the repository.
+- **[M]** Charts live in `R/plots.R` as **pure functions returning ggplot objects**, not inline in the
+  server. This is what makes `tests/test_plots.R` possible: every chart is rendered headlessly against the
+  real data, so a broken chart is caught without a browser. The Chrome extension was not connected in this
+  environment, so headless rendering was the only way to actually *look* at the output.
+- **[M]** The **elimination clock** is computed from the most recent outbreak-linked rash onset in
+  `outbreaks.csv` (Manitoba, week 31 of 2026 → 8 August 2026), giving an earliest verification date of
+  8 August 2027. It is labelled in the app as our calculation, not a PHAC determination, and the app states
+  that public data do not confirm genotype-level linkage of every chain.
+- **[M]** Epidemiological weeks use the convention that week 1 contains at least four days of the new year
+  and weeks end on Saturday. This is **validated against PHAC's own published dates** — `global_variables.csv`
+  says week 35 of 2026 ends 2026-09-05, and `epi_week_end(2026, 35)` returns that date. The test suite
+  asserts it, so a wrong week convention cannot pass silently.
+- **[M]** Colour-blind-safe Okabe–Ito palette throughout, with semantic roles defined once in `R/theme.R`.
+- **[M]** The equity module deliberately does not name any ethnic or religious community. It demonstrates a
+  mechanism using user-chosen inputs, and says so.
+
+### Bugs found during the build, and what they changed
+
+Recorded because each one would have produced a plausible-looking but wrong dashboard.
+
+1. **17-year-olds were being silently merged into the 7-year-old group.** `grepl("7-year", x)` also matches
+   `"17-year"`. The duplicate keys turned the coverage table into list-columns and `write_csv` wrote them
+   as blanks, so real estimates vanished and a cycle with data was labelled "ok" with no value. Fixed by
+   matching `"for 7-year-old"` with the leading space, and a uniqueness guard now **stops the pipeline** if
+   keys ever collide again.
+2. **The app re-downloaded every source file on startup.** Shiny auto-sources all of `R/`, which included
+   the fetch script. Pipeline moved to `scripts/`.
+3. **`jsonlite::validate()` masks `shiny::validate()`** because jsonlite is attached after shiny. Every
+   validation message in the app failed with `is.character(txt) is not TRUE` instead of explaining the
+   problem — visible only on the error paths, which is exactly when a user needs the message. All calls are
+   now `shiny::validate(shiny::need(...))`.
+4. **The equity chart drew an impossible "100.2% coverage" bar.** Splits that cannot average to the observed
+   provincial figure are now refused, with an explanation, rather than clamped.
+5. **The subscript zero in "R₀" is missing from the default plotting font** and rendered as an empty box.
+   Chart text uses ASCII; the HTML interface still uses the proper glyphs, which browsers render.
+6. **A NULL input took down the whole session.** `cov_lookup()` passed a zero-length value into `filter()`,
+   which threw and poisoned every other output. It now returns NULL defensively.
+
+### Testing
+
+- `tests/test_model.R` — 36 assertions on the epidemiology against hand-computed values.
+- `tests/test_plots.R` — renders all 11 charts headlessly plus 3 edge cases; PNGs land in `tests/output/`.
+- `tests/test_server.R` — drives the Shiny server with `shiny::testServer` across all 42 jurisdiction ×
+  age-group combinations, 18 slider-edge combinations, and both feasible and infeasible equity splits.
+  276 checks. This is what caught bugs 3 and 6.
+
+### Still open
+
+- **[M]** No health-region choropleth. `Figure3-ActiveMap.csv` is downloaded but not yet used; a map needs
+  boundary files and careful suppression handling at small geographies. Deferred rather than done badly.
+- **[M]** Coverage data stops at 2021. Worth checking whether a 2023 cNICS cycle has been published in a
+  form that is not in the StatCan table, and transcribing it with a citation if so.
+- **[M]** The brief's "ship by December or January" timeline predates today (2026-09-19). Kasturi should
+  decide whether the FSWEP framing needs updating for the current application cycle.

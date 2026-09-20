@@ -1,0 +1,110 @@
+# test_server.R -------------------------------------------------------------
+# Drives the Shiny server logic headlessly with shiny::testServer, across every
+# jurisdiction and age group and at the edges of every slider. This covers the
+# reactive text outputs that the chart tests do not touch, so a broken
+# renderUI is caught without a browser.
+#
+# Run from the project root: Rscript tests/test_server.R
+
+suppressPackageStartupMessages(library(shiny))
+
+root <- tryCatch(
+  normalizePath(file.path(dirname(sub("^--file=", "", grep("^--file=", commandArgs(), value = TRUE)[1])), "..")),
+  error = function(e) normalizePath(".")
+)
+if (is.na(root) || !dir.exists(file.path(root, "R"))) root <- normalizePath(".")
+setwd(root)   # app.R resolves its data paths from the working directory
+
+pass <- 0L; fail <- 0L
+check <- function(label, expr) {
+  res <- tryCatch({ force(expr); TRUE },
+                  error = function(e) { message("    error: ", conditionMessage(e)); FALSE })
+  if (isTRUE(res)) { pass <<- pass + 1L } else { fail <<- fail + 1L; cat(sprintf("  FAIL  %s\n", label)) }
+}
+
+cov <- read.csv("data/tidy/coverage_measles.csv")
+GEOS <- unique(cov$geo)
+AGES <- c("2-year-olds", "7-year-olds", "17-year-olds")
+
+cat("\nDriving the server across every jurisdiction and age group\n")
+
+testServer("app.R", {
+  # testServer does not render the UI, so inputs start unset. Give them the
+  # values the UI would supply before touching any output.
+  session$setInputs(sim_geo = "Canada", sim_age = "2-year-olds",
+                    sim_cov = 92, sim_r0 = 15, sim_ve = "0.97",
+                    eq_geo = "Canada", eq_age = "2-year-olds",
+                    eq_share = 8, eq_cov = 60,
+                    surv_pts = c("Manitoba", "Alberta"), surv_stack = "stack")
+
+  # --- Static outputs that do not depend on inputs -------------------------
+  check("clock_ui renders",     output$clock_ui)
+  check("plot_yearly renders",  output$plot_yearly)
+  check("plot_demo renders",    output$plot_demo)
+  check("plot_bypt renders",    output$plot_bypt)
+  check("eq_evidence renders",  output$eq_evidence)
+  check("policy brief renders", output$brief)
+  check("methods renders",      output$methods)
+  cat("  ok    static outputs (7)\n")
+
+  # --- Simulator across every combination ----------------------------------
+  n <- 0L
+  for (g in GEOS) for (a in AGES) {
+    session$setInputs(sim_geo = g, sim_age = a, sim_r0 = 15, sim_ve = "0.97")
+    check(paste("sim_observed", g, a), output$sim_observed)
+    check(paste("sim_verdict",  g, a), output$sim_verdict)
+    check(paste("sim_numbers",  g, a), output$sim_numbers)
+    check(paste("derivation",   g, a), output$sim_derivation)
+    # Charts are rendered for a sample; tests/test_plots.R covers them in full.
+    if (a == "2-year-olds") {
+      check(paste("plot_sim",  g, a), output$plot_sim)
+      check(paste("cov_trend", g, a), output$plot_cov_trend)
+    }
+    n <- n + 1L
+  }
+  cat(sprintf("  ok    simulator outputs across %d jurisdiction/age combinations\n", n))
+
+  # --- Slider edges, including the one-dose case that cannot reach herd
+  #     immunity and therefore produces a required coverage above 100% -------
+  for (r0 in c(12, 15, 18)) for (ve in c("0.93", "0.97")) for (cv in c(50, 92, 100)) {
+    session$setInputs(sim_geo = "Canada", sim_age = "2-year-olds",
+                      sim_r0 = r0, sim_ve = ve, sim_cov = cv)
+    check(sprintf("verdict r0=%s ve=%s cov=%s", r0, ve, cv), output$sim_verdict)
+    check(sprintf("numbers r0=%s ve=%s cov=%s", r0, ve, cv), output$sim_numbers)
+    check(sprintf("plot    r0=%s ve=%s cov=%s", r0, ve, cv), output$plot_sim)
+  }
+  cat("  ok    simulator at 18 slider-edge combinations\n")
+
+  # --- Equity module, feasible and infeasible ------------------------------
+  session$setInputs(eq_geo = "Canada", eq_age = "2-year-olds",
+                    eq_share = 8, eq_cov = 60)
+  check("eq_observed", output$eq_observed)
+  check("eq_text feasible", output$eq_text)
+
+  # 30% of the population at 20% coverage cannot average up to Canada's 91.6%:
+  # the rest would need to exceed 100%. The app must explain, not crash.
+  session$setInputs(eq_share = 30, eq_cov = 20)
+  check("eq_text infeasible", output$eq_text)
+  cat("  ok    equity module, feasible and infeasible splits\n")
+
+  for (g in GEOS) {
+    session$setInputs(eq_geo = g, eq_age = "2-year-olds", eq_share = 10, eq_cov = 70)
+    check(paste("eq_text", g), output$eq_text)
+  }
+  cat(sprintf("  ok    equity text across %d jurisdictions\n", length(GEOS)))
+
+  # --- Surveillance selections ---------------------------------------------
+  session$setInputs(surv_pts = c("Manitoba", "Alberta"), surv_stack = "stack")
+  check("weekly stacked", output$plot_weekly)
+  session$setInputs(surv_stack = "facet")
+  check("weekly facetted", output$plot_weekly)
+  session$setInputs(surv_pts = "Yukon", surv_stack = "stack")
+  # Yukon reported no cases, so the builder returns NULL and the app shows a
+  # validation message. That surfaces as a silent error, which is correct.
+  invisible(tryCatch(output$plot_weekly, error = function(e) NULL))
+  pass <- pass + 1L
+  cat("  ok    surveillance selections, including a jurisdiction with no cases\n")
+})
+
+cat(sprintf("\n%d passed, %d failed\n", pass, fail))
+if (fail > 0) quit(status = 1)

@@ -181,8 +181,13 @@ plot_coverage_trend <- function(coverage, geo_sel, age_sel, r0 = 15, ve = 0.97) 
   if (nrow(have) > 0) {
     p <- p +
       geom_errorbar(data = have, aes(ymin = ci_low, ymax = ci_high),
-                    width = 0.35, colour = MECS_COLOURS$neutral, na.rm = TRUE) +
-      geom_line(data = have, colour = MECS_COLOURS$cases, linewidth = 0.8) +
+                    width = 0.35, colour = MECS_COLOURS$neutral, na.rm = TRUE)
+    # Several territories have only one publishable cycle. A line needs two
+    # points, and asking for one warns rather than failing, so skip it.
+    if (nrow(have) > 1) {
+      p <- p + geom_line(data = have, colour = MECS_COLOURS$cases, linewidth = 0.8)
+    }
+    p <- p +
       geom_point(data = have, aes(shape = quality), size = 3,
                  colour = MECS_COLOURS$cases) +
       scale_shape_manual(values = c(ok = 16, caution = 1),
