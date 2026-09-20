@@ -73,6 +73,12 @@ render("equity",        plot_equity(clustered_coverage(0.97, 0.05, 0.70, 15, 0.9
 render("coverage_canada",  plot_coverage_trend(coverage, "Canada", "2-year-olds"), 8, 4.5)
 render("coverage_alberta", plot_coverage_trend(coverage, "Alberta", "2-year-olds"), 8, 4.5)
 render("coverage_nunavut", plot_coverage_trend(coverage, "Nunavut", "2-year-olds"), 8, 4.5)
+# One dose cannot reach herd immunity at R0 = 15, so required coverage exceeds
+# 100%. The threshold line must not be drawn off-scale and silently vanish;
+# the chart says so in the subtitle instead.
+render("coverage_unreachable",
+       plot_coverage_trend(coverage, "Canada", "2-year-olds", 15, 0.93), 8, 4.6)
+render("coverage_17yo",    plot_coverage_trend(coverage, "Canada", "17-year-olds"), 8, 4.5)
 
 cat("\nEdge cases\n")
 empty <- plot_weekly_cases(weekly, meta, AS_OF, character(0), "stack")

@@ -171,12 +171,20 @@ plot_coverage_trend <- function(coverage, geo_sel, age_sel, r0 = 15, ve = 0.97) 
   have <- d |> filter(!is.na(coverage))
   gaps <- d |> filter(is.na(coverage))
 
-  p <- ggplot(d, aes(year, coverage)) +
-    geom_hline(yintercept = req_cov, linetype = "dashed",
-               colour = MECS_COLOURS$threshold) +
-    annotate("text", x = min(d$year), y = req_cov,
-             label = sprintf(" coverage needed at R0 = %.0f: %.1f%%", r0, req_cov),
-             hjust = 0, vjust = -0.7, size = 3.3, colour = MECS_COLOURS$threshold)
+  # At one-dose effectiveness the required coverage exceeds 100%: no coverage
+  # level reaches the threshold. Drawing the line off-scale would make it
+  # vanish silently, so say so in the subtitle instead.
+  reachable <- req_cov <= 100
+
+  p <- ggplot(d, aes(year, coverage))
+  if (reachable) {
+    p <- p +
+      geom_hline(yintercept = req_cov, linetype = "dashed",
+                 colour = MECS_COLOURS$threshold) +
+      annotate("text", x = min(d$year), y = req_cov,
+               label = sprintf(" coverage needed at R0 = %.0f: %.1f%%", r0, req_cov),
+               hjust = 0, vjust = -0.7, size = 3.3, colour = MECS_COLOURS$threshold)
+  }
 
   if (nrow(have) > 0) {
     p <- p +
@@ -207,8 +215,13 @@ plot_coverage_trend <- function(coverage, geo_sel, age_sel, r0 = 15, ve = 0.97) 
          subtitle = paste0(
            "95% confidence intervals shown. ",
            if (nrow(gaps) > 0)
-             paste0(nrow(gaps), " cycle(s) with no publishable estimate marked \u00d7 on the axis.")
-           else "All cycles carry a publishable estimate."),
+             paste0(nrow(gaps), " cycle(s) with no publishable estimate marked \u00d7 on the axis. ")
+           else "All cycles carry a publishable estimate. ",
+           # ggplot does not wrap subtitles, so the note goes on its own line.
+           if (!reachable)
+             sprintf("\nAt R0 = %.0f with %.0f%% effectiveness, no coverage level reaches the threshold.",
+                     r0, ve * 100)
+           else ""),
          caption = SOURCE_CNICS) +
     theme_mecs()
 }
