@@ -45,8 +45,8 @@ reply and record it in the Decision log below and in `docs/METHODS.md`.
 - No plotly/leaflet/sf in v1 — a health-region choropleth needs shapefiles and is deferred.
 
 ## Commands
-- `Rscript R/fetch_data.R` downloads raw PHAC and StatCan files into `data/raw/` and writes `manifest.json`
-- `Rscript R/prepare_data.R` parses raw files into tidy CSVs in `data/tidy/`
+- `Rscript scripts/fetch_data.R` downloads raw PHAC and StatCan files into `data/raw/` and writes `manifest.json`
+- `Rscript scripts/prepare_data.R` parses raw files into tidy CSVs in `data/tidy/`
 - `Rscript tests/test_model.R` checks the model functions against hand-computed values
 - `Rscript -e 'shiny::runApp("app.R", port=7788)'` runs the dashboard
 
@@ -54,11 +54,15 @@ reply and record it in the Decision log below and in `docs/METHODS.md`.
 - **`TAR=internal` is required for `install.packages()` on this machine.** CRAN macOS binaries are
   zstd-compressed and the sandboxed `/usr/bin/tar` cannot find a `zstd` binary (no zstd, no Homebrew).
   Without it every install fails with "Can't initialize filter; unable to run program zstd".
+- **Shiny automatically sources every `.R` file in an app's `R/` directory at startup.** The data
+  pipeline therefore lives in `scripts/`, not `R/`. When both were in `R/`, launching the app
+  re-downloaded every file from PHAC and StatCan before serving a page. `R/` holds only pure
+  app-support code (`model.R`, `theme.R`), which is safe and useful to auto-source.
 
 ## Project layout
 ```
-R/fetch_data.R       downloads raw sources, writes data/raw/manifest.json
-R/prepare_data.R     parses raw -> data/tidy/
+scripts/fetch_data.R    downloads raw sources, writes data/raw/manifest.json
+scripts/prepare_data.R  parses raw -> data/tidy/
 R/model.R            transmission model functions (pure, testable, no Shiny)
 R/theme.R            shared ggplot theme and Okabe-Ito palette
 app.R                the Shiny application
@@ -114,7 +118,7 @@ during the build are marked **[M]** and should be reviewed by Kasturi.
   age group or dose.*
 - **[M]** "Real-time" is interpreted as **the most recent PHAC pull**, not a live connection. The app reads
   local files and displays PHAC's own `updateDate.csv` timestamp on every surveillance view, so a user
-  always knows how current the data is. Re-running `R/fetch_data.R` refreshes it.
+  always knows how current the data is. Re-running `scripts/fetch_data.R` refreshes it.
 
 ### Data limitation decisions
 

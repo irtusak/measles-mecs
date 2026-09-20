@@ -7,3 +7,6 @@
 # build + install logs
 .install.log
 *.log
+
+# generated chart renders from tests/test_plots.R
+tests/output/
