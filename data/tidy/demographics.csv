@@ -1,0 +1,37 @@
+characteristic,category,count,percentage_num,percentage_label
+Total number of cases,NA,1119,NA,NA
+Age group,<1 years,55,5,5
+Age group,1 to 4 years,163,15,15
+Age group,5 to 17 years,458,41,41
+Age group,18 to 54 years,412,37,37
+Age group,Born before 1970 (≥ 55 years),31,3,3
+Age group,Unknown,0,0,0
+Sex,Male,608,54,54
+Sex,Female,511,46,46
+Sex,Other/unspecified,0,0,0
+Sex,Unknown,0,0,0
+Province or territory,Alberta,311,28,28
+Province or territory,British Columbia,49,4,4
+Province or territory,Manitoba,680,61,61
+Province or territory,New Brunswick,1,NA,<1
+Province or territory,Nova Scotia,10,NA,<1
+Province or territory,Ontario,32,3,3
+Province or territory,Quebec,31,3,3
+Province or territory,Saskatchewan,5,NA,<1
+Exposure source,Exposed outside of Canada,37,3,3
+Exposure source,"Exposed in Canada, epidemiologically and/or virologically linked",1071,96,96
+Exposure source,Unknown or pending exposure source,11,NA,<1
+Vaccination status,Unvaccinated,963,86,86
+Vaccination status,1 dose,48,4,4
+Vaccination status,2 or more doses,54,5,5
+Vaccination status,Unknown,54,5,5
+Genotypes,B3,16,1,1
+Genotypes,D8,583,52,52
+Genotypes,Undetermined,95,8,8
+Genotypes,Pending,66,6,6
+Genotypes,N/A,359,32,32
+Hospitalizations,All,78,7,7
+Congenital measles cases,Laboratory-confirmed,4,NA,<1
+Congenital measles cases,Probable,0,0,0
+Deaths,All,0,0,0
+Countries of travel,"Bangladesh, Cameroon, Chad, Guatemala, India, Japan, Mexico, Pakistan, Sint Maarten, Spain, Thailand, Togo, Turkiye, United States, Vietnam",NA,NA,NA

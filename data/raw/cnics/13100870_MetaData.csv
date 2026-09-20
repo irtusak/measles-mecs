@@ -1,0 +1,95 @@
+﻿"Cube Title","Product Id","CANSIM Id",URL,"Cube Notes","Archive Status",Frequency,"Start Reference Period","End Reference Period","Total number of dimensions"
+"Vaccine coverage estimates for recommended vaccines in children and pregnant women","13100870",,"https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1310087001",1;2;3;4;6,"CURRENT - a cube available to the public and that is current","Occasional","2011-01-01","2021-01-01","5",
+
+"Dimension ID","Dimension name","Dimension Notes","Dimension Definitions"
+"1","Geography",,""
+"2","Target population",15,""
+"3","Sex",7,""
+"4","Antigen or vaccine",8;9;10;11;12;13;14;16,""
+"5","Characteristics",,""
+
+"Dimension ID","Member Name","Classification Code","Member ID","Parent Member ID",Terminated,"Member Notes","Member Definitions"
+"1","Newfoundland and Labrador","[10]","2","1","",,
+"1","Prince Edward Island","[11]","3","1","",,
+"1","Nova Scotia","[12]","4","1","",,
+"1","New Brunswick","[13]","5","1","",,
+"1","Ontario","[35]","6","1","",,
+"1","Quebec","[24]","7","1","",,
+"1","Manitoba","[46]","8","1","",,
+"1","Saskatchewan","[47]","9","1","",,
+"1","Alberta","[48]","10","1","",,
+"1","British Columbia","[59]","11","1","",,
+"1","Yukon","[60]","12","1","",,
+"1","Nunavut","[62]","14","1","",,
+"1","Northwest Territories","[61]","13","1","",,
+"1","Canada","[11124]","1","","",,
+"2","Recommended vaccines during pregnancy","","1","","",,
+"2","Recommended vaccines for 2-year-old children","","2","","",,
+"2","Recommended vaccines for 7-year-old children","","3","","",,
+"2","Recommended vaccines for 14-year-old children","","4","","",,
+"2","Recommended vaccines for 17-year-old children","","5","","",,
+"3","Men+","","2","1","",,
+"3","Women+","","3","1","",,
+"3","Total - Gender","","1","","",,
+"4","Diphtheria","","1","","",,
+"4","Pertussis (whooping cough)","","2","","",,
+"4","Tetanus","","3","","",,
+"4","Polio","","4","","",,
+"4","Haemophilus influenzae type B (Hib)","","5","","",,
+"4","Measles","","6","","",,
+"4","Mumps","","7","","",,
+"4","Rubella","","8","","",,
+"4","Hepatitis B","","9","","",,
+"4","Varicella","","10","","",,
+"4","Meningococcal type C","","11","","",,
+"4","Pneumococcal","","12","","",,
+"4","Rotavirus","","13","","",,
+"4","Human Papillomavirus (HPV)","","14","","",,
+"4","Diphtheria, Tetanus, acellular Pertussis (Tdap) booster","","15","","",,
+"4","Tetanus toxoid, reduced diphtheria toxoid and reduced acellular pertussis (Tdap)","","16","","",,
+"4","Influenza (flu)","","17","","",,
+"5","Percentage vaccinated","","1","","",,
+"5","Low 95% confidence interval, percentage vaccinated","","2","","",,
+"5","High 95% confidence interval, percentage vaccinated","","3","","",,
+
+Symbol Legend
+Description,Symbol
+"not available for a specific reference period","..",
+"less than the limit of detection","<LOD",
+"value rounded to 0 (zero) where there is a meaningful distinction between true zero and the value that was rounded","0s",
+"data quality: excellent","A",
+"data quality: very good","B",
+"data quality: good","C",
+"data quality: acceptable","D",
+"use with caution","E",
+"too unreliable to be published","F",
+"not applicable","...",
+"preliminary","p",
+"revised","r",
+"suppressed to meet the confidentiality requirements of the Statistics Act","x",
+"terminated","t",
+
+"Survey Code","Survey Name"
+"5185","Childhood National Immunization Coverage Survey"
+
+"Subject Code","Subject Name"
+"13","Health"
+
+"Note ID",Note
+1,"All participants were asked to provide information on their children's immunization through the child's vaccination record and were also asked to complete and return by mail a form that provides consent for Statistics Canada to contact their child's health care provider to obtain their child's vaccine history."
+2,"Starting in 2019, respondents from Prince Edward Island and Manitoba (the only jurisdictions with current registry data sharing agreements) were asked for consent to use their child immunization data if present in provincial registries."
+3,"Confidence intervals were calculated in SAS 8.3 using balanced repeated replication (BRR) weights and the modified Wilson interval."
+4,"See the <a href="https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=5185" rel="external noopener noreferrer" target="_blank">Childhood National Immunization Coverage Survey (CNICS) (opens new window)</a> IMDB page for more information on weighting."
+6,"The Childhood National Immunization Coverage Survey (CNICS) has been conducted nationally every two years since 2011 and by province/territory every four years since 2013."
+7,"Prior to 2019, the Childhood National Immunization Coverage Survey (CNICS) asked respondents about their child's sex. Since 2019, CNICS asks respondents about their child’s gender, which is different from sex assigned at birth – more information about gender can be found on the Statistics Canada website: <a href="https://www23.statcan.gc.ca/imdb/p3Var.pl?Function=DEC&Id=410445" rel="external noopener noreferrer" target="_blank">Gender of person (opens new window)</a>."
+8,"For each vaccination coverage estimate, the inclusion of a given province or territory depends on the date that the corresponding publicly funded vaccination program was introduced in the jurisdiction."
+9,"Starting in 2017, some imputation for tetanus, diphtheria, pertussis, and polio immunization was done to account for the fact that these are only available as combined vaccines in Canada. If a dose date was reported for any one of diphtheria, tetanus, or pertussis, it was assumed that the child received all of diphtheria, tetanus, pertussis and polio on that given date."
+10,"Hepatitis B coverage indicates three doses for 2-year-olds in provinces and territories where the vaccine was publicly funded: Prince Edward Island, Quebec, New Brunswick, British Columbia, Northwest Territories, Yukon and Nunavut."
+11,"Pneumococcal coverage indicates four doses for 2-year-olds for the Northwest Territories and Nunavut, and three doses for the other provinces and territories."
+12,"Rotavirus coverage indicates two doses for 2-year-olds in provinces and territories where the vaccine was publicly funded: Newfoundland and Labrador, Prince Edward Island, Quebec, Ontario, Manitoba, Saskatchewan, Alberta, New Brunswick (indicates three doses since 2021), British Columbia, Northwest Territories, Yukon."
+13,"Since 2015, the human papillomavirus (HPV) vaccine has been offered to boys and girls in all provinces and territories. However, the 14-year-old boys surveyed in 2017 may not have had the opportunity to receive the vaccine in many jurisdictions. Therefore, HPV vaccine coverage prior to 2019 was only measured in girls and started being measured in both boys and girls starting in 2019."
+14,"Meningococcal type C coverage indicates two doses for 2-year-olds in Alberta, British Columbia, Yukon and Northwest Territories and one dose in all other provinces and territories."
+15,"Coverage estimates for 14 and 17-year-olds are also based on parental/guardian recall in addition to other data sources listed in footnotes 1 and 2."
+16,"All vaccine programs in Canada administer a standalone varicella vaccine or a combination vaccine (MMR-V which includes the measles, mumps, rubella and varicella antigen). In 2013 and 2015, MMR-V was not included in the calculation of varicella coverage, thereby under counting the number of varicella doses received. "
+
+"Correction ID","Correction Date","Correction Note"

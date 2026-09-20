@@ -1,0 +1,9 @@
+# OS / editor
+.DS_Store
+.Rhistory
+.RData
+.Rproj.user/
+
+# build + install logs
+.install.log
+*.log

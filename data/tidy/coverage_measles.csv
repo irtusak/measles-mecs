@@ -1,0 +1,253 @@
+year,geo,age_group,coverage,ci_low,ci_high,quality
+2011,Alberta,17-year-olds,NA,NA,NA,not_available
+2013,Alberta,17-year-olds,79.4,74.7,83.3,ok
+2015,Alberta,17-year-olds,NA,NA,NA,not_available
+2017,Alberta,17-year-olds,NA,NA,NA,not_available
+2019,Alberta,17-year-olds,NA,NA,NA,not_available
+2021,Alberta,17-year-olds,NA,NA,NA,not_available
+2011,Alberta,2-year-olds,NA,NA,NA,not_available
+2013,Alberta,2-year-olds,82,77.8,85.5,ok
+2015,Alberta,2-year-olds,NA,NA,NA,not_available
+2017,Alberta,2-year-olds,91.7,87.4,94.6,ok
+2019,Alberta,2-year-olds,NA,NA,NA,not_available
+2021,Alberta,2-year-olds,88.4,83.3,92.1,ok
+2011,Alberta,7-year-olds,NA,NA,NA,not_available
+2013,Alberta,7-year-olds,75.2,70.2,79.7,ok
+2015,Alberta,7-year-olds,NA,NA,NA,not_available
+2017,Alberta,7-year-olds,NA,NA,NA,not_available
+2019,Alberta,7-year-olds,NA,NA,NA,not_available
+2021,Alberta,7-year-olds,NA,NA,NA,not_available
+2011,British Columbia,17-year-olds,NA,NA,NA,not_available
+2013,British Columbia,17-year-olds,74.8,69.5,79.5,ok
+2015,British Columbia,17-year-olds,NA,NA,NA,not_available
+2017,British Columbia,17-year-olds,NA,NA,NA,not_available
+2019,British Columbia,17-year-olds,NA,NA,NA,not_available
+2021,British Columbia,17-year-olds,NA,NA,NA,not_available
+2011,British Columbia,2-year-olds,NA,NA,NA,not_available
+2013,British Columbia,2-year-olds,86.9,82.7,90.1,ok
+2015,British Columbia,2-year-olds,NA,NA,NA,not_available
+2017,British Columbia,2-year-olds,86.1,81.6,89.6,ok
+2019,British Columbia,2-year-olds,NA,NA,NA,not_available
+2021,British Columbia,2-year-olds,91.3,87.1,94.2,ok
+2011,British Columbia,7-year-olds,NA,NA,NA,not_available
+2013,British Columbia,7-year-olds,83.5,79.3,87,ok
+2015,British Columbia,7-year-olds,NA,NA,NA,not_available
+2017,British Columbia,7-year-olds,NA,NA,NA,not_available
+2019,British Columbia,7-year-olds,NA,NA,NA,not_available
+2021,British Columbia,7-year-olds,NA,NA,NA,not_available
+2011,Canada,17-year-olds,77.1,71.6,81.8,ok
+2013,Canada,17-year-olds,83.9,82.1,85.7,ok
+2015,Canada,17-year-olds,89.2,84.8,92.5,ok
+2017,Canada,17-year-olds,NA,NA,NA,not_available
+2019,Canada,17-year-olds,NA,NA,NA,not_available
+2021,Canada,17-year-olds,NA,NA,NA,not_available
+2011,Canada,2-year-olds,89.2,85.4,92.1,ok
+2013,Canada,2-year-olds,89.7,88.3,91,ok
+2015,Canada,2-year-olds,89.2,85.1,92.3,ok
+2017,Canada,2-year-olds,90.2,88.2,92,ok
+2019,Canada,2-year-olds,90.2,86.8,92.8,ok
+2021,Canada,2-year-olds,91.6,89.9,93.1,ok
+2011,Canada,7-year-olds,79.5,74.4,83.8,ok
+2013,Canada,7-year-olds,85.7,84,87.3,ok
+2015,Canada,7-year-olds,85.8,81.2,89.4,ok
+2017,Canada,7-year-olds,87,83.2,90,ok
+2019,Canada,7-year-olds,83.3,78.8,87,ok
+2021,Canada,7-year-olds,79.2,74.7,83.1,ok
+2011,Manitoba,17-year-olds,NA,NA,NA,not_available
+2013,Manitoba,17-year-olds,84.9,80.5,88.3,ok
+2015,Manitoba,17-year-olds,NA,NA,NA,not_available
+2017,Manitoba,17-year-olds,NA,NA,NA,not_available
+2019,Manitoba,17-year-olds,NA,NA,NA,not_available
+2021,Manitoba,17-year-olds,NA,NA,NA,not_available
+2011,Manitoba,2-year-olds,NA,NA,NA,not_available
+2013,Manitoba,2-year-olds,83.5,77,88.5,ok
+2015,Manitoba,2-year-olds,NA,NA,NA,not_available
+2017,Manitoba,2-year-olds,86.1,80.8,90.1,ok
+2019,Manitoba,2-year-olds,NA,NA,NA,not_available
+2021,Manitoba,2-year-olds,87.1,82.4,90.7,ok
+2011,Manitoba,7-year-olds,NA,NA,NA,not_available
+2013,Manitoba,7-year-olds,76.6,71.4,81.1,ok
+2015,Manitoba,7-year-olds,NA,NA,NA,not_available
+2017,Manitoba,7-year-olds,NA,NA,NA,not_available
+2019,Manitoba,7-year-olds,NA,NA,NA,not_available
+2021,Manitoba,7-year-olds,NA,NA,NA,not_available
+2011,New Brunswick,17-year-olds,NA,NA,NA,not_available
+2013,New Brunswick,17-year-olds,73.8,69.1,78.1,ok
+2015,New Brunswick,17-year-olds,NA,NA,NA,not_available
+2017,New Brunswick,17-year-olds,NA,NA,NA,not_available
+2019,New Brunswick,17-year-olds,NA,NA,NA,not_available
+2021,New Brunswick,17-year-olds,NA,NA,NA,not_available
+2011,New Brunswick,2-year-olds,NA,NA,NA,not_available
+2013,New Brunswick,2-year-olds,92.6,89.3,94.9,ok
+2015,New Brunswick,2-year-olds,NA,NA,NA,not_available
+2017,New Brunswick,2-year-olds,92,87.3,95,ok
+2019,New Brunswick,2-year-olds,NA,NA,NA,not_available
+2021,New Brunswick,2-year-olds,94.3,90.9,96.5,ok
+2011,New Brunswick,7-year-olds,NA,NA,NA,not_available
+2013,New Brunswick,7-year-olds,92.3,88.4,94.9,ok
+2015,New Brunswick,7-year-olds,NA,NA,NA,not_available
+2017,New Brunswick,7-year-olds,NA,NA,NA,not_available
+2019,New Brunswick,7-year-olds,NA,NA,NA,not_available
+2021,New Brunswick,7-year-olds,NA,NA,NA,not_available
+2011,Newfoundland and Labrador,17-year-olds,NA,NA,NA,not_available
+2013,Newfoundland and Labrador,17-year-olds,87.2,83.2,90.4,ok
+2015,Newfoundland and Labrador,17-year-olds,NA,NA,NA,not_available
+2017,Newfoundland and Labrador,17-year-olds,NA,NA,NA,not_available
+2019,Newfoundland and Labrador,17-year-olds,NA,NA,NA,not_available
+2021,Newfoundland and Labrador,17-year-olds,NA,NA,NA,not_available
+2011,Newfoundland and Labrador,2-year-olds,NA,NA,NA,not_available
+2013,Newfoundland and Labrador,2-year-olds,95.1,92.2,97,ok
+2015,Newfoundland and Labrador,2-year-olds,NA,NA,NA,not_available
+2017,Newfoundland and Labrador,2-year-olds,96.9,93.6,98.5,ok
+2019,Newfoundland and Labrador,2-year-olds,NA,NA,NA,not_available
+2021,Newfoundland and Labrador,2-year-olds,97,93.9,98.6,ok
+2011,Newfoundland and Labrador,7-year-olds,NA,NA,NA,not_available
+2013,Newfoundland and Labrador,7-year-olds,84.3,79.7,87.9,ok
+2015,Newfoundland and Labrador,7-year-olds,NA,NA,NA,not_available
+2017,Newfoundland and Labrador,7-year-olds,NA,NA,NA,not_available
+2019,Newfoundland and Labrador,7-year-olds,NA,NA,NA,not_available
+2021,Newfoundland and Labrador,7-year-olds,NA,NA,NA,not_available
+2011,Northwest Territories,17-year-olds,NA,NA,NA,not_available
+2013,Northwest Territories,17-year-olds,92,85.9,95.6,ok
+2015,Northwest Territories,17-year-olds,NA,NA,NA,not_available
+2017,Northwest Territories,17-year-olds,NA,NA,NA,not_available
+2019,Northwest Territories,17-year-olds,NA,NA,NA,not_available
+2021,Northwest Territories,17-year-olds,NA,NA,NA,not_available
+2011,Northwest Territories,2-year-olds,NA,NA,NA,not_available
+2013,Northwest Territories,2-year-olds,84,77,89.2,ok
+2015,Northwest Territories,2-year-olds,NA,NA,NA,not_available
+2017,Northwest Territories,2-year-olds,91.8,83,96.2,ok
+2019,Northwest Territories,2-year-olds,NA,NA,NA,not_available
+2021,Northwest Territories,2-year-olds,90.8,83.3,95.2,ok
+2011,Northwest Territories,7-year-olds,NA,NA,NA,not_available
+2013,Northwest Territories,7-year-olds,88.4,81.2,93,ok
+2015,Northwest Territories,7-year-olds,NA,NA,NA,not_available
+2017,Northwest Territories,7-year-olds,NA,NA,NA,not_available
+2019,Northwest Territories,7-year-olds,NA,NA,NA,not_available
+2021,Northwest Territories,7-year-olds,NA,NA,NA,not_available
+2011,Nova Scotia,17-year-olds,NA,NA,NA,not_available
+2013,Nova Scotia,17-year-olds,68.1,59.2,75.9,ok
+2015,Nova Scotia,17-year-olds,NA,NA,NA,not_available
+2017,Nova Scotia,17-year-olds,NA,NA,NA,not_available
+2019,Nova Scotia,17-year-olds,NA,NA,NA,not_available
+2021,Nova Scotia,17-year-olds,NA,NA,NA,not_available
+2011,Nova Scotia,2-year-olds,NA,NA,NA,not_available
+2013,Nova Scotia,2-year-olds,86.6,81.9,90.3,ok
+2015,Nova Scotia,2-year-olds,NA,NA,NA,not_available
+2017,Nova Scotia,2-year-olds,87.1,79,92.4,ok
+2019,Nova Scotia,2-year-olds,NA,NA,NA,not_available
+2021,Nova Scotia,2-year-olds,93.6,89.4,96.2,ok
+2011,Nova Scotia,7-year-olds,NA,NA,NA,not_available
+2013,Nova Scotia,7-year-olds,71.7,66.1,76.7,ok
+2015,Nova Scotia,7-year-olds,NA,NA,NA,not_available
+2017,Nova Scotia,7-year-olds,NA,NA,NA,not_available
+2019,Nova Scotia,7-year-olds,NA,NA,NA,not_available
+2021,Nova Scotia,7-year-olds,NA,NA,NA,not_available
+2011,Nunavut,17-year-olds,NA,NA,NA,not_available
+2013,Nunavut,17-year-olds,65.2,50.7,77.3,ok
+2015,Nunavut,17-year-olds,NA,NA,NA,not_available
+2017,Nunavut,17-year-olds,NA,NA,NA,not_available
+2019,Nunavut,17-year-olds,NA,NA,NA,not_available
+2021,Nunavut,17-year-olds,NA,NA,NA,not_available
+2011,Nunavut,2-year-olds,NA,NA,NA,not_available
+2013,Nunavut,2-year-olds,79.8,67.1,88.4,ok
+2015,Nunavut,2-year-olds,NA,NA,NA,not_available
+2017,Nunavut,2-year-olds,88.7,77.1,94.8,ok
+2019,Nunavut,2-year-olds,NA,NA,NA,not_available
+2021,Nunavut,2-year-olds,34.6,24,46.9,caution
+2011,Nunavut,7-year-olds,NA,NA,NA,not_available
+2013,Nunavut,7-year-olds,64.8,51.4,76.3,ok
+2015,Nunavut,7-year-olds,NA,NA,NA,not_available
+2017,Nunavut,7-year-olds,NA,NA,NA,not_available
+2019,Nunavut,7-year-olds,NA,NA,NA,not_available
+2021,Nunavut,7-year-olds,NA,NA,NA,not_available
+2011,Ontario,17-year-olds,NA,NA,NA,not_available
+2013,Ontario,17-year-olds,84.8,81.2,87.9,ok
+2015,Ontario,17-year-olds,NA,NA,NA,not_available
+2017,Ontario,17-year-olds,NA,NA,NA,not_available
+2019,Ontario,17-year-olds,NA,NA,NA,not_available
+2021,Ontario,17-year-olds,NA,NA,NA,not_available
+2011,Ontario,2-year-olds,NA,NA,NA,not_available
+2013,Ontario,2-year-olds,92.8,89.9,95,ok
+2015,Ontario,2-year-olds,NA,NA,NA,not_available
+2017,Ontario,2-year-olds,90.9,87.2,93.6,ok
+2019,Ontario,2-year-olds,NA,NA,NA,not_available
+2021,Ontario,2-year-olds,92,88.1,94.7,ok
+2011,Ontario,7-year-olds,NA,NA,NA,not_available
+2013,Ontario,7-year-olds,88.7,85,91.6,ok
+2015,Ontario,7-year-olds,NA,NA,NA,not_available
+2017,Ontario,7-year-olds,NA,NA,NA,not_available
+2019,Ontario,7-year-olds,NA,NA,NA,not_available
+2021,Ontario,7-year-olds,NA,NA,NA,not_available
+2011,Prince Edward Island,17-year-olds,NA,NA,NA,not_available
+2013,Prince Edward Island,17-year-olds,78.2,72.5,83,ok
+2015,Prince Edward Island,17-year-olds,NA,NA,NA,not_available
+2017,Prince Edward Island,17-year-olds,NA,NA,NA,not_available
+2019,Prince Edward Island,17-year-olds,NA,NA,NA,not_available
+2021,Prince Edward Island,17-year-olds,NA,NA,NA,not_available
+2011,Prince Edward Island,2-year-olds,NA,NA,NA,not_available
+2013,Prince Edward Island,2-year-olds,90.2,86.3,93.1,ok
+2015,Prince Edward Island,2-year-olds,NA,NA,NA,not_available
+2017,Prince Edward Island,2-year-olds,93.2,86.7,96.6,ok
+2019,Prince Edward Island,2-year-olds,NA,NA,NA,not_available
+2021,Prince Edward Island,2-year-olds,98,95.3,99.2,ok
+2011,Prince Edward Island,7-year-olds,NA,NA,NA,not_available
+2013,Prince Edward Island,7-year-olds,84.2,77.5,89.2,ok
+2015,Prince Edward Island,7-year-olds,NA,NA,NA,not_available
+2017,Prince Edward Island,7-year-olds,NA,NA,NA,not_available
+2019,Prince Edward Island,7-year-olds,NA,NA,NA,not_available
+2021,Prince Edward Island,7-year-olds,NA,NA,NA,not_available
+2011,Quebec,17-year-olds,NA,NA,NA,not_available
+2013,Quebec,17-year-olds,88.4,85.7,90.7,ok
+2015,Quebec,17-year-olds,NA,NA,NA,not_available
+2017,Quebec,17-year-olds,NA,NA,NA,not_available
+2019,Quebec,17-year-olds,NA,NA,NA,not_available
+2021,Quebec,17-year-olds,NA,NA,NA,not_available
+2011,Quebec,2-year-olds,NA,NA,NA,not_available
+2013,Quebec,2-year-olds,90.6,87.9,92.7,ok
+2015,Quebec,2-year-olds,NA,NA,NA,not_available
+2017,Quebec,2-year-olds,91,88,93.3,ok
+2019,Quebec,2-year-olds,NA,NA,NA,not_available
+2021,Quebec,2-year-olds,93.2,90.2,95.3,ok
+2011,Quebec,7-year-olds,NA,NA,NA,not_available
+2013,Quebec,7-year-olds,91.1,88.2,93.3,ok
+2015,Quebec,7-year-olds,NA,NA,NA,not_available
+2017,Quebec,7-year-olds,NA,NA,NA,not_available
+2019,Quebec,7-year-olds,NA,NA,NA,not_available
+2021,Quebec,7-year-olds,NA,NA,NA,not_available
+2011,Saskatchewan,17-year-olds,NA,NA,NA,not_available
+2013,Saskatchewan,17-year-olds,88.7,85,91.6,ok
+2015,Saskatchewan,17-year-olds,NA,NA,NA,not_available
+2017,Saskatchewan,17-year-olds,NA,NA,NA,not_available
+2019,Saskatchewan,17-year-olds,NA,NA,NA,not_available
+2021,Saskatchewan,17-year-olds,NA,NA,NA,not_available
+2011,Saskatchewan,2-year-olds,NA,NA,NA,not_available
+2013,Saskatchewan,2-year-olds,90.1,85.7,93.2,ok
+2015,Saskatchewan,2-year-olds,NA,NA,NA,not_available
+2017,Saskatchewan,2-year-olds,89.5,85.4,92.6,ok
+2019,Saskatchewan,2-year-olds,NA,NA,NA,not_available
+2021,Saskatchewan,2-year-olds,91.4,85.5,95,ok
+2011,Saskatchewan,7-year-olds,NA,NA,NA,not_available
+2013,Saskatchewan,7-year-olds,78.9,73.5,83.5,ok
+2015,Saskatchewan,7-year-olds,NA,NA,NA,not_available
+2017,Saskatchewan,7-year-olds,NA,NA,NA,not_available
+2019,Saskatchewan,7-year-olds,NA,NA,NA,not_available
+2021,Saskatchewan,7-year-olds,NA,NA,NA,not_available
+2011,Yukon,17-year-olds,NA,NA,NA,not_available
+2013,Yukon,17-year-olds,79.3,70,86.3,ok
+2015,Yukon,17-year-olds,NA,NA,NA,not_available
+2017,Yukon,17-year-olds,NA,NA,NA,not_available
+2019,Yukon,17-year-olds,NA,NA,NA,not_available
+2021,Yukon,17-year-olds,NA,NA,NA,not_available
+2011,Yukon,2-year-olds,NA,NA,NA,not_available
+2013,Yukon,2-year-olds,85.2,78.1,90.3,ok
+2015,Yukon,2-year-olds,NA,NA,NA,not_available
+2017,Yukon,2-year-olds,91,85.4,94.6,ok
+2019,Yukon,2-year-olds,NA,NA,NA,not_available
+2021,Yukon,2-year-olds,85.3,76.4,91.2,ok
+2011,Yukon,7-year-olds,NA,NA,NA,not_available
+2013,Yukon,7-year-olds,77.5,69.2,84.2,ok
+2015,Yukon,7-year-olds,NA,NA,NA,not_available
+2017,Yukon,7-year-olds,NA,NA,NA,not_available
+2019,Yukon,7-year-olds,NA,NA,NA,not_available
+2021,Yukon,7-year-olds,NA,NA,NA,not_available

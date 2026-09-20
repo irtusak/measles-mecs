@@ -1,0 +1,35 @@
+Year,Category,CategoryFR,Value,Comments
+1998,Number of confirmed cases,Nombre de cas confirmés,17,
+1999,Number of confirmed cases,Nombre de cas confirmés,32,
+2000,Number of confirmed cases,Nombre de cas confirmés,207,
+2001,Number of confirmed cases,Nombre de cas confirmés,38,
+2002,Number of confirmed cases,Nombre de cas confirmés,9,
+2003,Number of confirmed cases,Nombre de cas confirmés,17,
+2004,Number of confirmed cases,Nombre de cas confirmés,9,
+2005,Number of confirmed cases,Nombre de cas confirmés,8,
+2006,Number of confirmed cases,Nombre de cas confirmés,13,
+2007,Number of confirmed cases,Nombre de cas confirmés,101,
+2008,Number of confirmed cases,Nombre de cas confirmés,61,
+2009,Number of confirmed cases,Nombre de cas confirmés,14,
+2010,Number of confirmed cases,Nombre de cas confirmés,99,
+2011,Number of confirmed cases,Nombre de cas confirmés,752,
+2012,Number of confirmed cases,Nombre de cas confirmés,10,
+2013,Number of confirmed cases,Nombre de cas confirmés,83,
+2014,Number of confirmed cases,Nombre de cas confirmés,418,
+2015,Number of confirmed cases,Nombre de cas confirmés,196,
+2016,Number of confirmed cases,Nombre de cas confirmés,11,
+2017,Number of confirmed cases,Nombre de cas confirmés,45,
+2018,Number of confirmed cases,Nombre de cas confirmés,29,
+2019,Number of confirmed cases,Nombre de cas confirmés,113,
+2020,Number of confirmed cases,Nombre de cas confirmés,1,
+2021,Number of confirmed cases,Nombre de cas confirmés,0,
+2022,Number of confirmed cases,Nombre de cas confirmés,3,
+2023,Number of confirmed cases,Nombre de cas confirmés,12,
+2024,Number of confirmed cases,Nombre de cas confirmés,146,
+2025,Number of confirmed cases,Nombre de cas confirmés,5085,
+2025,Number of probable cases,Nombre de cas probables,377,Pull these numbers from the 2025 google sheet
+2026,Number of confirmed cases,Nombre de cas confirmés,1038,
+2026,Number of probable cases,Nombre de cas probables,81,Pulled from global variables: measles_total_confirm & measles_total_probable
+avg_cases,,,90.51851852,average of cases from 1998 to 2024
+min_cases,,,0,min cases from 1998 to 2024
+max_cases,,,752,max cases from 1998 to 2024

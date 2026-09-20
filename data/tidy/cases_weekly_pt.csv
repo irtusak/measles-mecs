@@ -1,0 +1,491 @@
+week,pruid,pt,cases
+1,48,Alberta,24
+1,59,British Columbia,8
+1,46,Manitoba,11
+1,13,New Brunswick,0
+1,10,Newfoundland and Labrador,0
+1,61,Northwest Territories,0
+1,12,Nova Scotia,0
+1,62,Nunavut,0
+1,35,Ontario,0
+1,11,Prince Edward Island,0
+1,24,Quebec,0
+1,47,Saskatchewan,2
+1,60,Yukon,0
+1,01,Canada,45
+2,48,Alberta,12
+2,59,British Columbia,2
+2,46,Manitoba,16
+2,13,New Brunswick,0
+2,10,Newfoundland and Labrador,0
+2,61,Northwest Territories,0
+2,12,Nova Scotia,0
+2,62,Nunavut,0
+2,35,Ontario,0
+2,11,Prince Edward Island,0
+2,24,Quebec,1
+2,47,Saskatchewan,0
+2,60,Yukon,0
+2,01,Canada,31
+3,48,Alberta,7
+3,59,British Columbia,3
+3,46,Manitoba,33
+3,13,New Brunswick,0
+3,10,Newfoundland and Labrador,0
+3,61,Northwest Territories,0
+3,12,Nova Scotia,1
+3,62,Nunavut,0
+3,35,Ontario,0
+3,11,Prince Edward Island,0
+3,24,Quebec,2
+3,47,Saskatchewan,0
+3,60,Yukon,0
+3,01,Canada,46
+4,48,Alberta,8
+4,59,British Columbia,2
+4,46,Manitoba,32
+4,13,New Brunswick,0
+4,10,Newfoundland and Labrador,0
+4,61,Northwest Territories,0
+4,12,Nova Scotia,3
+4,62,Nunavut,0
+4,35,Ontario,1
+4,11,Prince Edward Island,0
+4,24,Quebec,0
+4,47,Saskatchewan,0
+4,60,Yukon,0
+4,01,Canada,46
+5,48,Alberta,15
+5,59,British Columbia,0
+5,46,Manitoba,70
+5,13,New Brunswick,0
+5,10,Newfoundland and Labrador,0
+5,61,Northwest Territories,0
+5,12,Nova Scotia,3
+5,62,Nunavut,0
+5,35,Ontario,0
+5,11,Prince Edward Island,0
+5,24,Quebec,0
+5,47,Saskatchewan,2
+5,60,Yukon,0
+5,01,Canada,90
+6,48,Alberta,12
+6,59,British Columbia,2
+6,46,Manitoba,60
+6,13,New Brunswick,0
+6,10,Newfoundland and Labrador,0
+6,61,Northwest Territories,0
+6,12,Nova Scotia,3
+6,62,Nunavut,0
+6,35,Ontario,0
+6,11,Prince Edward Island,0
+6,24,Quebec,0
+6,47,Saskatchewan,1
+6,60,Yukon,0
+6,01,Canada,78
+7,48,Alberta,30
+7,59,British Columbia,1
+7,46,Manitoba,54
+7,13,New Brunswick,0
+7,10,Newfoundland and Labrador,0
+7,61,Northwest Territories,0
+7,12,Nova Scotia,0
+7,62,Nunavut,0
+7,35,Ontario,3
+7,11,Prince Edward Island,0
+7,24,Quebec,0
+7,47,Saskatchewan,0
+7,60,Yukon,0
+7,01,Canada,88
+8,48,Alberta,37
+8,59,British Columbia,0
+8,46,Manitoba,28
+8,13,New Brunswick,0
+8,10,Newfoundland and Labrador,0
+8,61,Northwest Territories,0
+8,12,Nova Scotia,0
+8,62,Nunavut,0
+8,35,Ontario,2
+8,11,Prince Edward Island,0
+8,24,Quebec,0
+8,47,Saskatchewan,0
+8,60,Yukon,0
+8,01,Canada,67
+9,48,Alberta,44
+9,59,British Columbia,1
+9,46,Manitoba,40
+9,13,New Brunswick,0
+9,10,Newfoundland and Labrador,0
+9,61,Northwest Territories,0
+9,12,Nova Scotia,0
+9,62,Nunavut,0
+9,35,Ontario,1
+9,11,Prince Edward Island,0
+9,24,Quebec,0
+9,47,Saskatchewan,0
+9,60,Yukon,0
+9,01,Canada,86
+10,48,Alberta,34
+10,59,British Columbia,0
+10,46,Manitoba,40
+10,13,New Brunswick,0
+10,10,Newfoundland and Labrador,0
+10,61,Northwest Territories,0
+10,12,Nova Scotia,0
+10,62,Nunavut,0
+10,35,Ontario,3
+10,11,Prince Edward Island,0
+10,24,Quebec,1
+10,47,Saskatchewan,0
+10,60,Yukon,0
+10,01,Canada,78
+11,48,Alberta,15
+11,59,British Columbia,0
+11,46,Manitoba,44
+11,13,New Brunswick,0
+11,10,Newfoundland and Labrador,0
+11,61,Northwest Territories,0
+11,12,Nova Scotia,0
+11,62,Nunavut,0
+11,35,Ontario,2
+11,11,Prince Edward Island,0
+11,24,Quebec,1
+11,47,Saskatchewan,0
+11,60,Yukon,0
+11,01,Canada,62
+12,48,Alberta,20
+12,59,British Columbia,2
+12,46,Manitoba,41
+12,13,New Brunswick,0
+12,10,Newfoundland and Labrador,0
+12,61,Northwest Territories,0
+12,12,Nova Scotia,0
+12,62,Nunavut,0
+12,35,Ontario,3
+12,11,Prince Edward Island,0
+12,24,Quebec,2
+12,47,Saskatchewan,0
+12,60,Yukon,0
+12,01,Canada,68
+13,48,Alberta,16
+13,59,British Columbia,2
+13,46,Manitoba,43
+13,13,New Brunswick,0
+13,10,Newfoundland and Labrador,0
+13,61,Northwest Territories,0
+13,12,Nova Scotia,0
+13,62,Nunavut,0
+13,35,Ontario,8
+13,11,Prince Edward Island,0
+13,24,Quebec,0
+13,47,Saskatchewan,0
+13,60,Yukon,0
+13,01,Canada,69
+14,48,Alberta,10
+14,59,British Columbia,0
+14,46,Manitoba,37
+14,13,New Brunswick,0
+14,10,Newfoundland and Labrador,0
+14,61,Northwest Territories,0
+14,12,Nova Scotia,0
+14,62,Nunavut,0
+14,35,Ontario,0
+14,11,Prince Edward Island,0
+14,24,Quebec,2
+14,47,Saskatchewan,0
+14,60,Yukon,0
+14,01,Canada,49
+15,48,Alberta,9
+15,59,British Columbia,4
+15,46,Manitoba,20
+15,13,New Brunswick,0
+15,10,Newfoundland and Labrador,0
+15,61,Northwest Territories,0
+15,12,Nova Scotia,0
+15,62,Nunavut,0
+15,35,Ontario,0
+15,11,Prince Edward Island,0
+15,24,Quebec,0
+15,47,Saskatchewan,0
+15,60,Yukon,0
+15,01,Canada,33
+16,48,Alberta,4
+16,59,British Columbia,1
+16,46,Manitoba,31
+16,13,New Brunswick,0
+16,10,Newfoundland and Labrador,0
+16,61,Northwest Territories,0
+16,12,Nova Scotia,0
+16,62,Nunavut,0
+16,35,Ontario,0
+16,11,Prince Edward Island,0
+16,24,Quebec,2
+16,47,Saskatchewan,0
+16,60,Yukon,0
+16,01,Canada,38
+17,48,Alberta,2
+17,59,British Columbia,2
+17,46,Manitoba,24
+17,13,New Brunswick,0
+17,10,Newfoundland and Labrador,0
+17,61,Northwest Territories,0
+17,12,Nova Scotia,0
+17,62,Nunavut,0
+17,35,Ontario,1
+17,11,Prince Edward Island,0
+17,24,Quebec,3
+17,47,Saskatchewan,0
+17,60,Yukon,0
+17,01,Canada,32
+18,48,Alberta,4
+18,59,British Columbia,0
+18,46,Manitoba,18
+18,13,New Brunswick,0
+18,10,Newfoundland and Labrador,0
+18,61,Northwest Territories,0
+18,12,Nova Scotia,0
+18,62,Nunavut,0
+18,35,Ontario,0
+18,11,Prince Edward Island,0
+18,24,Quebec,3
+18,47,Saskatchewan,0
+18,60,Yukon,0
+18,01,Canada,25
+19,48,Alberta,4
+19,59,British Columbia,1
+19,46,Manitoba,17
+19,13,New Brunswick,0
+19,10,Newfoundland and Labrador,0
+19,61,Northwest Territories,0
+19,12,Nova Scotia,0
+19,62,Nunavut,0
+19,35,Ontario,2
+19,11,Prince Edward Island,0
+19,24,Quebec,1
+19,47,Saskatchewan,0
+19,60,Yukon,0
+19,01,Canada,25
+20,48,Alberta,3
+20,59,British Columbia,0
+20,46,Manitoba,6
+20,13,New Brunswick,0
+20,10,Newfoundland and Labrador,0
+20,61,Northwest Territories,0
+20,12,Nova Scotia,0
+20,62,Nunavut,0
+20,35,Ontario,1
+20,11,Prince Edward Island,0
+20,24,Quebec,1
+20,47,Saskatchewan,0
+20,60,Yukon,0
+20,01,Canada,11
+21,48,Alberta,0
+21,59,British Columbia,0
+21,46,Manitoba,4
+21,13,New Brunswick,0
+21,10,Newfoundland and Labrador,0
+21,61,Northwest Territories,0
+21,12,Nova Scotia,0
+21,62,Nunavut,0
+21,35,Ontario,0
+21,11,Prince Edward Island,0
+21,24,Quebec,0
+21,47,Saskatchewan,0
+21,60,Yukon,0
+21,01,Canada,4
+22,48,Alberta,1
+22,59,British Columbia,0
+22,46,Manitoba,1
+22,13,New Brunswick,0
+22,10,Newfoundland and Labrador,0
+22,61,Northwest Territories,0
+22,12,Nova Scotia,0
+22,62,Nunavut,0
+22,35,Ontario,0
+22,11,Prince Edward Island,0
+22,24,Quebec,1
+22,47,Saskatchewan,0
+22,60,Yukon,0
+22,01,Canada,3
+23,48,Alberta,0
+23,59,British Columbia,1
+23,46,Manitoba,1
+23,13,New Brunswick,0
+23,10,Newfoundland and Labrador,0
+23,61,Northwest Territories,0
+23,12,Nova Scotia,0
+23,62,Nunavut,0
+23,35,Ontario,0
+23,11,Prince Edward Island,0
+23,24,Quebec,0
+23,47,Saskatchewan,0
+23,60,Yukon,0
+23,01,Canada,2
+24,48,Alberta,0
+24,59,British Columbia,0
+24,46,Manitoba,2
+24,13,New Brunswick,0
+24,10,Newfoundland and Labrador,0
+24,61,Northwest Territories,0
+24,12,Nova Scotia,0
+24,62,Nunavut,0
+24,35,Ontario,1
+24,11,Prince Edward Island,0
+24,24,Quebec,5
+24,47,Saskatchewan,0
+24,60,Yukon,0
+24,01,Canada,8
+25,48,Alberta,0
+25,59,British Columbia,5
+25,46,Manitoba,2
+25,13,New Brunswick,0
+25,10,Newfoundland and Labrador,0
+25,61,Northwest Territories,0
+25,12,Nova Scotia,0
+25,62,Nunavut,0
+25,35,Ontario,1
+25,11,Prince Edward Island,0
+25,24,Quebec,5
+25,47,Saskatchewan,0
+25,60,Yukon,0
+25,01,Canada,13
+26,48,Alberta,0
+26,59,British Columbia,0
+26,46,Manitoba,1
+26,13,New Brunswick,0
+26,10,Newfoundland and Labrador,0
+26,61,Northwest Territories,0
+26,12,Nova Scotia,0
+26,62,Nunavut,0
+26,35,Ontario,0
+26,11,Prince Edward Island,0
+26,24,Quebec,1
+26,47,Saskatchewan,0
+26,60,Yukon,0
+26,01,Canada,2
+27,48,Alberta,0
+27,59,British Columbia,7
+27,46,Manitoba,2
+27,13,New Brunswick,1
+27,10,Newfoundland and Labrador,0
+27,61,Northwest Territories,0
+27,12,Nova Scotia,0
+27,62,Nunavut,0
+27,35,Ontario,0
+27,11,Prince Edward Island,0
+27,24,Quebec,0
+27,47,Saskatchewan,0
+27,60,Yukon,0
+27,01,Canada,10
+28,48,Alberta,0
+28,59,British Columbia,1
+28,46,Manitoba,0
+28,13,New Brunswick,0
+28,10,Newfoundland and Labrador,0
+28,61,Northwest Territories,0
+28,12,Nova Scotia,0
+28,62,Nunavut,0
+28,35,Ontario,0
+28,11,Prince Edward Island,0
+28,24,Quebec,0
+28,47,Saskatchewan,0
+28,60,Yukon,0
+28,01,Canada,1
+29,48,Alberta,0
+29,59,British Columbia,4
+29,46,Manitoba,0
+29,13,New Brunswick,0
+29,10,Newfoundland and Labrador,0
+29,61,Northwest Territories,0
+29,12,Nova Scotia,0
+29,62,Nunavut,0
+29,35,Ontario,1
+29,11,Prince Edward Island,0
+29,24,Quebec,0
+29,47,Saskatchewan,0
+29,60,Yukon,0
+29,01,Canada,5
+30,48,Alberta,0
+30,59,British Columbia,0
+30,46,Manitoba,1
+30,13,New Brunswick,0
+30,10,Newfoundland and Labrador,0
+30,61,Northwest Territories,0
+30,12,Nova Scotia,0
+30,62,Nunavut,0
+30,35,Ontario,0
+30,11,Prince Edward Island,0
+30,24,Quebec,0
+30,47,Saskatchewan,0
+30,60,Yukon,0
+30,01,Canada,1
+31,48,Alberta,0
+31,59,British Columbia,0
+31,46,Manitoba,1
+31,13,New Brunswick,0
+31,10,Newfoundland and Labrador,0
+31,61,Northwest Territories,0
+31,12,Nova Scotia,0
+31,62,Nunavut,0
+31,35,Ontario,0
+31,11,Prince Edward Island,0
+31,24,Quebec,0
+31,47,Saskatchewan,0
+31,60,Yukon,0
+31,01,Canada,1
+32,48,Alberta,0
+32,59,British Columbia,0
+32,46,Manitoba,0
+32,13,New Brunswick,0
+32,10,Newfoundland and Labrador,0
+32,61,Northwest Territories,0
+32,12,Nova Scotia,0
+32,62,Nunavut,0
+32,35,Ontario,0
+32,11,Prince Edward Island,0
+32,24,Quebec,0
+32,47,Saskatchewan,0
+32,60,Yukon,0
+32,01,Canada,0
+33,48,Alberta,0
+33,59,British Columbia,0
+33,46,Manitoba,0
+33,13,New Brunswick,0
+33,10,Newfoundland and Labrador,0
+33,61,Northwest Territories,0
+33,12,Nova Scotia,0
+33,62,Nunavut,0
+33,35,Ontario,1
+33,11,Prince Edward Island,0
+33,24,Quebec,0
+33,47,Saskatchewan,0
+33,60,Yukon,0
+33,01,Canada,1
+34,48,Alberta,0
+34,59,British Columbia,0
+34,46,Manitoba,0
+34,13,New Brunswick,0
+34,10,Newfoundland and Labrador,0
+34,61,Northwest Territories,0
+34,12,Nova Scotia,0
+34,62,Nunavut,0
+34,35,Ontario,1
+34,11,Prince Edward Island,0
+34,24,Quebec,0
+34,47,Saskatchewan,0
+34,60,Yukon,0
+34,01,Canada,1
+35,48,Alberta,0
+35,59,British Columbia,0
+35,46,Manitoba,0
+35,13,New Brunswick,0
+35,10,Newfoundland and Labrador,0
+35,61,Northwest Territories,0
+35,12,Nova Scotia,0
+35,62,Nunavut,0
+35,35,Ontario,0
+35,11,Prince Edward Island,0
+35,24,Quebec,0
+35,47,Saskatchewan,0
+35,60,Yukon,0
+35,01,Canada,0

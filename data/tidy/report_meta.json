@@ -1,0 +1,23 @@
+{
+  "phac_data_as_of": "2026-09-14 15:00:00",
+  "report_year": 2026,
+  "report_week": 35,
+  "week_start": "2026-08-30",
+  "week_end": "2026-09-05",
+  "latest_week_onset": 34,
+  "annual_confirmed": 1038,
+  "annual_probable": 81,
+  "annual_pt_count": 8,
+  "new_confirmed": 0,
+  "new_probable": 0,
+  "active_total": 5,
+  "active_pt": "Manitoba, Ontario",
+  "active_phu_count": 3,
+  "mj_outbreak_total": 6417,
+  "mj_outbreak_confirmed": 5929,
+  "mj_outbreak_probable": 488,
+  "mj_outbreak_pt_count": 10,
+  "rubella_annual": 0,
+  "crs_annual": 0,
+  "retrieved_at": "2026-09-19T21:49:49-0700"
+}
