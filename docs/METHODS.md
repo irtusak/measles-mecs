@@ -38,6 +38,14 @@ Full URLs, file-by-file contents and licences are in [`data/SOURCES.md`](../data
 `data/raw/manifest.json`. The app itself makes no network requests; it reads only the tidy files written by
 `scripts/prepare_data.R`.
 
+### One claim that is not in the data files
+
+The statement that Canada lost measles elimination status in **November 2025** does not appear in any file
+in `data/raw/`. It comes from the determination by the Pan American Health Organization's Regional
+Verification Commission and PHAC's response. It is treated here as background context, and should be cited
+to the primary announcement before this work is submitted anywhere. Every *number* in the dashboard comes
+from the data files.
+
 ### "Real-time" surveillance
 
 The dashboard is not connected live to PHAC. "Real-time" here means *the most recent PHAC publication*.
@@ -203,6 +211,7 @@ Rscript scripts/fetch_data.R      # download raw sources, write manifest
 Rscript scripts/prepare_data.R    # parse into data/tidy/
 Rscript tests/test_model.R        # 36 model assertions
 Rscript tests/test_plots.R        # render every chart headlessly
+Rscript tests/test_server.R       # 276 checks driving the Shiny server
 Rscript -e 'shiny::runApp("app.R", port = 7788)'
 ```
 

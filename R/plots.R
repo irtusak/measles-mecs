@@ -34,9 +34,13 @@ plot_yearly_cases <- function(yearly, meta, as_of) {
 
 #' Cases by vaccination status and age group.
 plot_demographics <- function(demo, meta, as_of) {
-  d <- demo |>
-    filter(characteristic %in% c("Vaccination status", "Age group"),
-           !is.na(count), category != "Unknown") |>
+  keep <- demo |> filter(characteristic %in% c("Vaccination status", "Age group"),
+                         !is.na(count))
+  # "Unknown" is a real reporting category, not a zero. Exclude it from the
+  # bars but say how many cases that removes rather than quietly dropping it.
+  n_unknown <- sum(keep$count[keep$category == "Unknown"], na.rm = TRUE)
+  d <- keep |>
+    filter(category != "Unknown") |>
     mutate(characteristic = factor(characteristic,
              levels = c("Vaccination status", "Age group")))
   ggplot(d, aes(x = reorder(category, count), y = count)) +
@@ -49,7 +53,12 @@ plot_demographics <- function(demo, meta, as_of) {
     labs(x = NULL, y = "Cases",
          title = paste0("Measles cases in ", meta$report_year,
                         " by vaccination status and age"),
-         subtitle = "The overwhelming majority of cases are in people who were never vaccinated.",
+         subtitle = paste0(
+           "The overwhelming majority of cases are in people who were never vaccinated.",
+           if (n_unknown > 0)
+             sprintf("\nExcludes %s case(s) recorded as unknown status or age.",
+                     format(n_unknown, big.mark = ","))
+           else ""),
          caption = SOURCE_PHAC(as_of)) +
     theme_mecs() + theme(panel.grid.major.y = element_blank())
 }

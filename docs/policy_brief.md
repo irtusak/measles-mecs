@@ -63,7 +63,7 @@ The pattern is not random. Measles is concentrating in people with no protection
 ## Why 95%
 
 Measles is among the most contagious diseases known. In a population with no immunity, one case infects
-roughly twelve to eighteen others. To stop it spreading, about **93% to 94% of people must be immune**.
+roughly twelve to eighteen others. To stop it spreading, roughly **92% to 94% of people must be immune**.
 
 Because two doses of vaccine protect about 97% of people rather than 100%, vaccination coverage has to be
 higher than the immunity target to reach it. Working it through: at the middle of that contagiousness range,
@@ -80,8 +80,8 @@ This is the part most easily missed by a national dashboard, and it is the reaso
 did.
 
 Suppose a province reports 97% coverage — comfortably above target. If 5% of that population lives in a
-community where coverage is 70%, then inside that community each case leads to nearly **five** more, even
-though the province as a whole is below the threshold that sustains transmission. The provincial average is
+community where coverage is 70%, then inside that community each case leads to nearly **five** more — even
+though the province as a whole sits above the level needed to stop transmission. The provincial average is
 genuinely 97%. The virus does not experience the average; it experiences the community it lands in.
 
 This is why coverage targets need to be met **locally**, not just nationally, and why the absence of
@@ -158,5 +158,8 @@ coverage before it shows up as an outbreak.
   and pregnant women* (PHAC childhood National Immunization Coverage Survey). Statistics Canada Open Licence.
 - Transmission parameters: Anderson & May (1991); Guerra et al. (2017), *Lancet Infectious Diseases*.
   Vaccine effectiveness: Canadian Immunization Guide; CDC Pink Book.
+- The loss of elimination status in November 2025 is not recorded in the open data files used here. It
+  comes from the announcement by the Pan American Health Organization's Regional Verification Commission
+  and PHAC's response to it. **Verify and cite the primary announcement before submitting this brief.**
 
 Full methods, assumptions and limitations are in the **Methods & data** tab.

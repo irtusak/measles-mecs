@@ -185,7 +185,7 @@ Recorded because each one would have produced a plausible-looking but wrong dash
 ### Testing
 
 - `tests/test_model.R` — 36 assertions on the epidemiology against hand-computed values.
-- `tests/test_plots.R` — renders all 11 charts headlessly plus 3 edge cases; PNGs land in `tests/output/`.
+- `tests/test_plots.R` — renders all 13 charts headlessly plus 3 edge cases; PNGs land in `tests/output/`.
 - `tests/test_server.R` — drives the Shiny server with `shiny::testServer` across all 42 jurisdiction ×
   age-group combinations, 18 slider-edge combinations, and both feasible and infeasible equity splits.
   276 checks. This is what caught bugs 3 and 6.
@@ -198,3 +198,27 @@ Recorded because each one would have produced a plausible-looking but wrong dash
   form that is not in the StatCan table, and transcribing it with a citation if so.
 - **[M]** The brief's "ship by December or January" timeline predates today (2026-09-19). Kasturi should
   decide whether the FSWEP framing needs updating for the current application cycle.
+
+## 2026-09-19 — Changes made after review
+
+- **[M]** Removed `font_google("Inter")` from `bs_theme()`. It fetched the font from
+  fonts.googleapis.com **when the app started**, which contradicted rule 7 and would fail on a restricted
+  federal network. Verified by clearing the font cache and relaunching: no download, and no
+  `fonts.googleapis` reference in the served HTML. bslib's default system font stack is used instead.
+- **[M]** The simulator verdict now states its scope. "R_eff = 1.67" computed from 2-year-old coverage is
+  not a whole-of-Canada figure — it excludes immunity in adults, including those born before 1970. The
+  verdict box says so, because that box is the first thing a reviewer reads. This was documented in
+  METHODS but not surfaced in the interface.
+- **[M]** The claim that Canada lost elimination status in November 2025 comes from the project brief, not
+  from any file in `data/raw/`. It is now flagged as such in `docs/METHODS.md` and in the brief's sources.
+  *Kasturi: cite the primary PAHO Regional Verification Commission / PHAC announcement before submitting.*
+- **[M]** Corrected the brief: the herd immunity threshold across R₀ 12–18 is 91.7–94.4%, so it now reads
+  "roughly 92% to 94%", not "93% to 94%". Also reworded an ambiguous sentence that could be read as saying
+  a province was below the herd immunity threshold when the point was that it was above it.
+- **[M]** The demographics chart excludes cases recorded as "Unknown" status or age. It now says how many
+  cases that removes, computed from the data rather than hardcoded.
+- **[M]** Doc sync: `tests/test_server.R` added to the README and METHODS command lists; chart count
+  corrected.
+
+**Verification at this point:** 36 model assertions, 16 chart renders, 276 server checks — all passing,
+no warnings. App serves HTTP 200 with no network calls at startup.

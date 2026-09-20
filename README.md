@@ -48,11 +48,13 @@ the latest PHAC report.
 ```bash
 Rscript tests/test_model.R    # 36 assertions on the transmission model
 Rscript tests/test_plots.R    # renders every chart headlessly to tests/output/
+Rscript tests/test_server.R   # 276 checks driving the Shiny server end to end
 ```
 
 The model tests check the epidemiology against hand-computed values, including validating the
 epidemiological-week function against PHAC's own published week dates. The plot tests render every chart
-against the real data, so a broken chart is caught without opening a browser.
+against the real data, so a broken chart is caught without opening a browser. The server tests drive the
+reactive logic with `shiny::testServer` across every jurisdiction, age group and slider edge.
 
 ## How it is organised
 

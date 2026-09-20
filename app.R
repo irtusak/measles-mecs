@@ -115,7 +115,10 @@ css <- "
 
 ui <- page_navbar(
   title = "MECS — Measles Elimination and Coverage Simulator",
-  theme = bs_theme(version = 5, primary = "#0072B2", base_font = font_google("Inter")),
+  # No font_google() here: it fetches from fonts.googleapis.com when the app
+  # starts, which would break the no-runtime-network guarantee and can fail
+  # behind a restricted network. bslib's default system font stack is fine.
+  theme = bs_theme(version = 5, primary = "#0072B2"),
   header = tags$head(tags$style(HTML(css))),
 
   # --- Overview -------------------------------------------------------------
@@ -401,17 +404,28 @@ server <- function(input, output, session) {
 
   output$sim_verdict <- renderUI({
     s <- sim_calc()
+    # The figure describes a population whose immunity comes only from the
+    # coverage chosen here. It is not a whole-of-Canada R_eff: it excludes
+    # immunity in adults, including those born before 1970.
+    scope <- tags$div(
+      class = "smallnote", style = "margin-top:6px;font-weight:400;",
+      "Applies to a population whose only immunity is the coverage selected ",
+      "above \u2014 typically a childhood cohort. It is not a whole-population ",
+      "figure: it excludes immunity from past infection and in adults born ",
+      "before 1970.")
     if (s$reff >= 1) {
       div(class = "verdict verdict-bad",
         sprintf("Sustained transmission possible — Rₑff = %.2f", s$reff),
         tags$div(style = "font-weight:400;font-size:0.88rem;margin-top:4px;",
           "Each case leads to more than one further case on average, so an ",
-          "introduction can grow into an outbreak rather than dying out."))
+          "introduction can grow into an outbreak rather than dying out."),
+        scope)
     } else {
       div(class = "verdict verdict-good",
         sprintf("Below the threshold — Rₑff = %.2f", s$reff),
         tags$div(style = "font-weight:400;font-size:0.88rem;margin-top:4px;",
-          "Introductions still cause cases, but chains of transmission die out."))
+          "Introductions still cause cases, but chains of transmission die out."),
+        scope)
     }
   })
 
