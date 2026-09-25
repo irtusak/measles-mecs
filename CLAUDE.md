@@ -427,3 +427,16 @@ the Action can redeploy as well as commit. Steps are in `docs/DEPLOY.md`.
 **Verification at this point:** every suite green — model, charts, contrast, CV claims (29), server (286),
 no warnings. App serves the 21 September 2026 data. **Nothing is pushed yet: `gh auth login` has not been
 run.**
+
+## 2026-09-24 — Published
+
+- **[K]** Pushed to a public GitHub repository: **https://github.com/irtusak/measles-mecs** (account
+  `irtusak`). Commit author is `Kasturi Rangarajan <Kasturi.rangarajan@gmail.com>`, which GitHub links to
+  the profile, so the commits count toward the contribution graph.
+- **[M]** The first push was refused until the login token was granted the `workflow` scope: GitHub will
+  not accept a push touching `.github/workflows/` without it. `gh auth refresh -s workflow` then
+  `gh auth setup-git` fixed it; noted here because the same thing will happen on any new machine.
+- **[M]** The refresh workflow was triggered once by hand immediately after the push, so that a CI-only
+  problem (package installation on Ubuntu, for instance) surfaces now rather than on the first Tuesday.
+- **Still to do, Kasturi only:** shinyapps.io deploy, then the three `SHINYAPPS_*` repository secrets so
+  the weekly workflow redeploys as well as commits (`docs/DEPLOY.md`, section 2 and 4).
