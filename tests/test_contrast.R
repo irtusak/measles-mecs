@@ -77,6 +77,8 @@ check_contrast("verdict, below threshold", "#04543F", "#E4F4EE")
 check_contrast("flag, use with caution",   "#7A4F00", "#FDF0D5")
 check_contrast("flag, gap",                "#4C5764", "#EFF1F3")
 check_contrast("active nav pill",          WHITE,     "#0072B2", 3.0)
+check_contrast("page footer",              "#43505F", WHITE)
+check_contrast("page footer link",         "#0072B2", WHITE)
 
 cat("\nThe specific regression that caused this file to exist\n")
 # Checked against the rendered HTML rather than the source text: what matters
@@ -100,6 +102,19 @@ box_region <- sub(".*?bslib-value-box", "", html)
 box_region <- substr(box_region, 1, max(gregexpr("statnote", box_region)[[1]]))
 check("no .smallnote anywhere among the stat cards",
       !grepl("smallnote", box_region, fixed = TRUE))
+# The footer has to sit outside the tab panels, or it would only appear on
+# whichever tab happened to contain it.
+footer_at <- regexpr("class=\"mecs-footer\"", html, fixed = FALSE)
+last_pane <- max(gregexpr("tab-pane", html)[[1]])
+check("the credit footer renders exactly once",
+      length(gregexpr("class=\"mecs-footer\"", html)[[1]]) == 1 && footer_at > 0)
+check("the footer sits outside every tab panel, so it shows on all tabs",
+      footer_at > last_pane)
+check("the footer carries the name, institution and contact",
+      grepl("Built by Kasturi Rangarajan", html, fixed = TRUE) &&
+      grepl("MPH Candidate, Simon Fraser University", html, fixed = TRUE) &&
+      grepl("mailto:kasturi_rangarajan@sfu.ca", html, fixed = TRUE))
+
 check("stat cards carry a category accent",
       all(vapply(c("stat-cases", "stat-active", "stat-context|stat-clear"),
                  function(p) grepl(p, html), logical(1))))

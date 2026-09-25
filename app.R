@@ -96,8 +96,14 @@ css <- "
 html { font-size: 17px; }
 body { line-height: 1.55; background: #FAFBFC; }
 /* The masthead and each tab set their own gutters, so the Bootstrap
-   container padding would only double them up. */
-body > .container-fluid { padding: 0; }
+   container padding would only double them up. The flex column keeps the
+   footer at the bottom of the viewport on short tabs. */
+body > .container-fluid { padding: 0; display: flex; flex-direction: column;
+  min-height: 100vh; }
+.mecs-body { flex: 1 0 auto; }
+.mecs-footer { flex-shrink: 0; background: #FFFFFF; border-top: 1px solid #DFE4EA;
+  padding: 18px 0; margin-top: 8px; font-size: 0.9rem; color: #43505F; }
+.mecs-footer a { color: #0072B2; }
 
 /* --- masthead ---------------------------------------------------------- */
 .mecs-header { background: #FFFFFF; border-bottom: 1px solid #DFE4EA; padding: 26px 0 20px; }
@@ -460,6 +466,14 @@ ui <- page_fluid(
             "checked without reading the code."),
           div(class = "brief", uiOutput("methods")))
       )
+    )
+  ),
+
+  tags$footer(
+    class = "mecs-footer",
+    div(class = "mecs-inner",
+      "Built by Kasturi Rangarajan, MPH Candidate, Simon Fraser University. Contact: ",
+      tags$a(href = "mailto:kasturi_rangarajan@sfu.ca", "kasturi_rangarajan@sfu.ca")
     )
   )
 )

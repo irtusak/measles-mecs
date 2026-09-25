@@ -335,3 +335,13 @@ both needs Kasturi's accounts, so nothing has been pushed or deployed.
 - **[M]** `tests/test_contrast.R` computes WCAG relative luminance in R and asserts all 32 pairs, including
   a check against the rendered HTML that no stat card ever gets a saturated fill or a `.smallnote` caption
   again.
+
+### Page footer
+
+- **[K]** Every tab carries a credit line at the bottom: "Built by Kasturi Rangarajan, MPH Candidate,
+  Simon Fraser University. Contact: kasturi_rangarajan@sfu.ca".
+- **[M]** Placed as a sibling of the tab set rather than inside any panel, so it renders once and appears
+  on all six tabs. The page is a flex column with `min-height: 100vh`, so on a short tab the footer sits at
+  the bottom of the window rather than floating half way up it. The email is a `mailto:` link.
+  `tests/test_contrast.R` asserts it renders exactly once, sits outside every tab panel, and carries the
+  name, institution and contact.
