@@ -15,7 +15,7 @@ Prepared 19 September 2026 · Surveillance data as of 14 September 2026
 Canada lost its measles elimination status in November 2025, after an outbreak that began in New Brunswick
 in October 2024 spread across ten jurisdictions and caused more than six thousand cases. Getting that
 status back requires one thing above all: showing that the outbreak strain has stopped spreading in Canada
-for **twelve consecutive months in a row**, backed by surveillance good enough to prove it.
+for **twelve consecutive months**, backed by surveillance good enough to prove it.
 
 As of the most recent report, Canada is partway through that twelve-month window, and the clock is fragile.
 A single new case linked to the same chain of transmission resets it.
@@ -106,17 +106,17 @@ Three things follow from that.
 
 ## Recommendations
 
-**1. Target under-immunised communities, not national averages.**
-Identify where coverage is lowest at sub-provincial level and direct catch-up programmes there. This means
-investing in the local immunisation registries needed to see those pockets in the first place. A national
+**1. Target under-immunized communities, not national averages.**
+Identify where coverage is lowest at sub-provincial level and direct catch-up programs there. This means
+investing in the local immunization registries needed to see those pockets in the first place. A national
 average above 90% is compatible with communities well below 70%.
 
-**2. Work with communities, not at them.**
+**2. Targeted community engagement: work with communities, not at them.**
 The communities most affected by this outbreak were reached late. Engagement that involves trusted local
 messengers — community leaders, family physicians, midwives, faith leaders where relevant — is slower to set
 up and considerably more effective than broadcast campaigns. Fund it before the next outbreak, not during it.
 
-**3. Close the routine-immunisation gap left by the pandemic.**
+**3. Close the routine-immunization gap left by the pandemic.**
 Coverage for two-year-olds has not recovered. Systematic catch-up for children who missed doses in 2020–2022
 addresses a known, countable deficit.
 

@@ -155,7 +155,7 @@ ob <- read_csv(raw("outbreaks.csv"), show_col_types = FALSE) |>
 write_csv(ob, tidy("outbreaks.csv"))
 message("  outbreaks.csv  (", nrow(ob), " outbreak-jurisdiction rows)")
 
-# 7. Immunisation coverage (cNICS) ------------------------------------------
+# 7. Immunization coverage (cNICS) ------------------------------------------
 # StatCan quality flags decide what the app may show:
 #   ""  usable        E  use with caution (shown, flagged)
 #   F   too unreliable to publish     x  suppressed for confidentiality

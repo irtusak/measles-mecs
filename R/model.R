@@ -147,7 +147,7 @@ prob_large_outbreak <- function(r_eff) {
 
 # Clustering / equity lens --------------------------------------------------
 
-#' Split a population into a well-covered majority and an under-immunised
+#' Split a population into a well-covered majority and an under-immunized
 #' pocket that together average to an observed provincial coverage.
 #'
 #' The point of the equity module. A province can report a coverage average
@@ -178,7 +178,7 @@ clustered_coverage <- function(mean_coverage, cluster_share, cluster_coverage,
   feasible <- rest_coverage >= 0 && rest_coverage <= 1
 
   out <- data.frame(
-    group      = c("Under-immunised community", "Rest of the province", "Province overall"),
+    group      = c("Under-immunized community", "Rest of the province", "Province overall"),
     share      = c(cluster_share, 1 - cluster_share, 1),
     coverage   = c(cluster_coverage, rest_coverage, mean_coverage),
     stringsAsFactors = FALSE

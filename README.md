@@ -3,7 +3,7 @@
 An interactive R Shiny dashboard showing how measles vaccination coverage relates to outbreak risk, and
 tracking Canada's path back to measles elimination status after it was lost in November 2025.
 
-Built for federal and provincial public health analysts, epidemiologists and immunization programme
+Built for federal and provincial public health analysts, epidemiologists and immunization program
 managers.
 
 An independent student project by Kasturi Rangarajan, Master of Public Health candidate, Simon Fraser
@@ -23,7 +23,7 @@ panels rather than on the page.
 | **Overview** | Current situation, the annual epidemic curve since 1998, who is being infected, and a live count of progress through the 12-month interruption requirement |
 | **Surveillance** | Weekly epidemic curves by province for the current reporting year, and year-to-date cases by jurisdiction |
 | **Simulator** | Move coverage, R₀ and vaccine effectiveness and watch the effective reproduction number, expected outbreak size and the derivation of the 95% target respond |
-| **Equity lens** | Why a province can report coverage above target and still sustain transmission in an under-immunised community |
+| **Equity lens** | Why a province can report coverage above target and still sustain transmission in an under-immunized community |
 | **Policy brief** | A plain-language evidence-informed brief with recommendations |
 | **Methods & data** | Every parameter, assumption and limitation |
 
@@ -52,13 +52,17 @@ the latest PHAC report.
 ```bash
 Rscript tests/test_model.R    # 36 assertions on the transmission model
 Rscript tests/test_plots.R    # renders every chart headlessly to tests/output/
-Rscript tests/test_server.R   # 276 checks driving the Shiny server end to end
+Rscript tests/test_server.R   # 279 checks driving the Shiny server end to end
+Rscript tests/test_resume_claims.R   # every CV claim, checked against the app
 ```
 
 The model tests check the epidemiology against hand-computed values, including validating the
 epidemiological-week function against PHAC's own published week dates. The plot tests render every chart
 against the real data, so a broken chart is caught without opening a browser. The server tests drive the
-reactive logic with `shiny::testServer` across every jurisdiction, age group and slider edge.
+reactive logic with `shiny::testServer` across every jurisdiction, age group and slider edge. The resume
+claims test asserts that each statement made about this project on a CV is actually true of the app — that
+the surveillance tab really does carry historical and recent curves with reporting-lag and suppression
+caveats, that the brief really does explain the 12-month requirement, and so on.
 
 ## How it is organised
 

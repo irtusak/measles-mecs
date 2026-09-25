@@ -5,7 +5,7 @@ An interactive R Shiny dashboard by Kasturi Rangarajan (Master of Public Health 
 University) that visualises how vaccination coverage relates to measles outbreak risk, and tracks Canada's
 path back to measles elimination status.
 
-Audience: federal and provincial public health analysts, epidemiologists and immunization programme
+Audience: federal and provincial public health analysts, epidemiologists and immunization program
 managers — specifically PHAC staff working on restoring Canada's elimination status, lost in November 2025.
 Purpose: supports a Federal Student Work Experience Program (FSWEP) application. Credibility in front of a
 PHAC epidemiologist matters more than visual flash.
@@ -85,17 +85,17 @@ during the build are marked **[M]** and should be reviewed by Kasturi.
 
 - **[K]** Build the Measles Elimination and Coverage Simulator (MECS) as an interactive dashboard for a
   FSWEP application. Audience: federal/provincial public health analysts, epidemiologists, immunization
-  programme managers.
+  program managers.
 - **[K]** Technology stack is **R Shiny**, because R is heavily used in federal epidemiology. Iterative
   development: a simple working version showing surveillance data and basic charts first, then the
   interactive scenario sliders.
 - **[K]** Three core modules: (1) Coverage Scenario Simulator with a coverage slider by province/age group
   against the 95% herd immunity threshold; (2) Real-Time Surveillance tab with PHAC epidemic curves;
-  (3) Equity and Clustering Lens showing how under-immunised pockets sustain transmission despite a high
+  (3) Equity and Clustering Lens showing how under-immunized pockets sustain transmission despite a high
   provincial average.
 - **[K]** Embed a plain-language evidence-informed policy brief covering the 12-consecutive-months
   interruption requirement for reclaiming elimination status, and recommending targeted community
-  engagement to close immunisation gaps and rebuild trust.
+  engagement to close immunization gaps and rebuild trust.
 - **[K]** Model must adhere to scientifically standard, well-established measles parameters so it is
   defensible if a PHAC epidemiologist reviews the code.
 - **[K]** Build logic to handle suppressed regional data appropriately, to respect privacy.
@@ -257,3 +257,35 @@ Masthead → contact → tab strip confirmed in that order in the served HTML, w
   screenshot external sites but shows an error page for `127.0.0.1:7788`, so its localhost is not the same
   as the shell's. Layout was checked structurally, not by eye. Kasturi should open it and say what still
   reads as cluttered.
+
+## 2026-09-24 — Resume claims audited against the app
+
+- **[K]** The project is described on Kasturi's CV in six bullets, and a hiring manager may open the
+  dashboard while reading them. Every claim must therefore be true of the running app.
+- **[M]** Three claims did not hold and were fixed rather than reworded:
+  1. *"a surveillance tab presenting historical and recent PHAC case data"* — the historical annual series
+     (1998 onward) lived only on the Overview tab. It is now the first card on Surveillance, headed
+     "Historical", with the weekly curve below it headed "Recent".
+  2. *"with reporting-lag ... caveats stated explicitly"* — nothing on the tab used the words. There is now
+     a labelled **Reporting lag** caveat explaining that cases are counted by rash onset but reported only
+     after confirmation, so recent weeks are systematically incomplete.
+  3. *"and data-suppression caveats stated explicitly"* — suppression was handled for coverage data on the
+     Simulator tab but never mentioned on Surveillance. A labelled **Data suppression** caveat now names
+     what is actually withheld in the data shown: `<1` percentages, unpublished confirmed/probable splits,
+     and blank health-region counts (which is why there is no sub-provincial map).
+- **[M]** `MEASLES_PARAMS$who_target` (0.95) was defined and never used. The CV says outbreak risk is shown
+  "relative to the 95% herd immunity threshold", but the chart drew only the derived requirement (96.2% at
+  R₀ 15). The risk chart now draws the 95% operational target as a labelled line, so the quoted figure is
+  visible next to the derived one, and the accordion explains why they differ.
+- **[M]** The elimination clock measured against `Sys.Date()` while the data is a fixed snapshot, so months
+  would accrue beyond what the data supports. It is now measured against the PHAC report date and labelled
+  "as of the latest PHAC report".
+- **[M]** Spelling moved to Canadian federal usage (`-ize`, "program"), matching the source documents —
+  *National Immunization Coverage Survey*, *Canadian Immunization Guide* — and the CV itself.
+- **[M]** `tests/test_resume_claims.R` locks all six bullets to the application: 27 checks that fail if a
+  claim stops being true.
+
+**Open question for Kasturi: where will the link in the resume point?** The repository has no remote and
+the app runs locally. Bullet 6 ("Git version control ... decision log") is only checkable by a manager if
+the repository is public. Deciding between a public GitHub repository, a hosted app (shinyapps.io), or
+both needs Kasturi's accounts, so nothing has been pushed or deployed.

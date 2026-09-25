@@ -42,7 +42,7 @@ page as downloads; the file list was read from the page's `data-loader.js`. Base
 
 ---
 
-## 2. Immunisation coverage — Statistics Canada / PHAC
+## 2. Immunization coverage — Statistics Canada / PHAC
 
 **Table 13-10-0870-01 — Vaccine coverage estimates for recommended vaccines in children and pregnant women**
 Source of the estimates: PHAC **childhood National Immunization Coverage Survey (cNICS)**

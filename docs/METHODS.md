@@ -156,7 +156,7 @@ Heesterbeek & Britton (2013).
 
 ## 5. The clustering module
 
-`clustered_coverage()` splits a population into an under-immunised community and the rest, and solves for
+`clustered_coverage()` splits a population into an under-immunized community and the rest, and solves for
 the coverage of the rest so that the weighted mean always reproduces the **observed** provincial average:
 
     rest coverage = (observed mean - share × community coverage) / (1 - share)
@@ -211,7 +211,8 @@ Rscript scripts/fetch_data.R      # download raw sources, write manifest
 Rscript scripts/prepare_data.R    # parse into data/tidy/
 Rscript tests/test_model.R        # 36 model assertions
 Rscript tests/test_plots.R        # render every chart headlessly
-Rscript tests/test_server.R       # 276 checks driving the Shiny server
+Rscript tests/test_server.R       # 279 checks driving the Shiny server
+Rscript tests/test_resume_claims.R  # CV claims checked against the app
 Rscript -e 'shiny::runApp("app.R", port = 7788)'
 ```
 

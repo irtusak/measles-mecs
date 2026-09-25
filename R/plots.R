@@ -114,10 +114,19 @@ plot_reff_curve <- function(r0, ve, chosen_cov, observed = NULL) {
     mutate(reff = r_effective_from_coverage(cov, r0, ve))
   chosen_reff <- r_effective_from_coverage(chosen_cov, r0, ve)
 
+  target <- MEASLES_PARAMS$who_target * 100
+
   p <- ggplot(grid, aes(cov * 100, reff)) +
     geom_hline(yintercept = 1, linetype = "dashed", colour = MECS_COLOURS$threshold) +
     annotate("text", x = 51, y = 1, label = "R_eff = 1", vjust = -0.6,
              hjust = 0, size = 3.4, colour = MECS_COLOURS$threshold) +
+    # The 95% operational target, so the figure everyone quotes is visible
+    # next to the requirement this model actually derives.
+    geom_vline(xintercept = target, linetype = "dashed",
+               colour = MECS_COLOURS$safe, linewidth = 0.6) +
+    annotate("text", x = target, y = max(grid$reff) * 0.62,
+             label = "95% WHO/PHAC target ", hjust = 1, size = 3.3,
+             colour = MECS_COLOURS$safe) +
     geom_line(linewidth = 1, colour = MECS_COLOURS$modelled) +
     annotate("point", x = chosen_cov * 100, y = chosen_reff, size = 3.6,
              colour = MECS_COLOURS$modelled) +
@@ -130,9 +139,9 @@ plot_reff_curve <- function(r0, ve, chosen_cov, observed = NULL) {
       geom_vline(xintercept = observed$coverage, colour = MECS_COLOURS$neutral,
                  linetype = "dotted") +
       annotate("text", x = observed$coverage, y = max(grid$reff) * 0.95,
-               label = paste0(" observed ", fmt_pct_p(observed$coverage),
-                              " (", observed$year, ")"),
-               hjust = 0, size = 3.3, colour = MECS_COLOURS$neutral)
+               label = paste0("observed ", fmt_pct_p(observed$coverage),
+                              " (", observed$year, ") "),
+               hjust = 1, size = 3.3, colour = MECS_COLOURS$neutral)
   }
 
   p + scale_x_continuous(labels = function(x) paste0(x, "%")) +

@@ -41,12 +41,13 @@ testServer("app.R", {
   check("clock_ui renders",     output$clock_ui)
   check("clock_caveat renders", output$clock_caveat)
   check("plot_yearly renders",  output$plot_yearly)
+  check("plot_yearly_surv renders", output$plot_yearly_surv)
   check("plot_demo renders",    output$plot_demo)
   check("plot_bypt renders",    output$plot_bypt)
   check("eq_evidence renders",  output$eq_evidence)
   check("policy brief renders", output$brief)
   check("methods renders",      output$methods)
-  cat("  ok    static outputs (8)\n")
+  cat("  ok    static outputs (9)\n")
 
   # --- Simulator across every combination ----------------------------------
   n <- 0L

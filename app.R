@@ -67,8 +67,11 @@ last_onset_row <- outbreak |>
   arrange(desc(last_rash_onset_year), desc(last_rash_onset_week)) |>
   slice(1)
 
+# Measured against the PHAC report date, not today: the data is a snapshot, and
+# counting months past it would claim progress the data cannot support.
 CLOCK <- elimination_clock(last_onset_row$last_rash_onset_year,
-                           last_onset_row$last_rash_onset_week)
+                           last_onset_row$last_rash_onset_week,
+                           as_of = as.Date(AS_OF))
 CLOCK_PROVINCE <- last_onset_row$province
 
 fmt_pct  <- function(x, d = 1) ifelse(is.na(x), "—", sprintf(paste0("%.", d, "f%%"), x))
@@ -128,6 +131,11 @@ body > .container-fluid { padding: 0; }
   border-radius: 10px; margin-left: 6px; }
 .flag-caution { background: #FDF0D5; color: #7A4F00; border: 1px solid #E69F00; }
 .flag-gap { background: #EFF1F3; color: #4C5764; border: 1px solid #C9CDD4; }
+.caveat { background: #FFFFFF; border: 1px solid #DFE4EA; border-left: 3px solid #E69F00;
+  padding: 14px 18px 4px; margin-bottom: 24px; border-radius: 4px; max-width: 62rem;
+  font-size: 0.93rem; color: #3D4854; }
+.caveat p { margin-bottom: 10px; }
+.caveat code { background: #F1F3F5; color: #8A5A00; padding: 1px 5px; border-radius: 3px; }
 .modelled-banner { background: #F8F1F7; border-left: 3px solid #CC79A7;
   padding: 10px 14px; font-size: 0.92rem; color: #5F4257; margin-bottom: 22px;
   border-radius: 4px; max-width: 60rem; }
@@ -154,7 +162,7 @@ masthead <- tags$header(
       "An interactive tool for exploring how measles vaccination coverage relates to outbreak ",
       "risk in Canada, and for tracking progress back towards measles elimination status, which ",
       "Canada lost in November 2025. It is built for public health analysts, epidemiologists and ",
-      "immunization programme managers, using open surveillance data from the Public Health ",
+      "immunization program managers, using open surveillance data from the Public Health ",
       "Agency of Canada and coverage estimates from Statistics Canada."),
     div(
       class = "mecs-contact",
@@ -242,10 +250,40 @@ ui <- page_fluid(
         div(class = "tabwrap",
           h2(class = "tab-h", "Epidemic curves"),
           p(class = "lede",
-            "Cases by the week the rash began, which is the closest available marker of when ",
-            "infection happened, and the year-to-date total for each jurisdiction."),
+            "Historical and recent measles case data from PHAC: the annual series back to 1998, ",
+            "the current year week by week, and the year-to-date total for each jurisdiction. ",
+            "Cases are plotted by when the rash began, the closest available marker of when ",
+            "infection happened."),
+
+          div(class = "caveat",
+            p(strong("Reporting lag."),
+              " Cases are counted by the week the rash began, but a case is only reported once it ",
+              "has been seen, tested and confirmed. The most recent weeks are therefore ",
+              strong("systematically incomplete"), " and will rise as late reports arrive. ",
+              paste0("This report covers week ", meta$report_week, " of ", meta$report_year,
+                     ", while the latest week with any rash onset reported is week ",
+                     meta$latest_week_onset, "."),
+              " Weeks with nothing reported yet are left out of the curve rather than drawn as ",
+              "zero, so an empty week is never mistaken for a week without cases."),
+            p(strong("Data suppression."),
+              " PHAC withholds or rounds small counts to protect privacy, and this dashboard keeps ",
+              "those gaps rather than filling them. Percentages below one are published as ",
+              tags$code("<1"), " and are shown that way. Some jurisdictions' confirmed and probable ",
+              "splits are not published and stay blank. Health-region case counts are blank where ",
+              "numbers are small, which is why no sub-provincial map is shown here \u2014 mapping ",
+              "suppressed small cells would imply precision the data does not have. Suppression ",
+              "flags on the immunization coverage estimates are handled on the Simulator tab.")),
+
           card(
-            card_header(paste0("Weekly cases by week of rash onset, ", meta$report_year)),
+            card_header("Historical \u2014 annual confirmed cases, 1998 to present"),
+            plotOutput("plot_yearly_surv", height = "340px"),
+            card_footer(class = "smallnote",
+              paste0("Probable cases are published separately by PHAC for 2025 and ",
+                     meta$report_year, " only. For earlier years a gap means not reported, ",
+                     "not zero."))),
+
+          card(
+            card_header(paste0("Recent \u2014 weekly cases by week of rash onset, ", meta$report_year)),
             layout_sidebar(
               sidebar = sidebar(
                 width = 290,
@@ -264,9 +302,10 @@ ui <- page_fluid(
               plotOutput("plot_weekly", height = "420px")
             ),
             card_footer(class = "smallnote",
-              paste0("Weeks after ", max(weekly$week), " are not yet reported and are left out ",
-                     "rather than drawn as zero. PHAC publishes a weekly curve for the current ",
-                     "year only \u2014 see the Overview tab for earlier years."))),
+              paste0("PHAC publishes a weekly curve for the current reporting year only, so 2025 ",
+                     "cannot be shown week by week \u2014 the annual series above carries the ",
+                     "multi-year picture."))),
+
           card(card_header("Cases by jurisdiction, year to date"),
                plotOutput("plot_bypt", height = "340px"),
                card_footer(class = "smallnote",
@@ -338,7 +377,7 @@ ui <- page_fluid(
           div(class = "modelled-banner",
             strong("This tab is an illustration. "),
             "Canada does not publish coverage below the provincial level, so the size and ",
-            "coverage of the under-immunised community are values you choose. The provincial ",
+            "coverage of the under-immunized community are values you choose. The provincial ",
             "average they must average out to is real. This shows a mechanism; it does not ",
             "describe any specific community."),
           layout_sidebar(
@@ -401,6 +440,9 @@ server <- function(input, output, session) {
 
   # -- Overview -------------------------------------------------------------
   output$plot_yearly <- renderPlot(plot_yearly_cases(yearly, meta, AS_OF))
+  # Same chart on the Surveillance tab, which is where "historical" belongs.
+  # A Shiny output id can only be bound to one placeholder, hence the alias.
+  output$plot_yearly_surv <- renderPlot(plot_yearly_cases(yearly, meta, AS_OF))
 
   output$clock_ui <- renderUI({
     months_done <- floor(CLOCK$months_elapsed)
@@ -410,7 +452,10 @@ server <- function(input, output, session) {
         "outbreak strain has been interrupted for ", strong("12 consecutive months"),
         ", verified by adequate surveillance."),
       div(class = "verdict verdict-bad",
-          sprintf("%d of 12 months since the last outbreak-linked case", months_done)),
+          sprintf("%d of 12 months since the last outbreak-linked case", months_done),
+          tags$div(style = "font-weight:400;font-size:0.86rem;margin-top:4px;",
+                   paste0("as of the latest PHAC report, ",
+                          format(as.Date(AS_OF), "%d %B %Y")))),
       br(),
       tags$div(style = "background:#E8EBEF;border-radius:6px;height:14px;overflow:hidden;",
         tags$div(style = sprintf("background:%s;height:14px;width:%.1f%%;",
@@ -652,7 +697,7 @@ server <- function(input, output, session) {
         else if (pocket$r_eff >= 1)
           strong("Both the community and the province are above the threshold — the gap is not only a clustering problem.")
         else
-          "At these settings even the under-immunised community is below the threshold."),
+          "At these settings even the under-immunized community is below the threshold."),
       p(class = "smallnote",
         "R₀ fixed at 15 and two-dose effectiveness at 97% for this module. Assumes each ",
         "group mixes mainly within itself, which is the assumption that makes clustering matter.")
