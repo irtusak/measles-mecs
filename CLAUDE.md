@@ -440,3 +440,9 @@ run.**
   problem (package installation on Ubuntu, for instance) surfaces now rather than on the first Tuesday.
 - **Still to do, Kasturi only:** shinyapps.io deploy, then the three `SHINYAPPS_*` repository secrets so
   the weekly workflow redeploys as well as commits (`docs/DEPLOY.md`, section 2 and 4).
+- **[M]** The first CI run passed every pipeline and test step on Ubuntu and then failed at the commit step.
+  Two causes, both fixed: (1) `report_meta.json` carried a `retrieved_at` run timestamp that nothing read,
+  so every run looked like a data change — removed, and `data/tidy/` is now byte-identical across runs on
+  unchanged data; (2) the push was rejected "fetch first" because a decision-log commit was pushed by hand
+  while the job was running — the commit step now does `git pull --rebase` before pushing. The smoke test
+  was worth doing: both would otherwise have surfaced on the first Tuesday.

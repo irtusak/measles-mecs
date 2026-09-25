@@ -57,8 +57,10 @@ meta <- list(
   mj_outbreak_probable  = as.integer(gv_val("measles_MJoutbreak_probable")),
   mj_outbreak_pt_count  = as.integer(gv_val("measles_MJoutbreak_pt_count")),
   rubella_annual        = as.integer(gv_val("rubella_annual_confirm")),
-  crs_annual            = as.integer(gv_val("crs_annual_confirm")),
-  retrieved_at          = format(Sys.time(), "%Y-%m-%dT%H:%M:%S%z")
+  crs_annual            = as.integer(gv_val("crs_annual_confirm"))
+  # No run timestamp here, deliberately. This file is committed, and the weekly
+  # workflow commits only when data/tidy/ has changed -- a timestamp would make
+  # every run look like a change. Download times live in data/raw/manifest.json.
 )
 write_json(meta, tidy("report_meta.json"), auto_unbox = TRUE, pretty = TRUE)
 message("  report_meta.json  (PHAC data as of ", update_stamp, ")")

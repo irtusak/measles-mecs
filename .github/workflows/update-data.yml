@@ -106,6 +106,9 @@ jobs:
           git add data/ docs/policy_brief.md
           git commit -m "Update PHAC surveillance data to ${AS_OF}" \
                      -m "Refreshed automatically. All test suites passed before this commit."
+          # Someone may have pushed while this job ran; replay the data commit
+          # on top of whatever is now on main rather than failing the push.
+          git pull --rebase origin main
           git push
 
       # Only runs once the shinyapps.io secrets are set. Without them the
