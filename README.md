@@ -6,6 +6,9 @@ tracking Canada's path back to measles elimination status after it was lost in N
 Built for federal and provincial public health analysts, epidemiologists and immunization program
 managers.
 
+**Live demo:** _add your shinyapps.io URL here after the first deploy_
+**Contact:** Kasturi Rangarajan — kasturi_rangarajan@sfu.ca
+
 An independent student project by Kasturi Rangarajan, Master of Public Health candidate, Simon Fraser
 University. It uses open data from the Public Health Agency of Canada and Statistics Canada. **It is not
 produced or endorsed by PHAC, Statistics Canada, or any province or territory.**
@@ -76,6 +79,7 @@ scripts/prepare_data.R   parses raw sources into data/tidy/
 data/SOURCES.md          every URL, what it contains, and its licence
 docs/METHODS.md          methods, parameters, assumptions and limitations
 docs/policy_brief.md     the plain-language brief
+docs/DEPLOY.md           how to publish to GitHub and shinyapps.io
 tests/                   model assertions and headless chart rendering
 CLAUDE.md                project rules and the running decision log
 ```
@@ -92,6 +96,11 @@ The pipeline lives in `scripts/`, not `R/`, because Shiny automatically sources 
   Licence
 
 See [`data/SOURCES.md`](data/SOURCES.md) for the full list, including known limitations of each source.
+
+## Publishing
+
+See [`docs/DEPLOY.md`](docs/DEPLOY.md). The deployment bundle has been pre-flighted: 29 files, 2.7 MB, with
+all nine packages detected by `rsconnect`.
 
 ## Two things worth knowing before you read the numbers
 

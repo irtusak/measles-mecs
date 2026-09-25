@@ -289,3 +289,19 @@ Masthead → contact → tab strip confirmed in that order in the served HTML, w
 the app runs locally. Bullet 6 ("Git version control ... decision log") is only checkable by a manager if
 the repository is public. Deciding between a public GitHub repository, a hosted app (shinyapps.io), or
 both needs Kasturi's accounts, so nothing has been pushed or deployed.
+
+### Publishing
+
+- **[K]** The dashboard will be published both as a **public GitHub repository** (so the commit history and
+  this decision log are checkable, which is what CV bullet 6 claims) and as a **live app on shinyapps.io**
+  (so a manager can actually use the simulator).
+- **[M]** Nothing has been pushed or deployed: both need Kasturi's own accounts, and publishing is theirs to
+  trigger. `docs/DEPLOY.md` has the exact steps for both, plus what to check afterwards.
+- **[M]** Deployment is pre-flighted rather than assumed: `rsconnect::listBundleFiles()` confirms 29 files,
+  2.7 MB, and `rsconnect::appDependencies()` detects all nine packages the app uses. `markdown` and `scales`
+  are only ever called as `markdown::` and `scales::`, which rsconnect does detect.
+- **[M]** `.rscignore` excludes `tests/` and `scripts/`. It cannot exclude `data/raw/` — rsconnect matches
+  only top-level entries — and that is left as is deliberately: the raw downloads travel with the deployed
+  app so the tidy data can be checked against them.
+- **[M]** Added an MIT `LICENSE` for the code, which restates that the data carry their own Government of
+  Canada licences and that this is not a PHAC product.
