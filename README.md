@@ -6,6 +6,7 @@ tracking Canada's path back to measles elimination status after it was lost in N
 Built for federal and provincial public health analysts, epidemiologists and immunization program
 managers.
 
+**Source:** https://github.com/irtusak/measles-mecs
 **Live demo:** _add your shinyapps.io URL here after the first deploy_
 **Contact:** Kasturi Rangarajan — kasturi_rangarajan@sfu.ca
 

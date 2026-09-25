@@ -22,7 +22,7 @@ clone without the fetch step, and there is a LICENCE. It is about 1 MB.
 Then, from the project directory:
 
 ```bash
-git remote add origin https://github.com/<your-username>/measles-mecs.git
+git remote add origin https://github.com/irtusak/measles-mecs.git
 git branch -M main
 git push -u origin main
 ```
@@ -97,7 +97,7 @@ One line under the project heading:
 
 ```
 Measles Elimination and Coverage Simulator (MECS)
-Live demo: <your-account>.shinyapps.io/measles-mecs  |  Source: github.com/<your-username>/measles-mecs
+Live demo: <your-account>.shinyapps.io/measles-mecs  |  Source: github.com/irtusak/measles-mecs
 ```
 
 ---
