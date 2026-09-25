@@ -213,6 +213,7 @@ Rscript tests/test_model.R        # 36 model assertions
 Rscript tests/test_plots.R        # render every chart headlessly
 Rscript tests/test_server.R       # 279 checks driving the Shiny server
 Rscript tests/test_resume_claims.R  # CV claims checked against the app
+Rscript tests/test_contrast.R      # WCAG AA contrast on every colour pair
 Rscript -e 'shiny::runApp("app.R", port = 7788)'
 ```
 

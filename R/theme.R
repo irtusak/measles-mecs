@@ -17,15 +17,25 @@ OKABE_ITO <- c(
 )
 
 # Semantic roles, so the meaning of a colour is set in one place.
+#
+# Reference lines and their labels are drawn in the SAME colour, so each pair
+# reads as one thing. That colour therefore has to satisfy the 4.5:1 text
+# contrast minimum on white, not just the 3:1 minimum for graphical objects,
+# which is why the line colours below are darkened relatives of the Okabe-Ito
+# hues rather than the hues themselves. Bars and filled areas keep the pure
+# Okabe-Ito values: they are large shapes, and every one is labelled in text.
+# Ratios against white are asserted in tests/test_contrast.R.
 MECS_COLOURS <- list(
-  cases        = unname(OKABE_ITO["blue"]),
-  probable     = unname(OKABE_ITO["sky_blue"]),
-  threshold    = unname(OKABE_ITO["vermillion"]),
-  safe         = unname(OKABE_ITO["green"]),
-  warning      = unname(OKABE_ITO["orange"]),
-  modelled     = unname(OKABE_ITO["purple"]),
-  neutral      = "#6E7A8A",
-  suppressed   = "#C9CDD4"
+  cases        = unname(OKABE_ITO["blue"]),      # 5.19:1
+  probable     = unname(OKABE_ITO["sky_blue"]),  # fill only
+  warning      = unname(OKABE_ITO["orange"]),    # fill only
+  threshold    = "#A34500",                      # 6.16:1  darkened vermillion
+  safe         = "#00674C",                      # 6.90:1  darkened green
+  modelled     = "#9B4779",                      # 5.88:1  darkened purple
+  neutral      = "#5A6472",                      # 6.00:1  was #6E7A8A at 4.36:1
+  label        = "#43505F",                      # 8.23:1  in-chart data labels
+  caption      = "#5C6673",                      # 5.83:1  was #77808E at 3.99:1
+  suppressed   = "#8892A0"                       # 3.24:1  gap markers, graphical
 )
 
 theme_mecs <- function(base_size = 13) {
@@ -33,14 +43,14 @@ theme_mecs <- function(base_size = 13) {
     theme(
       plot.title       = element_text(face = "bold", size = base_size * 1.15,
                                       margin = margin(b = 4)),
-      plot.subtitle    = element_text(colour = "#5A6472", size = base_size * 0.92,
+      plot.subtitle    = element_text(colour = MECS_COLOURS$neutral, size = base_size * 0.92,
                                       margin = margin(b = 10)),
-      plot.caption     = element_text(colour = "#77808E", size = base_size * 0.78,
+      plot.caption     = element_text(colour = MECS_COLOURS$caption, size = base_size * 0.78,
                                       hjust = 0, margin = margin(t = 10)),
       plot.caption.position = "plot",
       plot.title.position   = "plot",
-      axis.title       = element_text(colour = "#43505F", size = base_size * 0.9),
-      axis.text        = element_text(colour = "#5A6472"),
+      axis.title       = element_text(colour = MECS_COLOURS$label, size = base_size * 0.9),
+      axis.text        = element_text(colour = MECS_COLOURS$neutral),
       panel.grid.minor = element_blank(),
       panel.grid.major = element_line(colour = "#E8EBEF", linewidth = 0.4),
       legend.position  = "top",

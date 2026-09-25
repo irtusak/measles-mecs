@@ -305,3 +305,33 @@ both needs Kasturi's accounts, so nothing has been pushed or deployed.
   app so the tidy data can be checked against them.
 - **[M]** Added an MIT `LICENSE` for the code, which restates that the data carry their own Government of
   Canada licences and that this is not a PHAC product.
+
+## 2026-09-24 — Colour and contrast
+
+- **[K]** "The grey font is hard to read on a blue background." The colour scheme needed to be easier to
+  read.
+- **[M]** The cause was measured, not guessed. The four headline boxes on the Overview tab used bslib's
+  themed `value_box()`, which paints a saturated fill, and the caption inside each one used `.smallnote`
+  (#55606E). That is grey on #0072B2 blue: **1.23:1**, against a WCAG AA minimum of 4.5:1 — effectively
+  unreadable. The three "secondary" boxes were as bad at 1.36:1.
+- **[M]** Fixed by inverting the surface rather than recolouring the text: the boxes now use
+  `value_box_theme(bg = "#FFFFFF", fg = "#11212E")`, a light card with dark ink (**16.4:1** for the number,
+  8.2:1 for the title, 6.4:1 for the note). The category colour moved to a 4px left border, where it
+  signals meaning without sitting behind any text. `value_box()` itself is kept, so bslib's layout and
+  fill behaviour are untouched.
+- **[M]** Colour now carries meaning on the "new cases this week" box: green when none were reported,
+  amber when some were.
+- **[M]** Three chart colours failed the text minimum because reference lines and their labels share a
+  colour. They were darkened in `MECS_COLOURS` so the line and its label stay one thing:
+  threshold #D55E00 → **#A34500** (3.87 → 6.16), safe #009E73 → **#00674C** (3.42 → 6.90), modelled
+  #CC79A7 → **#9B4779** (3.06 → 5.88), neutral #6E7A8A → **#5A6472** (4.36 → 6.00), caption #77808E →
+  **#5C6673** (3.99 → 5.83). Bars and fills keep the pure Okabe-Ito hues: they are large shapes, they meet
+  the 3:1 graphical threshold, and every one is labelled in text as well as colour.
+- **[M]** The suppression markers were nearly invisible at #C9CDD4 (1.4:1) and are now #8892A0 (3.2:1),
+  which matters because those crosses are the visible evidence that a survey cycle has no publishable
+  estimate.
+- **[M]** The sidebar surface is pinned to #F7F9FA rather than inheriting a bslib default, so the contrast
+  of the help text on it is a known quantity rather than a guess.
+- **[M]** `tests/test_contrast.R` computes WCAG relative luminance in R and asserts all 32 pairs, including
+  a check against the rendered HTML that no stat card ever gets a saturated fill or a `.smallnote` caption
+  again.

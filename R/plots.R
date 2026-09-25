@@ -46,7 +46,7 @@ plot_demographics <- function(demo, meta, as_of) {
   ggplot(d, aes(x = reorder(category, count), y = count)) +
     geom_col(fill = MECS_COLOURS$cases, width = 0.7) +
     geom_text(aes(label = paste0(fmt_num_p(count), "  (", percentage_label, "%)")),
-              hjust = -0.08, size = 3.4, colour = "#43505F") +
+              hjust = -0.08, size = 3.4, colour = MECS_COLOURS$label) +
     coord_flip(clip = "off") +
     facet_wrap(~characteristic, scales = "free_y") +
     scale_y_continuous(expand = expansion(c(0, 0.32))) +
@@ -95,7 +95,7 @@ plot_cases_by_pt <- function(by_pt, meta, as_of) {
   ggplot(d, aes(x = reorder(pt, cases_ytd), y = cases_ytd)) +
     geom_col(fill = MECS_COLOURS$cases, width = 0.72) +
     geom_text(aes(label = fmt_num_p(cases_ytd)), hjust = -0.15, size = 3.4,
-              colour = "#43505F") +
+              colour = MECS_COLOURS$label) +
     coord_flip(clip = "off") +
     scale_y_continuous(expand = expansion(c(0, 0.14))) +
     labs(x = NULL, y = "Cases year to date",
@@ -166,7 +166,7 @@ plot_equity <- function(d) {
     geom_hline(yintercept = 1, linetype = "dashed", colour = MECS_COLOURS$threshold) +
     geom_text(aes(label = sprintf("R_eff %.2f  (coverage %s)", r_eff,
                                   fmt_pct_p(coverage * 100))),
-              hjust = -0.04, size = 3.5, colour = "#43505F") +
+              hjust = -0.04, size = 3.5, colour = MECS_COLOURS$label) +
     coord_flip(clip = "off") +
     scale_fill_manual(values = c(`TRUE` = MECS_COLOURS$warning,
                                  `FALSE` = MECS_COLOURS$safe), guide = "none") +

@@ -57,6 +57,7 @@ Rscript tests/test_model.R    # 36 assertions on the transmission model
 Rscript tests/test_plots.R    # renders every chart headlessly to tests/output/
 Rscript tests/test_server.R   # 279 checks driving the Shiny server end to end
 Rscript tests/test_resume_claims.R   # every CV claim, checked against the app
+Rscript tests/test_contrast.R        # WCAG AA contrast on every colour pair
 ```
 
 The model tests check the epidemiology against hand-computed values, including validating the
@@ -111,3 +112,8 @@ axis rather than being joined across.
 
 **Modelled is labelled.** The simulator and the clustering lens produce modelled values, and say so on
 every view. No modelled number is ever drawn on a surveillance chart.
+
+**Readable by measurement, not by eye.** Every text colour clears the WCAG AA 4.5:1 contrast minimum
+against the surface it sits on, and `tests/test_contrast.R` computes the ratios and fails if one drops
+below. Charts use the colour-blind-safe Okabe-Ito palette, and reference lines are drawn in the same colour
+as their own labels so each pair reads as one thing.

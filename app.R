@@ -110,7 +110,7 @@ body > .container-fluid { padding: 0; }
   font-size: 0.94rem; color: #43505F; line-height: 1.45; }
 .mecs-contact .mecs-name { font-weight: 600; color: #11212E; }
 .mecs-contact a { color: #0072B2; }
-.mecs-foot { margin-top: 10px; font-size: 0.84rem; color: #6B7684; }
+.mecs-foot { margin-top: 10px; font-size: 0.84rem; color: #5F6875; }
 
 /* --- sticky tab strip --------------------------------------------------- */
 .mecs-body > div > .nav { position: sticky; top: 0; z-index: 1020;
@@ -131,6 +131,21 @@ body > .container-fluid { padding: 0; }
   border-radius: 10px; margin-left: 6px; }
 .flag-caution { background: #FDF0D5; color: #7A4F00; border: 1px solid #E69F00; }
 .flag-gap { background: #EFF1F3; color: #4C5764; border: 1px solid #C9CDD4; }
+/* Pin the sidebar surface rather than inheriting a bslib default, so the
+   contrast of the help text on it is a known quantity. */
+.bslib-sidebar-layout > .sidebar { background-color: #F7F9FA; }
+.bslib-sidebar-layout > .sidebar .smallnote { color: #55606E; }
+
+/* --- stat cards --------------------------------------------------------- */
+.stat { border: 1px solid #DFE4EA; border-left-width: 4px; border-radius: 6px; }
+.stat .value-box-title { color: #43505F; font-size: 0.9rem; font-weight: 600; }
+.stat .value-box-value { color: #11212E; font-weight: 700; }
+.statnote { font-size: 0.85rem; color: #55606E; margin: 2px 0 0; line-height: 1.35; }
+.stat-cases   { border-left-color: #0072B2; }
+.stat-active  { border-left-color: #B36B00; }
+.stat-context { border-left-color: #5A6472; }
+.stat-clear   { border-left-color: #00674C; }
+
 .caveat { background: #FFFFFF; border: 1px solid #DFE4EA; border-left: 3px solid #E69F00;
   padding: 14px 18px 4px; margin-bottom: 24px; border-radius: 4px; max-width: 62rem;
   font-size: 0.93rem; color: #3D4854; }
@@ -180,6 +195,12 @@ masthead <- tags$header(
 # Only jurisdictions that have reported a case this year are offered as weekly
 # curve choices. The rest would draw an empty series, and the manual fill
 # palette holds eight colours.
+# Light surface, dark ink. The default themed value boxes rendered muted grey
+# text on a saturated blue fill, which measures 1.23:1 -- far below the 4.5:1
+# minimum. Accent colour moves to a left border, where it signals category
+# without sitting behind any text.
+STAT_THEME <- value_box_theme(bg = "#FFFFFF", fg = "#11212E")
+
 REPORTING_PTS <- by_pt$pt[!is.na(by_pt$cases_ytd) & by_pt$cases_ytd > 0]
 SILENT_PTS    <- by_pt$pt[!is.na(by_pt$cases_ytd) & by_pt$cases_ytd == 0]
 
@@ -208,19 +229,27 @@ ui <- page_fluid(
           layout_column_wrap(
             width = 1/4, fill = FALSE,
             value_box(title = paste0("Confirmed cases in ", meta$report_year),
-                      value = fmt_num(meta$annual_confirmed), theme = "primary",
-                      p(class = "smallnote", paste0("plus ", meta$annual_probable,
+                      value = fmt_num(meta$annual_confirmed),
+                      theme = STAT_THEME, class = "stat stat-cases",
+                      p(class = "statnote", paste0("plus ", meta$annual_probable,
                         " probable, in ", meta$annual_pt_count, " jurisdictions"))),
             value_box(title = "Active cases now",
-                      value = fmt_num(meta$active_total), theme = "secondary",
-                      p(class = "smallnote", meta$active_pt)),
+                      value = fmt_num(meta$active_total),
+                      theme = STAT_THEME, class = "stat stat-active",
+                      p(class = "statnote", meta$active_pt)),
             value_box(title = "Outbreak total since Oct 2024",
-                      value = fmt_num(meta$mj_outbreak_total), theme = "secondary",
-                      p(class = "smallnote", paste0("across ",
+                      value = fmt_num(meta$mj_outbreak_total),
+                      theme = STAT_THEME, class = "stat stat-context",
+                      p(class = "statnote", paste0("across ",
                         meta$mj_outbreak_pt_count, " jurisdictions"))),
+            # Colour carries meaning here: green when no new cases were
+            # reported this week, amber when there were.
             value_box(title = "New cases this week",
-                      value = fmt_num(meta$new_confirmed), theme = "secondary",
-                      p(class = "smallnote", paste0("week ", meta$report_week,
+                      value = fmt_num(meta$new_confirmed),
+                      theme = STAT_THEME,
+                      class = paste("stat", if (isTRUE(meta$new_confirmed > 0))
+                                              "stat-active" else "stat-clear"),
+                      p(class = "statnote", paste0("week ", meta$report_week,
                         ", ending ", meta$week_end)))
           ),
           layout_columns(
