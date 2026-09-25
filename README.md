@@ -98,6 +98,21 @@ The pipeline lives in `scripts/`, not `R/`, because Shiny automatically sources 
 
 See [`data/SOURCES.md`](data/SOURCES.md) for the full list, including known limitations of each source.
 
+## Staying current
+
+PHAC publishes the monitoring report weekly. A scheduled GitHub Action
+([`.github/workflows/update-data.yml`](.github/workflows/update-data.yml)) runs every Tuesday: it downloads
+the latest PHAC and Statistics Canada files, reparses them, runs all five test suites, and commits and
+redeploys **only if everything passes**. If PHAC changes a file format, the workflow fails and emails
+Kasturi while the deployed dashboard carries on serving the last known-good data.
+
+The app itself makes one small runtime request: it reads PHAC's 19-byte `updateDate.csv` to tell the reader
+whether a newer report exists, and says so in the masthead. It downloads no data files, and any failure of
+that check is silent.
+
+Deploying from the Action needs three repository secrets — `SHINYAPPS_NAME`, `SHINYAPPS_TOKEN` and
+`SHINYAPPS_SECRET`. Without them the workflow still refreshes the repository; it just does not redeploy.
+
 ## Publishing
 
 See [`docs/DEPLOY.md`](docs/DEPLOY.md). The deployment bundle has been pre-flighted: 29 files, 2.7 MB, with

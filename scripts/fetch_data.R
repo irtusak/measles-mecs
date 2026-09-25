@@ -115,6 +115,12 @@ manifest <- list(
 write_json(manifest, file.path(raw_dir, "manifest.json"), auto_unbox = TRUE, pretty = TRUE)
 
 message("\nDone. ", length(records), " files in data/raw/. Manifest written.")
-if (length(records) < length(phac_files) + 1) {
-  message("WARNING: some downloads failed. Check the messages above before using the data.")
+
+# Fail loudly rather than returning a partial download. This script runs
+# unattended in CI, and a silent partial fetch would be committed as if it
+# were a real update.
+expected <- length(phac_files) + 1L
+if (length(records) < expected) {
+  stop(sprintf("only %d of %d downloads succeeded - refusing to continue with partial data",
+               length(records), expected), call. = FALSE)
 }

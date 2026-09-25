@@ -1,0 +1,123 @@
+name: Refresh PHAC data
+
+# PHAC publishes the Measles and Rubella Weekly Monitoring Report on Mondays
+# (updateDate.csv has read 15:00 on a Monday for every cycle observed). This
+# runs on Tuesday morning Eastern, a day later, so a late publication still
+# lands before the job.
+#
+# The point of doing this in CI rather than in the app: PHAC changes its files
+# from time to time -- global_variables.csv carries its own "Removed in May
+# 2026" and "NEW VAR (created Jan 19, 2026)" annotations. If a change breaks the
+# pipeline, this workflow fails and emails Kasturi, and the deployed dashboard
+# carries on serving the last known-good data. An app that fetched its own data
+# would instead break in front of whoever was reading it.
+
+on:
+  schedule:
+    - cron: '0 14 * * 2'   # Tuesdays, 14:00 UTC (10:00 Eastern)
+  workflow_dispatch:        # and on demand, from the Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    # Declared here, not on the deploy step: a step's own `env:` block is not
+    # visible to that step's `if:` condition.
+    env:
+      SHINYAPPS_NAME:   ${{ secrets.SHINYAPPS_NAME }}
+      SHINYAPPS_TOKEN:  ${{ secrets.SHINYAPPS_TOKEN }}
+      SHINYAPPS_SECRET: ${{ secrets.SHINYAPPS_SECRET }}
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+        with:
+          # Full history: tests/test_resume_claims.R asserts the project has a
+          # real commit history, which a shallow clone would fail.
+          fetch-depth: 0
+
+      - name: Set up R
+        uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: 'release'
+          use-public-rspm: true
+
+      - name: Cache R packages
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.R_LIBS_USER }}
+          key: ${{ runner.os }}-r-${{ hashFiles('.github/workflows/update-data.yml') }}
+
+      - name: Install packages
+        run: |
+          install.packages(c("shiny", "bslib", "ggplot2", "dplyr", "tidyr",
+                             "readr", "jsonlite", "markdown", "scales",
+                             "htmltools", "rsconnect"))
+        shell: Rscript {0}
+
+      - name: Download the latest PHAC and Statistics Canada data
+        run: Rscript scripts/fetch_data.R
+
+      - name: Parse into tidy tables
+        run: Rscript scripts/prepare_data.R
+
+      # Every suite must pass before anything is committed or deployed. A
+      # failure here is the signal that PHAC changed something.
+      - name: Check the transmission model
+        run: Rscript tests/test_model.R
+
+      - name: Render every chart
+        run: Rscript tests/test_plots.R
+
+      - name: Check colour contrast
+        run: Rscript tests/test_contrast.R
+
+      - name: Drive the Shiny server
+        run: Rscript tests/test_server.R
+
+      - name: Check the CV claims still hold
+        run: Rscript tests/test_resume_claims.R
+
+      - name: Has the data actually changed?
+        id: changed
+        run: |
+          # Keyed on data/tidy only. data/raw/manifest.json records a fresh
+          # download timestamp on every run, so including it here would produce
+          # an empty commit every Tuesday.
+          if git diff --quiet -- data/tidy; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No change in the PHAC figures; nothing to commit."
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            echo "PHAC figures have changed:"
+            git diff --stat -- data/tidy
+          fi
+
+      - name: Commit the refreshed data
+        if: steps.changed.outputs.changed == 'true'
+        run: |
+          AS_OF=$(cut -c1-10 data/raw/updateDate.csv)
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/
+          git commit -m "Update PHAC surveillance data to ${AS_OF}" \
+                     -m "Refreshed automatically. All test suites passed before this commit."
+          git push
+
+      # Only runs once the shinyapps.io secrets are set. Without them the
+      # workflow still refreshes the repository, it just does not redeploy.
+      - name: Redeploy to shinyapps.io
+        if: steps.changed.outputs.changed == 'true' && env.SHINYAPPS_NAME != ''
+        run: |
+          rsconnect::setAccountInfo(
+            name   = Sys.getenv("SHINYAPPS_NAME"),
+            token  = Sys.getenv("SHINYAPPS_TOKEN"),
+            secret = Sys.getenv("SHINYAPPS_SECRET")
+          )
+          rsconnect::deployApp(
+            appName     = "measles-mecs",
+            appTitle    = "MECS - Measles Elimination and Coverage Simulator",
+            forceUpdate = TRUE
+          )
+        shell: Rscript {0}

@@ -102,18 +102,42 @@ Live demo: <your-account>.shinyapps.io/measles-mecs  |  Source: github.com/<your
 
 ---
 
-## Keeping it current
+## 4. Keeping it current, automatically
 
-PHAC updates the monitoring report weekly. To refresh:
+PHAC publishes the monitoring report weekly, on Mondays. Once the repository is on GitHub, the workflow in
+`.github/workflows/update-data.yml` handles refreshes for you: every Tuesday it downloads the latest files,
+reparses them, runs all five test suites, and commits and redeploys **only if everything passes**.
+
+To make it redeploy as well as commit, add three repository secrets under
+**Settings → Secrets and variables → Actions → New repository secret**, taking the values from the same
+shinyapps.io token page as above:
+
+| Secret | Value |
+|---|---|
+| `SHINYAPPS_NAME` | your shinyapps.io account name |
+| `SHINYAPPS_TOKEN` | the token |
+| `SHINYAPPS_SECRET` | the secret |
+
+Without them the workflow still refreshes the repository; it just does not redeploy.
+
+You can run it by hand at any time from the **Actions** tab → *Refresh PHAC data* → **Run workflow**. Do
+that once after the first push, to confirm it works while you are watching.
+
+**If it fails**, GitHub emails you. The usual cause is PHAC changing a file, and the failure is the point:
+the deployed dashboard keeps serving the last known-good data until the pipeline is fixed.
+
+### Refreshing by hand
 
 ```bash
 Rscript scripts/fetch_data.R
 Rscript scripts/prepare_data.R
-Rscript tests/test_model.R && Rscript tests/test_plots.R && Rscript tests/test_resume_claims.R
+Rscript tests/test_model.R && Rscript tests/test_plots.R && \
+  Rscript tests/test_contrast.R && Rscript tests/test_server.R && \
+  Rscript tests/test_resume_claims.R
 git add -A && git commit -m "Update PHAC surveillance data to <date>" && git push
 ```
 
 Then redeploy with `rsconnect::deployApp(appName = "measles-mecs", forceUpdate = TRUE)`.
 
-A stale dashboard is worse than an obviously dated one, so if you stop refreshing it, the "data as of" line
-in the masthead still tells a reader exactly how current the figures are.
+Either way the masthead states the report date the figures come from, and flags it when PHAC has published
+something newer, so a reader is never left guessing how current the dashboard is.

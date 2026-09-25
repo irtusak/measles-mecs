@@ -23,6 +23,7 @@ app_dir <- getwd()
 source(file.path(app_dir, "R", "model.R"))
 source(file.path(app_dir, "R", "theme.R"))
 source(file.path(app_dir, "R", "plots.R"))
+source(file.path(app_dir, "R", "refresh.R"))
 
 tidy_path <- function(...) file.path(app_dir, "data", "tidy", ...)
 
@@ -116,7 +117,13 @@ body > .container-fluid { padding: 0; display: flex; flex-direction: column;
   font-size: 0.94rem; color: #43505F; line-height: 1.45; }
 .mecs-contact .mecs-name { font-weight: 600; color: #11212E; }
 .mecs-contact a { color: #0072B2; }
-.mecs-foot { margin-top: 10px; font-size: 0.84rem; color: #5F6875; }
+.mecs-foot { margin-top: 8px; font-size: 0.84rem; color: #5F6875; }
+.mecs-status { margin-top: 12px; font-size: 0.9rem; color: #43505F; }
+.status-asof { font-weight: 600; }
+.status-flag { display: inline-block; margin-left: 8px; padding: 2px 9px;
+  border-radius: 10px; font-size: 0.85rem; font-weight: 500; }
+.status-current { background: #E4F4EE; color: #04543F; border: 1px solid #00674C; }
+.status-stale   { background: #FDF0D5; color: #7A4F00; border: 1px solid #B36B00; }
 
 /* --- sticky tab strip --------------------------------------------------- */
 .mecs-body > div > .nav { position: sticky; top: 0; z-index: 1020;
@@ -191,10 +198,17 @@ masthead <- tags$header(
       div("MPH Candidate, Simon Fraser University"),
       div(tags$a(href = "mailto:kasturi_rangarajan@sfu.ca", "kasturi_rangarajan@sfu.ca"))
     ),
+    div(class = "mecs-status",
+      tags$span(class = "status-asof",
+                paste0("PHAC surveillance data as of ",
+                       format(as.Date(AS_OF), "%d %B %Y"), ".")),
+      # Filled in by the server from a best-effort check of PHAC's published
+      # report date. Silent if the check cannot be made.
+      uiOutput("freshness", inline = TRUE)),
     p(class = "mecs-foot",
       "Independent student project \u2014 not produced or endorsed by PHAC, Statistics Canada, or ",
-      "any province or territory. \u00b7 PHAC surveillance data as of ", AS_OF,
-      " \u00b7 Coverage estimates: Statistics Canada table 13-10-0870-01.")
+      "any province or territory. \u00b7 Coverage estimates: Statistics Canada table ",
+      "13-10-0870-01, refreshed when Statistics Canada publishes a new cycle.")
   )
 )
 
@@ -482,6 +496,15 @@ ui <- page_fluid(
 server <- function(input, output, session) {
 
   # -- Overview -------------------------------------------------------------
+  # -- Data freshness -------------------------------------------------------
+  # One 19-byte read of PHAC's published report date. Any failure is silent:
+  # the dashboard is fully usable on its bundled data either way.
+  output$freshness <- renderUI({
+    st <- freshness_status(as.Date(AS_OF), phac_published_date())
+    if (is.null(st$text)) return(NULL)
+    tags$span(class = paste0("status-flag status-", st$status), st$text)
+  })
+
   output$plot_yearly <- renderPlot(plot_yearly_cases(yearly, meta, AS_OF))
   # Same chart on the Surveillance tab, which is where "historical" belongs.
   # A Shiny output id can only be bound to one placeholder, hence the alias.

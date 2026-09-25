@@ -48,9 +48,19 @@ from the data files.
 
 ### "Real-time" surveillance
 
-The dashboard is not connected live to PHAC. "Real-time" here means *the most recent PHAC publication*.
-Every surveillance view displays PHAC's own `updateDate.csv` timestamp so the user always knows how current
-the data is. Re-running the fetch and prepare scripts refreshes it.
+The dashboard is not connected live to PHAC, and does not download data while it runs. "Real-time" here
+means *the most recent PHAC publication*, refreshed on a weekly schedule.
+
+A GitHub Action runs every Tuesday — PHAC publishes on Mondays — and downloads, reparses, tests, commits
+and redeploys. Nothing is committed or deployed unless all five test suites pass, so a change to PHAC's
+file format stops the update and raises an alert rather than propagating a broken parse to readers. This is
+deliberately the opposite of having the app fetch its own data: PHAC's files do change (the published
+`global_variables.csv` carries its own "Removed in May 2026" and "NEW VAR (created Jan 19, 2026)"
+annotations), and a self-fetching app would meet such a change in front of whoever was reading it.
+
+The app makes one runtime request of its own: a single read of PHAC's 19-byte `updateDate.csv`, so the
+masthead can tell a reader whether what they are looking at is the latest report. No data files are
+downloaded, and if the check fails for any reason it is silent.
 
 ## 3. Handling of missing, suppressed and unreliable data
 

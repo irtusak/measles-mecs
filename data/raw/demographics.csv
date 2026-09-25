@@ -1,12 +1,12 @@
 case_characteristics,category,case_characteristics_fr,category_fr,count,percentage
-Total number of cases,,Nombre total de cas,,1119,
+Total number of cases,,Nombre total de cas,,1120,
 Age group,<1 years,Groupe d'âge,<1 an,55,5
 Age group,1 to 4 years,Groupe d'âge,1 – 4 ans,163,15
 Age group,5 to 17 years,Groupe d'âge,5 – 17 ans,458,41
-Age group,18 to 54 years,Groupe d'âge,18 – 54 ans,412,37
+Age group,18 to 54 years,Groupe d'âge,18 – 54 ans,413,37
 Age group,Born before 1970 (≥ 55 years),Groupe d'âge,Né avant 1970 (≥ 55 ans),31,3
 Age group,Unknown,Groupe d'âge,Inconnu,0,0
-Sex,Male,Sexe,Homme,608,54
+Sex,Male,Sexe,Homme,609,54
 Sex,Female,Sexe,Femme,511,46
 Sex,Other/unspecified,Sexe,Autre/non spécifié,0,0
 Sex,Unknown,Sexe,Inconnu,0,0
@@ -15,20 +15,20 @@ Province or territory,British Columbia,Province ou territoire,Colombie-Britanniq
 Province or territory,Manitoba,Province ou territoire,Manitoba,680,61
 Province or territory,New Brunswick,Province ou territoire,Nouveau-Brunswick,1,<1
 Province or territory,Nova Scotia,Province ou territoire,Nouvelle-Écosse,10,<1
-Province or territory,Ontario,Province ou territoire,Ontario,32,3
+Province or territory,Ontario,Province ou territoire,Ontario,33,3
 Province or territory,Quebec,Province ou territoire,Québec,31,3
 Province or territory,Saskatchewan,Province ou territoire,Saskatchewan,5,<1
 Exposure source,Exposed outside of Canada,Source d'exposition,Exposé à l'extérieur du Canada,37,3
-Exposure source,"Exposed in Canada, epidemiologically and/or virologically linked",Source d'exposition,"Exposé au Canada, lié épidémiologiquement et/ou virologiquement",1071,96
+Exposure source,"Exposed in Canada, epidemiologically and/or virologically linked",Source d'exposition,"Exposé au Canada, lié épidémiologiquement et/ou virologiquement",1072,96
 Exposure source,Unknown or pending exposure source,Source d'exposition,Source d'exposition inconnue ou en attente,11,<1
 Vaccination status,Unvaccinated,Statut vaccinal,Non vacciné,963,86
 Vaccination status,1 dose,Statut vaccinal,1 dose,48,4
 Vaccination status,2 or more doses,Statut vaccinal,2 doses ou plus,54,5
-Vaccination status,Unknown,Statut vaccinal,Inconnu,54,5
+Vaccination status,Unknown,Statut vaccinal,Inconnu,55,5
 Genotypes,B3,Génotypes,B3,16,1
 Genotypes,D8,Génotypes,D8,583,52
 Genotypes,Undetermined,Génotypes,Indéterminé,95,8
-Genotypes,Pending,Génotypes,En attente,66,6
+Genotypes,Pending,Génotypes,En attente,67,6
 Genotypes,N/A,Génotypes,s.o.,359,32
 Hospitalizations,All,Hospitalisations,Total,78,7
 Congenital measles cases,Laboratory-confirmed,Cas de rougeole congénitale,Confirmé en laboratoire,4,<1

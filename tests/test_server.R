@@ -26,6 +26,23 @@ cov <- read.csv("data/tidy/coverage_measles.csv")
 GEOS <- unique(cov$geo)
 AGES <- c("2-year-olds", "7-year-olds", "17-year-olds")
 
+cat("\nData freshness logic (pure, no network)\n")
+source("R/refresh.R")
+fs <- freshness_status(as.Date("2026-09-14"), as.Date("2026-09-21"))
+check("a newer PHAC report is reported as stale", identical(fs$status, "stale"))
+check("the stale message names the newer date and the gap",
+      grepl("21 September 2026", fs$text) && grepl("7 days", fs$text))
+check("same date reads as current",
+      identical(freshness_status(as.Date("2026-09-21"), as.Date("2026-09-21"))$status, "current"))
+check("an older remote date is not reported as stale",
+      identical(freshness_status(as.Date("2026-09-21"), as.Date("2026-09-14"))$status, "current"))
+# A failed check must be silent rather than showing the reader an error.
+unk <- freshness_status(as.Date("2026-09-21"), NULL)
+check("an unavailable check stays silent",
+      identical(unk$status, "unknown") && is.null(unk$text))
+check("phac_published_date never raises, whatever the network does",
+      { d <- phac_published_date(timeout_sec = 5); is.null(d) || inherits(d, "Date") })
+
 cat("\nDriving the server across every jurisdiction and age group\n")
 
 testServer("app.R", {
@@ -40,6 +57,7 @@ testServer("app.R", {
   # --- Static outputs that do not depend on inputs -------------------------
   check("clock_ui renders",     output$clock_ui)
   check("clock_caveat renders", output$clock_caveat)
+  check("freshness indicator renders", { output$freshness; TRUE })
   check("plot_yearly renders",  output$plot_yearly)
   check("plot_yearly_surv renders", output$plot_yearly_surv)
   check("plot_demo renders",    output$plot_demo)

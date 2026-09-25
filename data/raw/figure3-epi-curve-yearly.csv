@@ -28,7 +28,7 @@ Year,Category,CategoryFR,Value,Comments
 2024,Number of confirmed cases,Nombre de cas confirmés,146,
 2025,Number of confirmed cases,Nombre de cas confirmés,5085,
 2025,Number of probable cases,Nombre de cas probables,377,Pull these numbers from the 2025 google sheet
-2026,Number of confirmed cases,Nombre de cas confirmés,1038,
+2026,Number of confirmed cases,Nombre de cas confirmés,1039,
 2026,Number of probable cases,Nombre de cas probables,81,Pulled from global variables: measles_total_confirm & measles_total_probable
 avg_cases,,,90.51851852,average of cases from 1998 to 2024
 min_cases,,,0,min cases from 1998 to 2024

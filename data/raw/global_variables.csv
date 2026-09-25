@@ -1,19 +1,19 @@
 Full description,Variable name,Value,Value_fr,Comments
 Year of report,report_year,2026,,
-Week of report,report_week,35,,
-Week start date,week_start,2026-08-30,,
-Week end date,week_end,2026-09-05,,
-,active_cases_start,2026-07-25,,
-,measles_annual_total,1119,,Validation check: measles_annual_confirm + measles_annual_probable
-Measles - Total annual confirmed cases,measles_annual_confirm,1038,,
+Week of report,report_week,36,,
+Week start date,week_start,2026-09-06,,
+Week end date,week_end,2026-09-12,,
+,active_cases_start,2026-08-01,,
+,measles_annual_total,1120,,Validation check: measles_annual_confirm + measles_annual_probable
+Measles - Total annual confirmed cases,measles_annual_confirm,1039,,
 ,measles_annual_probable,81,,
 ,measles_annual_pt,"Alberta, British Columbia, Manitoba, New Brunswick, Nova Scotia, Ontario, Quebec, Saskatchewan","Alberta, Colombie-Britannique, Manitoba, Nouveau-Brunswick, Nouvelle-Écosse, Ontario, Québec, Saskatchewan",
 ,measles_annual_pt_count,8,,
-,measles_new_total,0,,Validation check: measles_new_confirm + measles_new_probable
-Measles - New confirmed cases this week,measles_new_confirm,0,,
+,measles_new_total,1,,Validation check: measles_new_confirm + measles_new_probable
+Measles - New confirmed cases this week,measles_new_confirm,1,,
 Measles - New probable cases this week,measles_new_probable,0,,
-Measles - PTs with new confirmed cases,measles_new_pt,,,
-Measles - PTs with new confirmed cases,measles_new_pt_count,0,,
+Measles - PTs with new confirmed cases,measles_new_pt,Ontario,Ontario,
+Measles - PTs with new confirmed cases,measles_new_pt_count,1,,
 ,measles_new2025_total,0,,"Removed in May 2026; NEW VAR (created Jan 19, 2026) "
 ,measles_new2025_confirm,0,,"Removed in May 2026; NEW VAR (created Jan 19, 2026) "
 ,measles_new2025_probable,0,,"Removed in May 2026; NEW VAR (created Jan 19, 2026) "
@@ -33,7 +33,7 @@ Measles - PTs with new confirmed cases,measles_new_pt_count,0,,
 ,measles_MJoutbreak_probable,488,,All CAN2024A (including 2024) 
 ,measles_MJoutbreak_pt_count,10,,"All CAN2024A (including 2024). Formula counts unique outbreak jurisdictions minus ""pending"""
 ,excludecases_2026,9,,"NEW VAR (created Jan 19, 2026) "
-Measles - Latest week of rash onset,measles_latest_week_onset,34,,
+Measles - Latest week of rash onset,measles_latest_week_onset,36,,
 Rubella - Total annual confirmed cases,rubella_annual_confirm,0,,
 Rubella - New confirmed cases this week,rubella_new_confirm,0,,
 ,rubella_annual_pt,,,

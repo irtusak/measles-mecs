@@ -28,8 +28,12 @@ reply and record it in the Decision log below and in `docs/METHODS.md`.
    summed without saying so.
 6. Cite the source and download date for every dataset. Licences: Open Government Licence – Canada (PHAC)
    and the Statistics Canada Open Licence.
-7. No API keys anywhere in this repo. No runtime network calls from the app — the app reads local files
-   written by the fetch step.
+7. No API keys anywhere in this repo. The app reads its figures from local files written by the fetch
+   step and never downloads data at runtime. **One exception, added 2026-09-24:** on startup the app
+   makes a single read-only request for PHAC's 19-byte `updateDate.csv`, purely to tell the reader whether
+   a newer report exists. It downloads no data files, it is wrapped so any failure is silent, and the
+   dashboard is fully usable whether or not it succeeds. Refreshing the data itself is CI's job, not the
+   app's — see `.github/workflows/update-data.yml`.
 
 ## Model rules
 - Transmission parameters come from published literature and are cited inline in `R/model.R`. They are not
@@ -345,3 +349,35 @@ both needs Kasturi's accounts, so nothing has been pushed or deployed.
   the bottom of the window rather than floating half way up it. The email is a `mailto:` link.
   `tests/test_contrast.R` asserts it renders exactly once, sits outside every tab panel, and carries the
   name, institution and contact.
+
+## 2026-09-24 — Weekly data refresh
+
+- **[K]** The dashboard should update weekly, or whenever PHAC publishes new information, rather than
+  being frozen at whatever was last fetched by hand.
+- **[M]** **CI refreshes the data, not the app.** A scheduled GitHub Action
+  (`.github/workflows/update-data.yml`) runs each Tuesday — PHAC publishes Mondays — and downloads,
+  reparses, runs all five test suites, then commits and redeploys only if every suite passes.
+  The alternative, an app that fetches and reparses its own data at startup, was rejected: PHAC's files do
+  change (`global_variables.csv` carries its own "Removed in May 2026" and "NEW VAR (created Jan 19, 2026)"
+  annotations, and `scripts/prepare_data.R` deliberately calls `stop()` on a duplicate-key guard), and a
+  self-fetching app would meet the next such change **in front of a reader**. In CI the same change fails
+  on a Tuesday, in Kasturi's inbox, while the deployed dashboard carries on serving the last good data.
+- **[M]** The app does make one runtime request, which amends rule 7 above: a single read of PHAC's 19-byte
+  `updateDate.csv` so the masthead can say whether a newer report exists. No data files are downloaded,
+  `phac_published_date()` is total (any failure returns `NULL`), and `freshness_status()` is a pure
+  function so the wording is tested without a network.
+- **[M]** `scripts/fetch_data.R` now **fails with a non-zero exit** on a partial download instead of
+  printing a warning. Unattended, a partial fetch would otherwise be committed as though it were real.
+- **[M]** The Action decides whether to commit by diffing `data/tidy/` alone. `data/raw/manifest.json`
+  records a fresh download timestamp every run, so keying on it would produce an empty commit every week.
+- **[M]** The refresh path was exercised end to end, not just written: PHAC had in fact published a newer
+  report (2026-09-21) while this work was in progress. Fetch and prepare absorbed it cleanly — week 36 now
+  reported, 1,120 cases year to date, up from 1,119 — and all five suites passed on the new data. The
+  dashboard now shows 21 September 2026.
+- **[M]** *Note for a future change:* the elimination clock takes the most recent rash onset across **all**
+  outbreak rows. That is right for "any outbreak-linked case", but if PHAC ever adds an unrelated outbreak
+  with its own `outbreak_id`, the clock would start tracking that instead. Worth revisiting if a second
+  outbreak appears in `outbreaks.csv`.
+
+**Only Kasturi can finish this:** push to GitHub, then add the three `SHINYAPPS_*` repository secrets so
+the Action can redeploy as well as commit. Steps are in `docs/DEPLOY.md`.
