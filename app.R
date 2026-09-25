@@ -536,6 +536,15 @@ server <- function(input, output, session) {
         tags$tr(tags$td("Earliest possible verification"),
                 tags$td(strong(format(CLOCK$earliest_verify, "%d %B %Y")))),
         tags$tr(tags$td("Days remaining"), tags$td(strong(fmt_num(CLOCK$days_remaining))))),
+      # A reader will see active cases on this same screen and ask how the
+      # clock can be running. Answer it here, from the data, rather than
+      # leaving it to the caveat panel.
+      if (isTRUE(meta$active_total > 0)) p(class = "smallnote",
+        sprintf(paste("PHAC also reports %d active case%s (%s), %d new this week.",
+                      "Its published outbreak table does not link them to the outbreak",
+                      "strain; if PHAC does, this clock resets."),
+                meta$active_total, if (meta$active_total == 1) "" else "s",
+                meta$active_pt, meta$new_confirmed)),
       p(class = "smallnote",
         strong("Our calculation, not a PHAC determination."),
         " See the panel below for how it is worked out.")

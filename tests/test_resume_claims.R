@@ -95,6 +95,14 @@ claim("5", "the 12-month interruption requirement is explained",
 claim("5", "targeted community engagement is recommended",
       has(brief, "community engagement"))
 claim("5", "the brief is plain-language, not a stub", nchar(brief) > 6000)
+# The brief is generated from the data. It must carry no unfilled placeholder,
+# and its headline figure must be the one in report_meta.json -- otherwise the
+# prose and the charts disagree, which is exactly what a reviewer would catch.
+claim("5", "the rendered brief has no unfilled placeholders", !grepl("\\{\\{", brief))
+rm_meta <- jsonlite::fromJSON("data/tidy/report_meta.json")
+claim("5", "the brief's case count matches the data behind the charts",
+      grepl(format(rm_meta$annual_confirmed + rm_meta$annual_probable, big.mark = ","), brief, fixed = TRUE) &&
+      grepl(format(as.Date(substr(rm_meta$phac_data_as_of, 1, 10)), "%d %B %Y"), brief, fixed = TRUE))
 
 cat("\nBullet 6 - Git version control and a maintained decision log\n")
 n_commits <- suppressWarnings(as.integer(system("git rev-list --count HEAD 2>/dev/null", intern = TRUE)))

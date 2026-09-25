@@ -62,6 +62,9 @@ jobs:
       - name: Parse into tidy tables
         run: Rscript scripts/prepare_data.R
 
+      - name: Fill the policy brief from the tidy data
+        run: Rscript scripts/render_brief.R
+
       # Every suite must pass before anything is committed or deployed. A
       # failure here is the signal that PHAC changed something.
       - name: Check the transmission model
@@ -100,7 +103,7 @@ jobs:
           AS_OF=$(cut -c1-10 data/raw/updateDate.csv)
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/
+          git add data/ docs/policy_brief.md
           git commit -m "Update PHAC surveillance data to ${AS_OF}" \
                      -m "Refreshed automatically. All test suites passed before this commit."
           git push

@@ -8,7 +8,7 @@
 **A plain-language brief for public health decision-makers**
 
 Kasturi Rangarajan, Master of Public Health candidate, Simon Fraser University
-Prepared 19 September 2026 · Figures as of the PHAC report of 21 September 2026
+Prepared 19 September 2026 · Figures as of the PHAC report of {{as_of_long}}
 
 > This is an independent student project built with open federal data. It is not produced or endorsed by
 > the Public Health Agency of Canada, Statistics Canada, or any province or territory.
@@ -18,17 +18,17 @@ Prepared 19 September 2026 · Figures as of the PHAC report of 21 September 2026
 ## The short version
 
 Canada lost its measles elimination status in November 2025, after an outbreak that began in New Brunswick
-in October 2024 spread across 10 jurisdictions and caused more than six thousand cases.
+in October 2024 spread across {{mj_pt_count}} jurisdictions and caused more than six thousand cases.
 Getting that status back requires one thing above all: showing that the outbreak strain has stopped
 spreading in Canada for **twelve consecutive months**, backed by surveillance good enough to prove it.
 
-As of the most recent report, the last rash onset PHAC links to the outbreak was on 08 August 2026,
-in Manitoba — about 1 of the twelve months. The earliest date on which a full
-twelve months could be demonstrated is 08 August 2027, and the clock is fragile: a single new case linked
+As of the most recent report, the last rash onset PHAC links to the outbreak was on {{clock_last_onset}},
+in {{clock_province}} — about {{clock_months}} of the twelve months. The earliest date on which a full
+twelve months could be demonstrated is {{clock_verify}}, and the clock is fragile: a single new case linked
 to the same chain of transmission resets it.
 
 The deeper problem is that the conditions that allowed the outbreak have not gone away. National measles
-vaccination coverage for two-year-olds was **91.6%** in the most recent survey cycle (2021).
+vaccination coverage for two-year-olds was **{{cov_canada}}** in the most recent survey cycle ({{cov_year}}).
 The level needed to stop measles spreading is roughly **95%**. Averages also hide the real risk: measles
 finds communities where coverage is low, and it spreads there even when the province as a whole looks well
 protected.
@@ -45,29 +45,26 @@ Between 1998 and 2024, Canada averaged about 90 confirmed cases a year. Then:
 
 | Year | Confirmed cases |
 |---|---|
-| 2023 | 12 |
-| 2024 | 146 |
-| 2025 | 5,085 (plus 377 probable) |
-| 2026 to date | 1,039 (plus 81 probable) |
+{{year_table_rows}}
 
-The multi-jurisdictional outbreak that began in October 2024 has accounted for **6,417 cases
-across 10 jurisdictions**. Because transmission of that strain continued for more than twelve
+The multi-jurisdictional outbreak that began in October 2024 has accounted for **{{mj_total_fmt}} cases
+across {{mj_pt_count}} jurisdictions**. Because transmission of that strain continued for more than twelve
 months, Canada no longer met the definition of elimination, and the status was lost in November 2025.
 
-The outbreak has since been declared over in most provinces. 5 cases remain active, in Manitoba and Ontario, across 3 health units. 1 new confirmed case was reported in the latest week.
+The outbreak has since been declared over in most provinces. {{active_sentence}} {{new_sentence}}
 PHAC's published outbreak table does not link these to the outbreak strain; if it does, the twelve-month
 clock resets.
 
 ## Who is getting sick
 
-Of the 1,120 confirmed and probable cases reported in 2026:
+Of the {{total_fmt}} confirmed and probable cases reported in {{report_year}}:
 
-- **86% were unvaccinated.** Only 5% had received two or more doses.
-- **96% were infected inside Canada**, linked to known chains of transmission, rather than
+- **{{pct_unvax}} were unvaccinated.** Only {{pct_two_dose}} had received two or more doses.
+- **{{pct_in_canada}} were infected inside Canada**, linked to known chains of transmission, rather than
   being imported.
-- **41% were school-aged children** (5 to 17 years), and a further 19% were under
+- **{{pct_school}} were school-aged children** (5 to 17 years), and a further {{pct_under5}} were under
   five.
-- **78 people were hospitalized.** 4 babies were born with congenital measles. No deaths were reported.
+- **{{hosp_fmt}} people were hospitalized.** {{congen_sentence}} {{deaths_sentence}}
 
 The pattern is not random. Measles is concentrating in people with no protection at all.
 
@@ -78,11 +75,11 @@ roughly twelve to eighteen others. To stop it spreading, roughly **92% to 94% of
 
 Because two doses of vaccine protect about 97% of people rather than 100%, vaccination coverage has to be
 higher than the immunity target to reach it. Working it through: at the middle of that contagiousness range,
-you need about **96% coverage**; across the whole range, between roughly 94.5% and
-97.4%. That is where the familiar 95% target comes from. It is not a round number chosen for
+you need about **{{req_cov_mid}} coverage**; across the whole range, between roughly {{req_cov_low}} and
+{{req_cov_high}}. That is where the familiar 95% target comes from. It is not a round number chosen for
 convenience — it is what the arithmetic of this particular virus demands.
 
-Canada is not there. National coverage for two-year-olds was 91.6% in the most recent cycle of the
+Canada is not there. National coverage for two-year-olds was {{cov_canada}} in the most recent cycle of the
 childhood National Immunization Coverage Survey, and it has moved very little in a decade.
 
 ## Averages hide the risk
@@ -132,7 +129,7 @@ Coverage for two-year-olds has not recovered. Systematic catch-up for children w
 addresses a known, countable deficit.
 
 **4. Make school-entry and childcare-entry checks work.**
-41% of 2026 cases were school-aged. Existing points of contact with the health system
+{{pct_school}} of {{report_year}} cases were school-aged. Existing points of contact with the health system
 are the cheapest place to find and fix missed doses.
 
 **5. Publish sub-provincial coverage.**
@@ -150,7 +147,7 @@ coverage before it shows up as an outbreak.
 ## What this brief cannot tell you
 
 - **Coverage data is not current.** The latest machine-readable national coverage survey is from
-  **2021**. Coverage today may be higher or lower.
+  **{{cov_year}}**. Coverage today may be higher or lower.
 - **Coverage below the provincial level is not published nationally**, so the clustering analysis in this
   dashboard is a modelled illustration of a mechanism, not a measurement of any real community.
 - **Comparing provincial case counts with provincial coverage is suggestive, not causal.** Provinces differ
@@ -164,9 +161,9 @@ coverage before it shows up as an outbreak.
 ## Sources
 
 - Public Health Agency of Canada, *Measles and Rubella Weekly Monitoring Report*, data as of
-  21 September 2026. Contains information licensed under the Open Government Licence – Canada.
+  {{as_of_long}}. Contains information licensed under the Open Government Licence – Canada.
 - Adapted from Statistics Canada, table 13-10-0870-01 *Vaccine coverage estimates for recommended vaccines
-  in children and pregnant women* (childhood National Immunization Coverage Survey), 2021 cycle.
+  in children and pregnant women* (childhood National Immunization Coverage Survey), {{cov_year}} cycle.
   This does not constitute an endorsement by Statistics Canada of this product.
 - Transmission parameters: Anderson & May (1991); Guerra et al. (2017), *Lancet Infectious Diseases*.
   Vaccine effectiveness: Canadian Immunization Guide; CDC Pink Book.

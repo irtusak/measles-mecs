@@ -12,7 +12,8 @@ file in `data/raw/manifest.json`.
 
 **Measles and Rubella Weekly Monitoring Report**
 Landing page: https://health-infobase.canada.ca/measles-rubella/
-Licence: Open Government Licence – Canada
+Licence: Open Government Licence – Canada. Required attribution, used throughout this project:
+*Contains information licensed under the Open Government Licence – Canada.*
 
 These are the machine-readable CSVs that drive PHAC's own published figures. They are not linked from the
 page as downloads; the file list was read from the page's `data-loader.js`. Base path:
@@ -49,7 +50,10 @@ Source of the estimates: PHAC **childhood National Immunization Coverage Survey 
 Table: https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1310087001
 CSV: https://www150.statcan.gc.ca/n1/tbl/csv/13100870-eng.zip
 Open data record: https://open.canada.ca/data/en/dataset/39b3c9a9-608f-44e0-9d25-8f98616323dd
-Licence: Statistics Canada Open Licence
+Licence: Statistics Canada Open Licence. Because the estimates are reshaped and re-plotted here, this is a
+"value-added product" under that licence, and the required notice is used throughout:
+*Adapted from Statistics Canada, table 13-10-0870-01, 2021. This does not constitute an endorsement by
+Statistics Canada of this product.*
 
 Provides measles coverage by province/territory for 2-, 7- and 17-year-olds, with 95% confidence intervals.
 The survey is biennial: 2011, 2013, 2015, 2017, 2019, **2021 (latest machine-readable cycle)**.

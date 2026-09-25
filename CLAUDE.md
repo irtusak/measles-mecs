@@ -381,3 +381,49 @@ both needs Kasturi's accounts, so nothing has been pushed or deployed.
 
 **Only Kasturi can finish this:** push to GitHub, then add the three `SHINYAPPS_*` repository secrets so
 the Action can redeploy as well as commit. Steps are in `docs/DEPLOY.md`.
+
+## 2026-09-24 — Full review before publication
+
+- **[K]** Review everything, make sure every figure is correct, and make the dashboard as strong as it can
+  be for a PHAC placement application.
+- **[M]** **Data layer verified correct.** Every internal total agrees at 1,120 (weekly Canada column,
+  weekly provincial columns, year-to-date by jurisdiction, annual series, and PHAC's headline variables).
+  All fourteen demographic percentages reconcile to their counts. cNICS tidy values equal the StatCan raw
+  file. Model figures quoted in METHODS reproduce exactly. `epi_week_end()` now matches PHAC's published
+  week-end for a **second** week (week 36 → 2026-09-12) after the refresh.
+- **[M]** **The policy brief is now generated, not typed.** Its figures had been written in by hand and
+  were already wrong after the first weekly refresh (1,038 confirmed vs 1,039 in the data). That was the
+  only place on the dashboard where a number did not come from `data/raw/` — a rule 1 violation, not just
+  drift. `docs/policy_brief.tmpl.md` holds the wording with placeholders; `scripts/render_brief.R` fills
+  them from the same tidy tables the charts use and refuses to write if any placeholder is left. The year
+  table is generated from `cases_yearly.csv`, sentences that change shape with the count ("5 cases remain
+  active" / "No cases are currently listed as active") are built in R, and percentages are computed from
+  PHAC's counts and rounded once — which is why "under five" reads 19%, not PHAC's pre-rounded 5% + 15%.
+  CI renders it between prepare and tests; `tests/test_resume_claims.R` asserts the rendered brief has no
+  placeholder and that its case count and report date match `report_meta.json`.
+- **[M]** **The clock card now answers the question a PHAC reader would ask first.** The same screen shows
+  5 active cases and 1 new this week beside "1 of 12 months since the last outbreak-linked case". Both are
+  true: PHAC's outbreak table still lists Manitoba week 31 as the last outbreak-linked onset and has not
+  attributed the active cases. The card now says so, from the data, and the brief says the same.
+- **[M]** **Licence attribution uses the exact required wording**, taken from the two licence pages:
+  *"Contains information licensed under the Open Government Licence – Canada"* and, because the coverage
+  data is reshaped and re-plotted, the value-added-product form *"Adapted from Statistics Canada, table
+  13-10-0870-01, 2021. This does not constitute an endorsement by Statistics Canada of this product."*
+  Applied in the brief, README, SOURCES.md and LICENSE.
+- **[M]** Test counts removed from README, METHODS and DEPLOY prose: they drift with every change. Counts
+  stay only in these dated log entries, which are snapshots by design.
+- **[M]** README now opens with a "five minutes" guide for a screener and three committed example renders
+  (`docs/img/`, dated). Not regenerated in CI, to avoid binary churn every Tuesday.
+
+### Still open — the one thing that would most strengthen this for PHAC
+
+- **[M]** **A bilingual (EN/FR) interface.** PHAC is a federal institution and its own files already carry
+  `_fr` columns for every category label. It is the single largest differentiator not built. It is a
+  sizeable piece of work (every label, caveat and both documents), so it is flagged here for Kasturi to
+  decide on rather than started unasked.
+- Health-region choropleth, deferred (needs boundary files and small-cell suppression at that geography).
+- Coverage data ends at the 2021 cNICS cycle; check for a 2023 release before submitting.
+
+**Verification at this point:** every suite green — model, charts, contrast, CV claims (29), server (286),
+no warnings. App serves the 21 September 2026 data. **Nothing is pushed yet: `gh auth login` has not been
+run.**

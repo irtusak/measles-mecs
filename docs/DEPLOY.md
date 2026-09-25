@@ -131,6 +131,7 @@ the deployed dashboard keeps serving the last known-good data until the pipeline
 ```bash
 Rscript scripts/fetch_data.R
 Rscript scripts/prepare_data.R
+Rscript scripts/render_brief.R
 Rscript tests/test_model.R && Rscript tests/test_plots.R && \
   Rscript tests/test_contrast.R && Rscript tests/test_server.R && \
   Rscript tests/test_resume_claims.R

@@ -101,7 +101,7 @@ rendered as `1`. Counts that are blank for individual jurisdictions in `outbreak
 ## 4. Transmission model
 
 All model code is in [`R/model.R`](../R/model.R) as pure functions with no Shiny dependency, checked by
-[`tests/test_model.R`](../tests/test_model.R) (36 assertions against hand-computed values).
+[`tests/test_model.R`](../tests/test_model.R), against hand-computed values.
 
 ### Parameters
 
@@ -190,8 +190,9 @@ adds twelve months.
 
 **Epidemiological weeks** follow the standard convention that week 1 is the first week containing at least
 four days of the new year, and weeks end on Saturday. This implementation is validated against PHAC's own
-published dates: `global_variables.csv` states that week 35 of 2026 runs to 5 September 2026, and
-`epi_week_end(2026, 35)` returns that date. The test suite asserts it.
+published dates: `global_variables.csv` stated that week 35 of 2026 ended on 5 September 2026 and, after
+the next weekly refresh, that week 36 ended on 12 September 2026; `epi_week_end()` returns both. The test
+suite asserts the first, and the second was checked by hand when the data was refreshed.
 
 **Caveats displayed alongside the clock in the app:**
 
@@ -214,14 +215,23 @@ published dates: `global_variables.csv` states that week 35 of 2026 runs to 5 Se
 6. **No health-region map.** A choropleth needs boundary files and careful suppression handling at small
    geographies; it is deferred rather than done badly.
 
-## 8. Reproducing this
+## 8. The policy brief is generated
+
+`docs/policy_brief.md` is rendered by `scripts/render_brief.R` from `docs/policy_brief.tmpl.md`, with every
+data-derived figure filled from the same tidy tables the charts use. That brings the brief under the same
+rule as the charts — no number typed in by hand — and it matters because the data refreshes weekly: a brief
+with hand-typed figures was a week out of date the first time PHAC published. Percentages are computed from
+PHAC's counts and rounded once. The renderer refuses to write the file if any placeholder is left unfilled.
+
+## 9. Reproducing this
 
 ```bash
 Rscript scripts/fetch_data.R      # download raw sources, write manifest
 Rscript scripts/prepare_data.R    # parse into data/tidy/
-Rscript tests/test_model.R        # 36 model assertions
+Rscript scripts/render_brief.R    # fill the policy brief from the tidy data
+Rscript tests/test_model.R        # the transmission model
 Rscript tests/test_plots.R        # render every chart headlessly
-Rscript tests/test_server.R       # 279 checks driving the Shiny server
+Rscript tests/test_server.R       # the Shiny server, end to end
 Rscript tests/test_resume_claims.R  # CV claims checked against the app
 Rscript tests/test_contrast.R      # WCAG AA contrast on every colour pair
 Rscript -e 'shiny::runApp("app.R", port = 7788)'
