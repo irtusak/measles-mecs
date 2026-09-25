@@ -39,13 +39,14 @@ testServer("app.R", {
 
   # --- Static outputs that do not depend on inputs -------------------------
   check("clock_ui renders",     output$clock_ui)
+  check("clock_caveat renders", output$clock_caveat)
   check("plot_yearly renders",  output$plot_yearly)
   check("plot_demo renders",    output$plot_demo)
   check("plot_bypt renders",    output$plot_bypt)
   check("eq_evidence renders",  output$eq_evidence)
   check("policy brief renders", output$brief)
   check("methods renders",      output$methods)
-  cat("  ok    static outputs (7)\n")
+  cat("  ok    static outputs (8)\n")
 
   # --- Simulator across every combination ----------------------------------
   n <- 0L
@@ -94,16 +95,27 @@ testServer("app.R", {
   cat(sprintf("  ok    equity text across %d jurisdictions\n", length(GEOS)))
 
   # --- Surveillance selections ---------------------------------------------
+  reporting <- read.csv("data/tidy/cases_by_pt.csv")
+  reporting <- reporting$pt[!is.na(reporting$cases_ytd) & reporting$cases_ytd > 0]
+
   session$setInputs(surv_pts = c("Manitoba", "Alberta"), surv_stack = "stack")
   check("weekly stacked", output$plot_weekly)
   session$setInputs(surv_stack = "facet")
   check("weekly facetted", output$plot_weekly)
-  session$setInputs(surv_pts = "Yukon", surv_stack = "stack")
-  # Yukon reported no cases, so the builder returns NULL and the app shows a
-  # validation message. That surfaces as a silent error, which is correct.
+
+  # Selecting every offered jurisdiction at once: the manual fill palette must
+  # have at least as many colours as there are jurisdictions with cases, or
+  # ggplot fails with "Insufficient values in manual scale".
+  session$setInputs(surv_pts = reporting, surv_stack = "stack")
+  check(sprintf("weekly with all %d reporting jurisdictions", length(reporting)),
+        output$plot_weekly)
+
+  # Nothing selected: the app shows a validation message rather than a chart,
+  # which surfaces here as a silent error. That is the correct behaviour.
+  session$setInputs(surv_pts = character(0))
   invisible(tryCatch(output$plot_weekly, error = function(e) NULL))
   pass <- pass + 1L
-  cat("  ok    surveillance selections, including a jurisdiction with no cases\n")
+  cat("  ok    surveillance selections, including all jurisdictions and none\n")
 })
 
 cat(sprintf("\n%d passed, %d failed\n", pass, fail))

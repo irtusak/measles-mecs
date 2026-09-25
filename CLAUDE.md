@@ -222,3 +222,38 @@ Recorded because each one would have produced a plausible-looking but wrong dash
 
 **Verification at this point:** 36 model assertions, 16 chart renders, 276 server checks — all passing,
 no warnings. App serves HTTP 200 with no network calls at startup.
+
+## 2026-09-24 — Interface redesign
+
+- **[K]** The dashboard opens with a large title, then a short description of what it is, then Kasturi's
+  contact details (name, "MPH Candidate, Simon Fraser University", kasturi_rangarajan@sfu.ca). These three
+  sit above the tabs and are present on every tab. The interface was too dense: "an overwhelming amount of
+  information and it's hard to concentrate/read".
+- **[M]** Moved from `page_navbar` to `page_fluid` + a masthead + `navset_pill`, so content can sit above
+  the tab strip. The masthead is static and the **tab strip is sticky**, so navigation stays reachable on
+  scroll without a ~150px block permanently occupying the viewport — pinning the whole masthead on scroll
+  is a two-line CSS change if Kasturi wants it.
+- **[M]** Density reductions: the "not a PHAC product" disclaimer and the "data as of" date now appear
+  **once**, in the masthead, instead of on every tab. Each tab gets a one-sentence lede saying what it
+  answers. Card footers cut to a single line, with the detail already in `docs/METHODS.md`. Four
+  text-heavy blocks moved into collapsed accordions: the elimination clock caveat, the coverage-over-time
+  chart, the 95% derivation, and the equity evidence.
+- **[M]** Dropped "Module 1 —" / "Module 3 —" from headings; that is specification jargon, not something a
+  reader needs. Tabs renamed to *Simulator* and *Equity lens*.
+- **[M]** Typography: base 17px, line-height 1.55, `.smallnote` raised to 0.88rem and darkened to #55606E,
+  which was below the WCAG AA contrast minimum at the previous #6E7A8A on white.
+- **[M]** The weekly-curve jurisdiction list now offers only the 8 jurisdictions with at least one case
+  this year, naming the 5 with none underneath. This also removes a latent crash: the manual fill palette
+  holds 8 colours, so selecting 9 or more of the 13 jurisdictions would have failed with "Insufficient
+  values in manual scale". `tests/test_server.R` now selects all 8 at once to hold that line.
+- **[M]** Fixed `page_fluid(padding = 0, gap = 0)` — `page_fluid` takes only `...`, `title`, `theme` and
+  `lang`, so those two were silently rendered as invalid HTML attributes and did nothing. Container
+  padding is now handled in CSS.
+
+**Verification:** 36 model assertions, 16 chart renders, 278 server checks, all passing, no warnings.
+Masthead → contact → tab strip confirmed in that order in the served HTML, with all six tabs present.
+
+- **[M]** *Not visually verified.* Chrome cannot reach the local Shiny app in this environment — it can
+  screenshot external sites but shows an error page for `127.0.0.1:7788`, so its localhost is not the same
+  as the shell's. Layout was checked structurally, not by eye. Kasturi should open it and say what still
+  reads as cluttered.

@@ -74,13 +74,6 @@ CLOCK_PROVINCE <- last_onset_row$province
 fmt_pct  <- function(x, d = 1) ifelse(is.na(x), "—", sprintf(paste0("%.", d, "f%%"), x))
 fmt_num  <- function(x) ifelse(is.na(x), "—", format(x, big.mark = ","))
 
-disclaimer <- div(
-  class = "disclaimer",
-  strong("Independent student project."), " Built by Kasturi Rangarajan (MPH, Simon Fraser University) ",
-  "using open data from the Public Health Agency of Canada and Statistics Canada. ",
-  "It is not produced or endorsed by PHAC, Statistics Canada, or any province or territory."
-)
-
 quality_note <- function(q) {
   switch(q,
     ok            = NULL,
@@ -92,220 +85,315 @@ quality_note <- function(q) {
 }
 
 # UI ------------------------------------------------------------------------
+# Layout: a masthead that stays above the tabs on every view (title, what the
+# dashboard is, contact), then a sticky tab strip, then one tab of content.
+# Detail that is not needed at a glance lives in collapsed accordions rather
+# than on the page, so each tab shows one idea at a time.
 css <- "
-.disclaimer { font-size: 0.82rem; color: #5A6472; background: #F4F6F8;
-  border-left: 3px solid #0072B2; padding: 8px 12px; margin: 4px 0 16px 0; border-radius: 3px; }
-.flag { display: inline-block; font-size: 0.76rem; padding: 2px 7px;
+html { font-size: 17px; }
+body { line-height: 1.55; background: #FAFBFC; }
+/* The masthead and each tab set their own gutters, so the Bootstrap
+   container padding would only double them up. */
+body > .container-fluid { padding: 0; }
+
+/* --- masthead ---------------------------------------------------------- */
+.mecs-header { background: #FFFFFF; border-bottom: 1px solid #DFE4EA; padding: 26px 0 20px; }
+.mecs-inner { max-width: 1500px; margin: 0 auto; padding: 0 28px; }
+.mecs-title { font-size: 2.5rem; font-weight: 700; letter-spacing: -0.02em;
+  color: #11212E; margin: 0; line-height: 1.08; }
+.mecs-title .mecs-abbr { color: #0072B2; }
+.mecs-blurb { max-width: 60rem; margin: 14px 0 0; color: #36424F; font-size: 1.02rem; }
+.mecs-contact { margin-top: 16px; padding-top: 14px; border-top: 1px solid #EDF0F3;
+  font-size: 0.94rem; color: #43505F; line-height: 1.45; }
+.mecs-contact .mecs-name { font-weight: 600; color: #11212E; }
+.mecs-contact a { color: #0072B2; }
+.mecs-foot { margin-top: 10px; font-size: 0.84rem; color: #6B7684; }
+
+/* --- sticky tab strip --------------------------------------------------- */
+.mecs-body > div > .nav { position: sticky; top: 0; z-index: 1020;
+  background: #FFFFFF; border-bottom: 1px solid #DFE4EA;
+  padding: 10px 28px; margin: 0 0 26px; gap: 4px; }
+.mecs-body .nav-pills .nav-link { font-weight: 500; color: #43505F; border-radius: 6px; }
+.mecs-body .nav-pills .nav-link:hover { background: #EDF2F7; }
+.mecs-body .nav-pills .nav-link.active { background: #0072B2; color: #FFFFFF; }
+
+/* --- tab content -------------------------------------------------------- */
+.tabwrap { max-width: 1500px; margin: 0 auto; padding: 0 28px 48px; }
+.tab-h { font-size: 1.6rem; font-weight: 650; color: #11212E; margin: 0 0 4px; }
+.lede { font-size: 1.04rem; color: #4A5666; max-width: 58rem; margin: 0 0 22px; }
+.card { margin-bottom: 22px; }
+
+/* --- annotations -------------------------------------------------------- */
+.flag { display: inline-block; font-size: 0.8rem; padding: 2px 8px;
   border-radius: 10px; margin-left: 6px; }
-.flag-caution { background: #FDF0D5; color: #8A5A00; border: 1px solid #E69F00; }
-.flag-gap { background: #EFF1F3; color: #55606E; border: 1px solid #C9CDD4; }
-.modelled-banner { background: #F7F0F6; border-left: 3px solid #CC79A7;
-  padding: 8px 12px; font-size: 0.85rem; color: #6B4A62; margin-bottom: 14px;
-  border-radius: 3px; }
-.verdict { font-size: 1.05rem; font-weight: 600; padding: 10px 14px;
-  border-radius: 4px; margin-top: 6px; }
-.verdict-bad  { background: #FBEAE3; color: #8A3410; border: 1px solid #D55E00; }
-.verdict-good { background: #E4F4EE; color: #05604A; border: 1px solid #009E73; }
-.smallnote { font-size: 0.8rem; color: #6E7A8A; }
-.brief { max-width: 62rem; }
-.brief h2 { font-size: 1.28rem; margin-top: 1.6rem; }
-.brief h3 { font-size: 1.05rem; margin-top: 1.1rem; color: #43505F; }
-.brief li { margin-bottom: 0.35rem; }
+.flag-caution { background: #FDF0D5; color: #7A4F00; border: 1px solid #E69F00; }
+.flag-gap { background: #EFF1F3; color: #4C5764; border: 1px solid #C9CDD4; }
+.modelled-banner { background: #F8F1F7; border-left: 3px solid #CC79A7;
+  padding: 10px 14px; font-size: 0.92rem; color: #5F4257; margin-bottom: 22px;
+  border-radius: 4px; max-width: 60rem; }
+.verdict { font-size: 1.08rem; font-weight: 600; padding: 12px 16px;
+  border-radius: 5px; margin-top: 4px; }
+.verdict-bad  { background: #FBEAE3; color: #7D2F0E; border: 1px solid #D55E00; }
+.verdict-good { background: #E4F4EE; color: #04543F; border: 1px solid #009E73; }
+.smallnote { font-size: 0.88rem; color: #55606E; }
+.brief { max-width: 54rem; }
+.brief h1 { font-size: 1.75rem; }
+.brief h2 { font-size: 1.32rem; margin-top: 1.9rem; }
+.brief h3 { font-size: 1.08rem; margin-top: 1.3rem; color: #36424F; }
+.brief li { margin-bottom: 0.4rem; }
+.brief table { font-size: 0.95rem; }
 "
 
-ui <- page_navbar(
-  title = "MECS — Measles Elimination and Coverage Simulator",
+masthead <- tags$header(
+  class = "mecs-header",
+  div(
+    class = "mecs-inner",
+    h1(class = "mecs-title",
+       span(class = "mecs-abbr", "MECS"), " \u2014 Measles Elimination and Coverage Simulator"),
+    p(class = "mecs-blurb",
+      "An interactive tool for exploring how measles vaccination coverage relates to outbreak ",
+      "risk in Canada, and for tracking progress back towards measles elimination status, which ",
+      "Canada lost in November 2025. It is built for public health analysts, epidemiologists and ",
+      "immunization programme managers, using open surveillance data from the Public Health ",
+      "Agency of Canada and coverage estimates from Statistics Canada."),
+    div(
+      class = "mecs-contact",
+      div(class = "mecs-name", "Kasturi Rangarajan"),
+      div("MPH Candidate, Simon Fraser University"),
+      div(tags$a(href = "mailto:kasturi_rangarajan@sfu.ca", "kasturi_rangarajan@sfu.ca"))
+    ),
+    p(class = "mecs-foot",
+      "Independent student project \u2014 not produced or endorsed by PHAC, Statistics Canada, or ",
+      "any province or territory. \u00b7 PHAC surveillance data as of ", AS_OF,
+      " \u00b7 Coverage estimates: Statistics Canada table 13-10-0870-01.")
+  )
+)
+
+# Only jurisdictions that have reported a case this year are offered as weekly
+# curve choices. The rest would draw an empty series, and the manual fill
+# palette holds eight colours.
+REPORTING_PTS <- by_pt$pt[!is.na(by_pt$cases_ytd) & by_pt$cases_ytd > 0]
+SILENT_PTS    <- by_pt$pt[!is.na(by_pt$cases_ytd) & by_pt$cases_ytd == 0]
+
+ui <- page_fluid(
+  title = "MECS \u2014 Measles Elimination and Coverage Simulator",
   # No font_google() here: it fetches from fonts.googleapis.com when the app
   # starts, which would break the no-runtime-network guarantee and can fail
   # behind a restricted network. bslib's default system font stack is fine.
   theme = bs_theme(version = 5, primary = "#0072B2"),
-  header = tags$head(tags$style(HTML(css))),
+  tags$head(tags$style(HTML(css))),
+  masthead,
 
-  # --- Overview -------------------------------------------------------------
-  nav_panel(
-    "Overview",
-    div(class = "container-fluid",
-      h3("Canada's measles situation and the road back to elimination"),
-      disclaimer,
-      layout_column_wrap(
-        width = 1/4, fill = FALSE,
-        value_box(title = paste0("Confirmed cases, ", meta$report_year),
-                  value = fmt_num(meta$annual_confirmed),
-                  showcase = NULL, theme = "primary",
-                  p(class = "smallnote", paste0("plus ", meta$annual_probable,
-                    " probable, across ", meta$annual_pt_count, " jurisdictions"))),
-        value_box(title = "Active cases",
-                  value = fmt_num(meta$active_total),
-                  theme = "secondary",
-                  p(class = "smallnote", paste0(meta$active_pt, " — ",
-                    meta$active_phu_count, " health units"))),
-        value_box(title = "Multi-jurisdictional outbreak, total",
-                  value = fmt_num(meta$mj_outbreak_total),
-                  theme = "secondary",
-                  p(class = "smallnote", paste0("since October 2024, across ",
-                    meta$mj_outbreak_pt_count, " jurisdictions"))),
-        value_box(title = "New cases this reporting week",
-                  value = fmt_num(meta$new_confirmed),
-                  theme = "secondary",
-                  p(class = "smallnote", paste0("week ", meta$report_week,
-                    " (", meta$week_start, " to ", meta$week_end, ")")))
-      ),
-      br(),
-      layout_columns(
-        col_widths = c(7, 5),
-        card(card_header("Confirmed measles cases in Canada, 1998 to present"),
-             plotOutput("plot_yearly", height = "340px"),
-             card_footer(class = "smallnote",
-               "Probable cases are reported separately by PHAC for 2025 and 2026 only, and are shown",
-               " as a separate band. Earlier years show confirmed cases only — a gap here means",
-               " 'not reported', not zero.")),
-        card(card_header("The 12-month elimination clock"),
-             uiOutput("clock_ui"))
-      ),
-      card(card_header("Who is being infected"),
-           plotOutput("plot_demo", height = "300px"),
-           card_footer(class = "smallnote",
-             "Vaccination status and age group of confirmed and probable cases in ",
-             meta$report_year, ". Percentages shown by PHAC as '<1' are plotted at their",
-             " count value and labelled accordingly."))
-    )
-  ),
+  div(
+    class = "mecs-body",
+    navset_pill(
 
-  # --- Surveillance ---------------------------------------------------------
-  nav_panel(
-    "Surveillance",
-    div(class = "container-fluid",
-      h3("Epidemic curves"),
-      p(class = "smallnote", paste0("PHAC data as of ", AS_OF,
-        ". Reporting week ", meta$report_week, " of ", meta$report_year, ".")),
-      disclaimer,
-      card(card_header(paste0("Weekly cases by week of rash onset, ", meta$report_year)),
-           layout_sidebar(
-             sidebar = sidebar(
-               width = 280,
-               checkboxGroupInput("surv_pts", "Provinces and territories",
-                 choices = setdiff(sort(unique(weekly$pt)), "Canada"),
-                 selected = c("Manitoba", "Alberta", "Ontario", "British Columbia")),
-               radioButtons("surv_stack", "Display",
-                 choices = c("Stacked" = "stack", "Separate panels" = "facet"),
-                 selected = "stack")
-             ),
-             plotOutput("plot_weekly", height = "400px")
-           ),
-           card_footer(class = "smallnote",
-             paste0("Weeks 1 to ", max(weekly$week), " are reported. Later weeks of ",
-               meta$report_year, " are not yet reported and are omitted rather than",
-               " drawn as zero. PHAC publishes a weekly curve for the current",
-               " reporting year only, so 2025 is not shown here — see the annual",
-               " series on the Overview tab for the multi-year picture."))),
-      card(card_header("Cases by province and territory, year to date"),
-           plotOutput("plot_bypt", height = "320px"),
-           card_footer(class = "smallnote",
-             "Jurisdictions with no reported cases this year are shown at zero,",
-             " which here is an observed count rather than a missing value."))
-    )
-  ),
-
-  # --- Coverage simulator ---------------------------------------------------
-  nav_panel(
-    "Coverage simulator",
-    div(class = "container-fluid",
-      h3("Module 1 — What does a change in coverage do to outbreak risk?"),
-      div(class = "modelled-banner",
-        strong("Modelled scenario. "),
-        "The coverage figure you choose is hypothetical. Everything downstream of it ",
-        "— population immunity, the effective reproduction number, outbreak size ",
-        "— is model output, not observed data. Observed coverage is shown for ",
-        "comparison and is labelled as such."),
-      layout_sidebar(
-        sidebar = sidebar(
-          width = 330,
-          selectInput("sim_geo", "Jurisdiction", choices = GEOS, selected = "Canada"),
-          selectInput("sim_age", "Age group", choices = AGES, selected = "2-year-olds"),
-          uiOutput("sim_observed"),
-          hr(),
-          sliderInput("sim_cov", "Hypothetical vaccination coverage (%)",
-                      min = 50, max = 100, value = 92, step = 0.5),
-          actionButton("sim_reset", "Reset to observed", class = "btn-sm btn-outline-secondary"),
-          hr(),
-          sliderInput("sim_r0", "Basic reproduction number, R₀",
-                      min = 12, max = 18, value = 15, step = 0.5),
-          p(class = "smallnote",
-            "12–18 is the range conventionally used for measles. Move it to see how",
-            " sensitive the threshold is."),
-          radioButtons("sim_ve", "Vaccine effectiveness",
-            choices = c("Two doses (97%)" = "0.97", "One dose (93%)" = "0.93"),
-            selected = "0.97")
-        ),
-        layout_columns(
-          col_widths = c(6, 6),
-          card(card_header("Where this coverage level sits"),
-               uiOutput("sim_verdict"),
-               br(),
-               uiOutput("sim_numbers")),
-          card(card_header("Effective reproduction number across coverage levels"),
-               plotOutput("plot_sim", height = "330px"))
+      # --- Overview -------------------------------------------------------
+      nav_panel(
+        "Overview",
+        div(class = "tabwrap",
+          h2(class = "tab-h", "Where Canada stands today"),
+          p(class = "lede",
+            "The headline numbers from the latest weekly PHAC report, the long view since ",
+            "elimination was achieved in 1998, and how far Canada has come through the ",
+            "12-month clock needed to regain that status."),
+          layout_column_wrap(
+            width = 1/4, fill = FALSE,
+            value_box(title = paste0("Confirmed cases in ", meta$report_year),
+                      value = fmt_num(meta$annual_confirmed), theme = "primary",
+                      p(class = "smallnote", paste0("plus ", meta$annual_probable,
+                        " probable, in ", meta$annual_pt_count, " jurisdictions"))),
+            value_box(title = "Active cases now",
+                      value = fmt_num(meta$active_total), theme = "secondary",
+                      p(class = "smallnote", meta$active_pt)),
+            value_box(title = "Outbreak total since Oct 2024",
+                      value = fmt_num(meta$mj_outbreak_total), theme = "secondary",
+                      p(class = "smallnote", paste0("across ",
+                        meta$mj_outbreak_pt_count, " jurisdictions"))),
+            value_box(title = "New cases this week",
+                      value = fmt_num(meta$new_confirmed), theme = "secondary",
+                      p(class = "smallnote", paste0("week ", meta$report_week,
+                        ", ending ", meta$week_end)))
+          ),
+          layout_columns(
+            col_widths = c(7, 5),
+            card(card_header("Confirmed cases, 1998 to present"),
+                 plotOutput("plot_yearly", height = "340px"),
+                 card_footer(class = "smallnote",
+                   "A gap in the early years means not reported, not zero.")),
+            card(card_header("The 12-month elimination clock"),
+                 uiOutput("clock_ui"))
+          ),
+          card(card_header("Who is being infected"),
+               plotOutput("plot_demo", height = "300px"),
+               card_footer(class = "smallnote",
+                 paste0("Confirmed and probable cases in ", meta$report_year, "."))),
+          accordion(
+            open = FALSE,
+            accordion_panel("How the elimination clock is calculated",
+                            uiOutput("clock_caveat"))
+          )
         )
       ),
-      card(card_header("Observed coverage over time, with survey gaps shown"),
-           plotOutput("plot_cov_trend", height = "300px"),
-           card_footer(class = "smallnote",
-             "Observed data, not modelled. The childhood National Immunization Coverage Survey",
-             " runs every two years and does not publish an estimate for every jurisdiction in",
-             " every cycle. Cycles with no publishable estimate are marked with a cross on the",
-             " axis rather than joined up, so a gap is never read as a value.")),
-      card(card_header("Why the target is 95%"),
-           uiOutput("sim_derivation"))
-    )
-  ),
 
-  # --- Equity lens ----------------------------------------------------------
-  nav_panel(
-    "Equity & clustering",
-    div(class = "container-fluid",
-      h3("Module 3 — Why a healthy provincial average can still sustain an outbreak"),
-      div(class = "modelled-banner",
-        strong("Modelled illustration. "),
-        "Canada does not publish measles coverage below the provincial level, so the ",
-        "size and coverage of the under-immunised community here are inputs you choose, ",
-        "not measurements. The provincial average they are constrained to reproduce is ",
-        "real. This module shows a mechanism; it does not describe any specific community."),
-      layout_sidebar(
-        sidebar = sidebar(
-          width = 330,
-          selectInput("eq_geo", "Jurisdiction", choices = GEOS, selected = "Canada"),
-          selectInput("eq_age", "Age group", choices = AGES, selected = "2-year-olds"),
-          uiOutput("eq_observed"),
-          hr(),
-          sliderInput("eq_share", "Share of the population in the under-immunised community (%)",
-                      min = 1, max = 30, value = 8, step = 1),
-          sliderInput("eq_cov", "Coverage inside that community (%)",
-                      min = 20, max = 95, value = 60, step = 1),
-          p(class = "smallnote",
-            "Coverage in the rest of the population is solved for, so the two groups",
-            " always average to the observed provincial figure.")
-        ),
-        layout_columns(
-          col_widths = c(6, 6),
-          card(card_header("Transmission in each group"),
-               plotOutput("plot_equity", height = "320px")),
-          card(card_header("What this means"),
-               uiOutput("eq_text"))
+      # --- Surveillance ---------------------------------------------------
+      nav_panel(
+        "Surveillance",
+        div(class = "tabwrap",
+          h2(class = "tab-h", "Epidemic curves"),
+          p(class = "lede",
+            "Cases by the week the rash began, which is the closest available marker of when ",
+            "infection happened, and the year-to-date total for each jurisdiction."),
+          card(
+            card_header(paste0("Weekly cases by week of rash onset, ", meta$report_year)),
+            layout_sidebar(
+              sidebar = sidebar(
+                width = 290,
+                checkboxGroupInput("surv_pts", "Show these jurisdictions",
+                  choices = REPORTING_PTS,
+                  selected = utils::head(REPORTING_PTS, 4)),
+                p(class = "smallnote",
+                  paste0("Only jurisdictions with at least one case in ", meta$report_year,
+                         " are listed. ", paste(SILENT_PTS, collapse = ", "),
+                         " have reported none.")),
+                hr(),
+                radioButtons("surv_stack", "Display",
+                  choices = c("Stacked together" = "stack", "Separate panels" = "facet"),
+                  selected = "stack")
+              ),
+              plotOutput("plot_weekly", height = "420px")
+            ),
+            card_footer(class = "smallnote",
+              paste0("Weeks after ", max(weekly$week), " are not yet reported and are left out ",
+                     "rather than drawn as zero. PHAC publishes a weekly curve for the current ",
+                     "year only \u2014 see the Overview tab for earlier years."))),
+          card(card_header("Cases by jurisdiction, year to date"),
+               plotOutput("plot_bypt", height = "340px"),
+               card_footer(class = "smallnote",
+                 "Zero here is an observed count, not a missing value."))
         )
       ),
-      card(card_header("What the surveillance data shows"),
-           uiOutput("eq_evidence"))
+
+      # --- Simulator ------------------------------------------------------
+      nav_panel(
+        "Simulator",
+        div(class = "tabwrap",
+          h2(class = "tab-h", "Coverage simulator"),
+          p(class = "lede",
+            "Move the coverage slider and watch the risk of sustained transmission change. ",
+            "The sliders start at the coverage actually observed for the jurisdiction you pick."),
+          div(class = "modelled-banner",
+            strong("This tab is modelled. "),
+            "The coverage you choose is hypothetical, and everything calculated from it is model ",
+            "output. Observed coverage is shown alongside for comparison and is labelled as such."),
+          layout_sidebar(
+            sidebar = sidebar(
+              width = 340,
+              selectInput("sim_geo", "Jurisdiction", choices = GEOS, selected = "Canada"),
+              selectInput("sim_age", "Age group", choices = AGES, selected = "2-year-olds"),
+              uiOutput("sim_observed"),
+              hr(),
+              sliderInput("sim_cov", "If coverage were\u2026 (%)",
+                          min = 50, max = 100, value = 92, step = 0.5),
+              actionButton("sim_reset", "Reset to observed",
+                           class = "btn-sm btn-outline-secondary"),
+              hr(),
+              sliderInput("sim_r0", "How contagious, R\u2080",
+                          min = 12, max = 18, value = 15, step = 0.5),
+              radioButtons("sim_ve", "Vaccine effectiveness",
+                choices = c("Two doses (97%)" = "0.97", "One dose (93%)" = "0.93"),
+                selected = "0.97")
+            ),
+            layout_columns(
+              col_widths = c(6, 6),
+              card(card_header("What this coverage level means"),
+                   uiOutput("sim_verdict"), br(), uiOutput("sim_numbers")),
+              card(card_header("Risk across every coverage level"),
+                   plotOutput("plot_sim", height = "340px"))
+            )
+          ),
+          accordion(
+            open = FALSE,
+            accordion_panel(
+              "Observed coverage over time, and where the survey has gaps",
+              plotOutput("plot_cov_trend", height = "320px"),
+              p(class = "smallnote",
+                "Observed data, not modelled. The survey runs every two years and does not ",
+                "publish an estimate for every jurisdiction in every cycle. Cycles with no ",
+                "publishable estimate are marked with a cross on the axis rather than joined ",
+                "up, so a gap is never read as a value.")),
+            accordion_panel("Why the target is 95%", uiOutput("sim_derivation"))
+          )
+        )
+      ),
+
+      # --- Equity lens ----------------------------------------------------
+      nav_panel(
+        "Equity lens",
+        div(class = "tabwrap",
+          h2(class = "tab-h", "Why a healthy average can still sustain an outbreak"),
+          p(class = "lede",
+            "A province can report coverage above the target and still contain communities ",
+            "where measles spreads freely. This tab shows how that happens."),
+          div(class = "modelled-banner",
+            strong("This tab is an illustration. "),
+            "Canada does not publish coverage below the provincial level, so the size and ",
+            "coverage of the under-immunised community are values you choose. The provincial ",
+            "average they must average out to is real. This shows a mechanism; it does not ",
+            "describe any specific community."),
+          layout_sidebar(
+            sidebar = sidebar(
+              width = 340,
+              selectInput("eq_geo", "Jurisdiction", choices = GEOS, selected = "Canada"),
+              selectInput("eq_age", "Age group", choices = AGES, selected = "2-year-olds"),
+              uiOutput("eq_observed"),
+              hr(),
+              sliderInput("eq_share", "Size of that community (% of population)",
+                          min = 1, max = 30, value = 8, step = 1),
+              sliderInput("eq_cov", "Coverage inside it (%)",
+                          min = 20, max = 95, value = 60, step = 1),
+              p(class = "smallnote",
+                "Coverage in the rest of the population is worked out for you, so the two ",
+                "groups always average to the real provincial figure.")
+            ),
+            layout_columns(
+              col_widths = c(6, 6),
+              card(card_header("Transmission in each group"),
+                   plotOutput("plot_equity", height = "330px")),
+              card(card_header("What this means"), uiOutput("eq_text"))
+            )
+          ),
+          accordion(
+            open = FALSE,
+            accordion_panel("What the real surveillance data shows",
+                            uiOutput("eq_evidence"))
+          )
+        )
+      ),
+
+      # --- Policy brief ---------------------------------------------------
+      nav_panel(
+        "Policy brief",
+        div(class = "tabwrap",
+          h2(class = "tab-h", "Evidence-informed policy brief"),
+          p(class = "lede",
+            "A plain-language summary for decision-makers: what happened, why it happened, ",
+            "and six recommendations."),
+          div(class = "brief", uiOutput("brief")))
+      ),
+
+      # --- Methods --------------------------------------------------------
+      nav_panel(
+        "Methods & data",
+        div(class = "tabwrap",
+          h2(class = "tab-h", "Methods, data and limitations"),
+          p(class = "lede",
+            "Every parameter, assumption and limitation, written so the arithmetic can be ",
+            "checked without reading the code."),
+          div(class = "brief", uiOutput("methods")))
+      )
     )
-  ),
-
-  # --- Policy brief ---------------------------------------------------------
-  nav_panel("Policy brief", div(class = "container-fluid brief", uiOutput("brief"))),
-
-  # --- Methods --------------------------------------------------------------
-  nav_panel("Methods & data", div(class = "container-fluid brief", uiOutput("methods"))),
-
-  nav_spacer(),
-  nav_item(tags$span(class = "smallnote", paste0("PHAC data as of ", AS_OF)))
+  )
 )
 
 # Server --------------------------------------------------------------------
@@ -338,11 +426,32 @@ server <- function(input, output, session) {
                 tags$td(strong(format(CLOCK$earliest_verify, "%d %B %Y")))),
         tags$tr(tags$td("Days remaining"), tags$td(strong(fmt_num(CLOCK$days_remaining))))),
       p(class = "smallnote",
-        strong("This is our calculation, not a PHAC determination. "),
-        "It is derived from the last rash onset dates PHAC publishes for the ",
-        "multi-jurisdictional outbreak. The published data do not confirm ",
-        "genotype-level linkage of every chain, and the clock resets if a new ",
-        "outbreak-linked case is reported.")
+        strong("Our calculation, not a PHAC determination."),
+        " See the panel below for how it is worked out.")
+    )
+  })
+
+  output$clock_caveat <- renderUI({
+    tagList(
+      p("Verification of measles elimination requires interrupting transmission of the ",
+        "outbreak strain for at least twelve consecutive months, demonstrated through ",
+        "surveillance of sufficient quality."),
+      p("This dashboard takes the most recent rash onset that PHAC links to the ",
+        "multi-jurisdictional outbreak across all jurisdictions \u2014 ",
+        strong(sprintf("week %d of %d in %s", last_onset_row$last_rash_onset_week,
+                       last_onset_row$last_rash_onset_year, CLOCK_PROVINCE)),
+        ", which ends ", strong(format(CLOCK$last_onset, "%d %B %Y")),
+        " \u2014 and adds twelve months."),
+      tags$ul(
+        tags$li(strong("It is our calculation, not a PHAC determination"),
+                " and not a decision of the regional verification commission."),
+        tags$li("The published data do not confirm genotype-level linkage of every chain ",
+                "of transmission."),
+        tags$li("The clock resets if a new outbreak-linked case is reported."),
+        tags$li("Epidemiological weeks follow the convention that week 1 contains at least ",
+                "four days of the new year and weeks end on Saturday. This is validated ",
+                "against PHAC's own published week dates.")
+      )
     )
   })
 

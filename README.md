@@ -14,12 +14,16 @@ produced or endorsed by PHAC, Statistics Canada, or any province or territory.**
 
 ## What it does
 
+A masthead carries the title, a short description of the tool and Kasturi's contact details above the
+tabs, so they are on screen whichever tab is open. Detail that is not needed at a glance sits in collapsed
+panels rather than on the page.
+
 | Tab | What it shows |
 |---|---|
 | **Overview** | Current situation, the annual epidemic curve since 1998, who is being infected, and a live count of progress through the 12-month interruption requirement |
 | **Surveillance** | Weekly epidemic curves by province for the current reporting year, and year-to-date cases by jurisdiction |
-| **Coverage simulator** | Move coverage, R₀ and vaccine effectiveness and watch the effective reproduction number, expected outbreak size and the derivation of the 95% target respond |
-| **Equity & clustering** | Why a province can report coverage above target and still sustain transmission in an under-immunised community |
+| **Simulator** | Move coverage, R₀ and vaccine effectiveness and watch the effective reproduction number, expected outbreak size and the derivation of the 95% target respond |
+| **Equity lens** | Why a province can report coverage above target and still sustain transmission in an under-immunised community |
 | **Policy brief** | A plain-language evidence-informed brief with recommendations |
 | **Methods & data** | Every parameter, assumption and limitation |
 
