@@ -446,3 +446,10 @@ run.**
   unchanged data; (2) the push was rejected "fetch first" because a decision-log commit was pushed by hand
   while the job was running — the commit step now does `git pull --rebase` before pushing. The smoke test
   was worth doing: both would otherwise have surfaced on the first Tuesday.
+
+- **[K]** Deployed to shinyapps.io on 2026-09-27: **https://kasturirangarajan.shinyapps.io/measles-mecs/** (account `kasturirangarajan`, free tier).
+  The first deploy bundled 35 files / 0.5 MB and built 65 packages in a few minutes.
+- **[M]** The account token was pasted into the chat during setup, so it is to be treated as exposed:
+  Kasturi should delete it on shinyapps.io and create a fresh one, and use the fresh one for the three
+  `SHINYAPPS_*` GitHub secrets. Until those secrets exist the weekly workflow refreshes the repository
+  but does not redeploy, so the live app will lag the repository.

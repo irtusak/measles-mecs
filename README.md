@@ -7,7 +7,7 @@ Built for federal and provincial public health analysts, epidemiologists and imm
 managers.
 
 **Source:** https://github.com/irtusak/measles-mecs
-**Live demo:** _add your shinyapps.io URL here after the first deploy_
+**Live demo:** https://kasturirangarajan.shinyapps.io/measles-mecs/
 **Contact:** Kasturi Rangarajan — kasturi_rangarajan@sfu.ca
 
 An independent student project by Kasturi Rangarajan, Master of Public Health candidate, Simon Fraser

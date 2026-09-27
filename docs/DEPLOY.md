@@ -79,7 +79,7 @@ sort(f)
 ```
 
 The first deploy takes several minutes while shinyapps.io builds the packages. Your URL will be
-`https://<your-account>.shinyapps.io/measles-mecs/`.
+`https://kasturirangarajan.shinyapps.io/measles-mecs/`.
 
 **Check afterwards**, in the live app:
 
@@ -97,7 +97,7 @@ One line under the project heading:
 
 ```
 Measles Elimination and Coverage Simulator (MECS)
-Live demo: <your-account>.shinyapps.io/measles-mecs  |  Source: github.com/irtusak/measles-mecs
+Live demo: kasturirangarajan.shinyapps.io/measles-mecs  |  Source: github.com/irtusak/measles-mecs
 ```
 
 ---
