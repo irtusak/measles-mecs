@@ -8,6 +8,7 @@ managers.
 
 **Source:** https://github.com/irtusak/measles-mecs
 **Live demo:** https://kasturirangarajan.shinyapps.io/measles-mecs/
+**Share link (with preview card):** https://irtusak.github.io/measles-mecs/ — shinyapps.io blocks link crawlers, so this page carries the preview and forwards to the dashboard
 **Contact:** Kasturi Rangarajan — kasturi_rangarajan@sfu.ca
 
 An independent student project by Kasturi Rangarajan, Master of Public Health candidate, Simon Fraser
