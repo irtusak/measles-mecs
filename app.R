@@ -230,7 +230,23 @@ ui <- page_fluid(
   # starts, which would break the no-runtime-network guarantee and can fail
   # behind a restricted network. bslib's default system font stack is fine.
   theme = bs_theme(version = 5, primary = "#0072B2"),
-  tags$head(tags$style(HTML(css))),
+  tags$head(
+    tags$style(HTML(css)),
+    # Open Graph tags so LinkedIn, Slack and others can build a link preview.
+    # Without these a shared link shows no title, description or image.
+    tags$meta(property = "og:type",        content = "website"),
+    tags$meta(property = "og:title",       content = "MECS \u2014 Measles Elimination and Coverage Simulator"),
+    tags$meta(property = "og:description", content = paste(
+      "Interactive dashboard on PHAC measles surveillance and immunization coverage data.",
+      "See how vaccination coverage changes outbreak risk, and track Canada's 12-month path",
+      "back to elimination status. Independent student project; refreshes weekly.")),
+    tags$meta(property = "og:url",         content = "https://kasturirangarajan.shinyapps.io/measles-mecs/"),
+    tags$meta(property = "og:image",       content = "https://kasturirangarajan.shinyapps.io/measles-mecs/og-image.png"),
+    tags$meta(property = "og:image:width", content = "1200"),
+    tags$meta(property = "og:image:height", content = "630"),
+    tags$meta(name = "twitter:card",       content = "summary_large_image"),
+    tags$meta(name = "description",        content = "Interactive dashboard on PHAC measles surveillance and immunization coverage data, by Kasturi Rangarajan (MPH candidate, SFU).")
+  ),
   masthead,
 
   div(
