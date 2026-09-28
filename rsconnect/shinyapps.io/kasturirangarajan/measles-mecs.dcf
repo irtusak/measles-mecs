@@ -5,6 +5,6 @@ account: kasturirangarajan
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 18023968
-bundleId: 12613534
+bundleId: 12614001
 url: https://kasturirangarajan.shinyapps.io/measles-mecs/
 version: 1
