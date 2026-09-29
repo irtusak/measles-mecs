@@ -1,7 +1,7 @@
 outbreak_id,outbreak_type,outbreak_string,date_start,date_end,province,total_cases,confirmed_cases,probable_cases,last_rash_onset_year,last_rash_onset_week,description_en
 1,Multi,"Multijurisdictional outbreak (October 2024 - March 8, 2025)",2024-10,2025-03-08,Ontario,2390,2077,313,2026,13,The outbreak was declared over in the province in October 2025.[b]
 1,Multi,"Multijurisdictional outbreak (October 2024 - March 8, 2025)",2024-10,2025-03-08,Alberta,2299,2299,0,2026,22,The outbreak was declared over in the province in July 2026.
-1,Multi,"Multijurisdictional outbreak (October 2024 - March 8, 2025)",2024-10,2025-03-08,Manitoba,1033,926,107,2026,31,Recent cases[4] reported.
+1,Multi,"Multijurisdictional outbreak (October 2024 - March 8, 2025)",2024-10,2025-03-08,Manitoba,1033,926,107,2026,31,The outbreak is being monitored.
 1,Multi,"Multijurisdictional outbreak (October 2024 - March 8, 2025)",2024-10,2025-03-08,British Columbia,427,397,30,2026,15,The outbreak was declared over in the province in June 2026.
 1,Multi,"Multijurisdictional outbreak (October 2024 - March 8, 2025)",2024-10,2025-03-08,New Brunswick,66,62,4,2025,29,The outbreak was declared over in the province in September 2025.
 1,Multi,"Multijurisdictional outbreak (October 2024 - March 8, 2025)",2024-10,2025-03-08,Saskatchewan,125,NA,NA,2026,6,The outbreak was declared over in the province in March 2026.

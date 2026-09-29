@@ -25,10 +25,10 @@ Vaccination status,Unvaccinated,963,86,86
 Vaccination status,1 dose,48,4,4
 Vaccination status,2 or more doses,54,5,5
 Vaccination status,Unknown,55,5,5
-Genotypes,B3,16,1,1
-Genotypes,D8,583,52,52
+Genotypes,B3,17,2,2
+Genotypes,D8,585,52,52
 Genotypes,Undetermined,95,8,8
-Genotypes,Pending,67,6,6
+Genotypes,Pending,64,6,6
 Genotypes,N/A,359,32,32
 Hospitalizations,All,78,7,7
 Congenital measles cases,Laboratory-confirmed,4,NA,<1
