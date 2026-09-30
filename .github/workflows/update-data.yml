@@ -16,6 +16,11 @@ on:
   schedule:
     - cron: '0 14 * * 2'   # Tuesdays, 14:00 UTC (10:00 Eastern)
   workflow_dispatch:        # and on demand, from the Actions tab
+    inputs:
+      redeploy:
+        description: "Redeploy to shinyapps.io even if the data has not changed"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -113,8 +118,10 @@ jobs:
 
       # Only runs once the shinyapps.io secrets are set. Without them the
       # workflow still refreshes the repository, it just does not redeploy.
+      # The manual "redeploy" switch exists so the secrets can be tested on a
+      # week with no new data, and so a code change can be published from here.
       - name: Redeploy to shinyapps.io
-        if: steps.changed.outputs.changed == 'true' && env.SHINYAPPS_NAME != ''
+        if: (steps.changed.outputs.changed == 'true' || inputs.redeploy == true) && env.SHINYAPPS_NAME != ''
         run: |
           rsconnect::setAccountInfo(
             name   = Sys.getenv("SHINYAPPS_NAME"),
