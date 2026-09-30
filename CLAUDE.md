@@ -470,5 +470,7 @@ run.**
 - **[M]** Not visually verified in the running app: headless Chrome does not wait for Shiny's outputs, so
   only the panel's HTML was rendered on its own and checked. All five suites pass (server 295).
 
-**Still to do, Kasturi only:** push to GitHub and redeploy to shinyapps.io (the `SHINYAPPS_*` secrets are
-still not set, so the weekly workflow cannot redeploy).
+- **[K]** Pushed to GitHub and redeployed to shinyapps.io on 2026-09-30, on top of the 28 September data
+  the weekly workflow had committed the day before. The live app was driven in Chrome after the deploy:
+  the panel shows the published counts and all six tabs load with no Shiny errors. The `SHINYAPPS_*`
+  secrets are still not set, so weekly refreshes update the repository but not the live app.
