@@ -113,5 +113,16 @@ claim("6", "a decision log exists and records choices",
       has(paste(readLines("CLAUDE.md", warn = FALSE), collapse = "\n"),
           "Decision log", "\\[K\\]", "\\[M\\]"))
 
+cat("\nBullet 7 - GBA Plus panel: published sex and age breakdowns, and the factors PHAC does not publish\n")
+source("R/gba.R")
+gba <- gsub("\\s+", " ", gsub("<[^>]+>", " ",
+             as.character(gba_panel(gba_facts(read.csv("data/tidy/demographics.csv", check.names = FALSE)), 2026))))
+claim("7", "the panel is on screen", has(plain, "Who is affected, and what these data cannot show"))
+claim("7", "it lists PHAC's sex categories", has(gba, "Male", "Female", "Other/unspecified", "Unknown"))
+claim("7", "it names the GBA Plus factors the files lack",
+      has(gba, "disability", "ethnicity", "economic status", "rurality", "sexual orientation"))
+claim("7", "it uses PHAC's word, sex, and does not describe gender", has(gba, "does not describe gender"))
+claim("7", "METHODS.md documents the limitation", has(methods, "GBA Plus reading is limited"))
+
 cat(sprintf("\n%d passed, %d failed\n", pass, fail))
 if (fail > 0) quit(status = 1)
