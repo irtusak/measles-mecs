@@ -453,3 +453,22 @@ run.**
   Kasturi should delete it on shinyapps.io and create a fresh one, and use the fresh one for the three
   `SHINYAPPS_*` GitHub secrets. Until those secrets exist the weekly workflow refreshes the repository
   but does not redeploy, so the live app will lag the repository.
+
+## 2026-09-30 — GBA Plus panel
+
+- **[K]** Add a GBA Plus lens to MECS, sized to the data: a short panel, not a full section, after the full
+  lens was built on the Neuroscale dashboard the day before.
+- **[M]** New card on the Overview tab beside the demographics chart: "Who is affected, and what these data
+  cannot show". It lists the published sex counts with PHAC's own percentage labels, states that sex and
+  age are separate national totals and cannot be crossed with each other, province, week or vaccination
+  status, and names the GBA Plus factors the files do not carry. Code in `R/gba.R` as pure functions
+  (`gba_facts()`, `gba_panel()`), so `tests/test_server.R` checks them against the real table and against
+  tables with sex rows removed: a missing row must read "not published", never zero.
+- **[M]** PHAC's field is **sex** (male, female, other/unspecified, unknown), so the panel uses that word
+  and does not describe gender. Statistics Canada publishes measles coverage for all children together, so
+  coverage by gender is not shown. The equity module was left untouched: it is modelled and names no group.
+- **[M]** Not visually verified in the running app: headless Chrome does not wait for Shiny's outputs, so
+  only the panel's HTML was rendered on its own and checked. All five suites pass (server 295).
+
+**Still to do, Kasturi only:** push to GitHub and redeploy to shinyapps.io (the `SHINYAPPS_*` secrets are
+still not set, so the weekly workflow cannot redeploy).

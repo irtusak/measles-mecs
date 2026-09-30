@@ -43,6 +43,37 @@ check("an unavailable check stays silent",
 check("phac_published_date never raises, whatever the network does",
       { d <- phac_published_date(timeout_sec = 5); is.null(d) || inherits(d, "Date") })
 
+cat("\nGBA Plus panel (pure, from the demographics table)\n")
+source("R/gba.R")
+demo <- read.csv("data/tidy/demographics.csv", check.names = FALSE)
+f <- gba_facts(demo)
+check("sex counts are the published ones, not recomputed",
+      identical(f$sex$count[f$sex$category == "Male"],
+                demo$count[demo$characteristic == "Sex" & demo$category == "Male"]))
+check("percentages are PHAC's labels, not recomputed",
+      f$sex$pct[f$sex$category == "Female"] ==
+        paste0(demo$percentage_label[demo$characteristic == "Sex" & demo$category == "Female"], "%"))
+check("every PHAC sex category is listed, in PHAC's order",
+      identical(f$sex$category, c("Male", "Female", "Other/unspecified", "Unknown")))
+html <- as.character(gba_panel(f, 2026))
+check("panel says sex, never gender, for PHAC's field",
+      grepl("<strong>sex</strong>", html) && !grepl("by gender as", html))
+check("panel names the GBA Plus factors the files lack",
+      all(sapply(c("disability", "ethnicity", "economic status", "rurality", "language",
+                   "religion", "sexual orientation"), grepl, html)))
+check("panel says the equity tab is modelled", grepl("modelled illustration", html))
+# A sex row PHAC stops publishing must read "not published", never zero.
+demo_missing <- demo[!(demo$characteristic == "Sex" & demo$category == "Female"), ]
+fm <- gba_facts(demo_missing)
+html_m <- as.character(gba_panel(fm, 2026))
+check("a missing sex row is 'not published', not 0",
+      is.na(fm$sex$count[fm$sex$category == "Female"]) &&
+        grepl("Female</strong>: not published", html_m) && !grepl("Female</strong>: 0", html_m))
+demo_nosex <- demo[demo$characteristic != "Sex", ]
+fn <- gba_facts(demo_nosex)
+check("no sex rows at all: the list is dropped and the panel says so",
+      !fn$sex_published && grepl("not published the 2026 cases by sex", as.character(gba_panel(fn, 2026))))
+
 cat("\nDriving the server across every jurisdiction and age group\n")
 
 testServer("app.R", {
@@ -57,6 +88,8 @@ testServer("app.R", {
   # --- Static outputs that do not depend on inputs -------------------------
   check("clock_ui renders",     output$clock_ui)
   check("clock_caveat renders", output$clock_caveat)
+  check("GBA Plus panel renders with the published male count",
+        grepl("Male</strong>: 609|Male</strong>: [0-9,]+", output$gba_ui$html))
   check("freshness indicator renders", { output$freshness; TRUE })
   check("plot_yearly renders",  output$plot_yearly)
   check("plot_yearly_surv renders", output$plot_yearly_surv)

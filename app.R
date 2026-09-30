@@ -24,6 +24,7 @@ source(file.path(app_dir, "R", "model.R"))
 source(file.path(app_dir, "R", "theme.R"))
 source(file.path(app_dir, "R", "plots.R"))
 source(file.path(app_dir, "R", "refresh.R"))
+source(file.path(app_dir, "R", "gba.R"))
 
 tidy_path <- function(...) file.path(app_dir, "data", "tidy", ...)
 
@@ -172,6 +173,10 @@ body > .container-fluid { padding: 0; display: flex; flex-direction: column;
 .verdict-bad  { background: #FBEAE3; color: #7D2F0E; border: 1px solid #D55E00; }
 .verdict-good { background: #E4F4EE; color: #04543F; border: 1px solid #009E73; }
 .smallnote { font-size: 0.88rem; color: #55606E; }
+.gba { font-size: 0.93rem; color: #3D4854; }
+.gba p { margin-bottom: 10px; }
+.gba .gba-list { margin: 0 0 10px; padding-left: 1.2rem; }
+.gba a { color: #0072B2; }
 .brief { max-width: 54rem; }
 .brief h1 { font-size: 1.75rem; }
 .brief h2 { font-size: 1.32rem; margin-top: 1.9rem; }
@@ -297,10 +302,19 @@ ui <- page_fluid(
             card(card_header("The 12-month elimination clock"),
                  uiOutput("clock_ui"))
           ),
-          card(card_header("Who is being infected"),
-               plotOutput("plot_demo", height = "300px"),
-               card_footer(class = "smallnote",
-                 paste0("Confirmed and probable cases in ", meta$report_year, "."))),
+          layout_columns(
+            col_widths = c(7, 5),
+            card(card_header("Who is being infected"),
+                 plotOutput("plot_demo", height = "300px"),
+                 card_footer(class = "smallnote",
+                   paste0("Confirmed and probable cases in ", meta$report_year, "."))),
+            # A GBA Plus reading of the same table: what PHAC publishes about
+            # who the cases are, and which factors it does not publish at all.
+            card(card_header("Who is affected, and what these data cannot show"),
+                 div(class = "gba", uiOutput("gba_ui")),
+                 card_footer(class = "smallnote",
+                   "Sex and age as PHAC publishes them: national totals, not cross-tabulated."))
+          ),
           accordion(
             open = FALSE,
             accordion_panel("How the elimination clock is calculated",
@@ -592,6 +606,7 @@ server <- function(input, output, session) {
   })
 
   output$plot_demo <- renderPlot(plot_demographics(demo, meta, AS_OF))
+  output$gba_ui    <- renderUI(gba_panel(gba_facts(demo), meta$report_year))
 
   # -- Surveillance ---------------------------------------------------------
   output$plot_weekly <- renderPlot({

@@ -214,6 +214,19 @@ suite asserts the first, and the second was checked by hand when the data was re
 5. **Confirmed and probable cases are counted separately** and are never silently summed.
 6. **No health-region map.** A choropleth needs boundary files and careful suppression handling at small
    geographies; it is deferred rather than done badly.
+7. **A GBA Plus reading is limited to what PHAC publishes** (panel "Who is affected, and what these data
+   cannot show", Overview tab, added 2026-09-30). Gender-based Analysis Plus considers sex and gender
+   together with age, disability, education, ethnicity, economic status, geography including rurality,
+   language, race, religion and sexual orientation. PHAC's measles files carry sex, age group and province
+   or territory, each as a separate national or jurisdictional total, never cross-tabulated. The panel
+   lists the sex counts exactly as published (`R/gba.R`, `gba_facts()`), with PHAC's own percentage labels
+   rather than recomputed ones, and names the factors that are absent, because a missing factor is not
+   evidence of no difference. PHAC's field is *sex*, with four categories (male, female,
+   other/unspecified, unknown), so the panel uses that word and does not describe gender. Statistics
+   Canada's coverage table has gender rows for other antigens but publishes measles coverage for all
+   children together, so coverage cannot be shown by gender. A sex category PHAC stops publishing reads
+   "not published", never zero; `tests/test_server.R` checks this by removing rows. Nothing was added to
+   the equity module, which is a modelled illustration and does not describe any real community.
 
 ## 8. The policy brief is generated
 
