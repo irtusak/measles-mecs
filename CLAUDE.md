@@ -472,5 +472,8 @@ run.**
 
 - **[K]** Pushed to GitHub and redeployed to shinyapps.io on 2026-09-30, on top of the 28 September data
   the weekly workflow had committed the day before. The live app was driven in Chrome after the deploy:
-  the panel shows the published counts and all six tabs load with no Shiny errors. The `SHINYAPPS_*`
-  secrets are still not set, so weekly refreshes update the repository but not the live app.
+  the panel shows the published counts and all six tabs load with no Shiny errors.
+- **[K]** The three `SHINYAPPS_*` repository secrets were set on 2026-09-30 with a freshly issued token
+  (the exposed one was deleted). A manual run with the new `redeploy` switch published from CI for the
+  first time, so from now on the Tuesday refresh updates the live app as well as the repository. The
+  first attempt returned HTTP 401 from a mis-pasted value; re-entering the token and secret fixed it.
