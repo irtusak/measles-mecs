@@ -8,7 +8,7 @@
 **A plain-language brief for public health decision-makers**
 
 Kasturi Rangarajan, Master of Public Health candidate, Simon Fraser University
-Prepared 19 September 2026 · Figures as of the PHAC report of 28 September 2026
+Prepared 19 September 2026 · Figures as of the PHAC report of 05 October 2026
 
 > This is an independent student project built with open federal data. It is not produced or endorsed by
 > the Public Health Agency of Canada, Statistics Canada, or any province or territory.
@@ -48,24 +48,24 @@ Between 1998 and 2024, Canada averaged about 90 confirmed cases a year. Then:
 | 2023 | 12 |
 | 2024 | 146 |
 | 2025 | 5,085 (plus 377 probable) |
-| 2026 to date | 1,039 (plus 81 probable) |
+| 2026 to date | 1,040 (plus 81 probable) |
 
 The multi-jurisdictional outbreak that began in October 2024 has accounted for **6,417 cases
 across 10 jurisdictions**. Because transmission of that strain continued for more than twelve
 months, Canada no longer met the definition of elimination, and the status was lost in November 2025.
 
-The outbreak has since been declared over in most provinces. 3 cases remain active, in Ontario, across 2 health units. No new confirmed cases were reported in the latest week.
+The outbreak has since been declared over in most provinces. 4 cases remain active, in British Columbia and Ontario, across 3 health units. 1 new confirmed case was reported in the latest week.
 PHAC's published outbreak table does not link these to the outbreak strain; if it does, the twelve-month
 clock resets.
 
 ## Who is getting sick
 
-Of the 1,120 confirmed and probable cases reported in 2026:
+Of the 1,121 confirmed and probable cases reported in 2026:
 
 - **86% were unvaccinated.** Only 5% had received two or more doses.
 - **96% were infected inside Canada**, linked to known chains of transmission, rather than
   being imported.
-- **41% were school-aged children** (5 to 17 years), and a further 19% were under
+- **41% were school-aged children** (5 to 17 years), and a further 20% were under
   five.
 - **78 people were hospitalized.** 4 babies were born with congenital measles. No deaths were reported.
 
@@ -164,7 +164,7 @@ coverage before it shows up as an outbreak.
 ## Sources
 
 - Public Health Agency of Canada, *Measles and Rubella Weekly Monitoring Report*, data as of
-  28 September 2026. Contains information licensed under the Open Government Licence – Canada.
+  05 October 2026. Contains information licensed under the Open Government Licence – Canada.
 - Adapted from Statistics Canada, table 13-10-0870-01 *Vaccine coverage estimates for recommended vaccines
   in children and pregnant women* (childhood National Immunization Coverage Survey), 2021 cycle.
   This does not constitute an endorsement by Statistics Canada of this product.

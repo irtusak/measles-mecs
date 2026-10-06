@@ -1,22 +1,22 @@
 {
-  "generated_at": "2026-09-29T19:13:09+0000",
+  "generated_at": "2026-10-06T19:26:20+0000",
   "note": "Raw downloads for the Measles Elimination and Coverage Simulator. Independent student project; not a PHAC product.",
   "files": [
     {
       "file": "global_variables.csv",
       "url": "https://health-infobase.canada.ca/src/data/measles-rubella/global_variables.csv",
-      "bytes": 2808,
-      "sha256": "e780200a8e2899dcec00a2707ded0b76991b54172774c7b79fe8d2f739c743ef",
-      "downloaded_at": "2026-09-29T19:13:05+0000",
+      "bytes": 2888,
+      "sha256": "1967fbc199f67877dc31e93f6b35f2c1045124e9e640bebeabc646f77f266e88",
+      "downloaded_at": "2026-10-06T19:26:17+0000",
       "source": "PHAC Measles and Rubella Weekly Monitoring Report",
       "licence": "Open Government Licence - Canada"
     },
     {
       "file": "figure2A-EpiCurvePT.csv",
       "url": "https://health-infobase.canada.ca/src/data/measles-rubella/figure2A-EpiCurvePT.csv",
-      "bytes": 1846,
-      "sha256": "70863dc8ae51600b432de9c5e0a756bb6412782ae6e04be594857f20a6e06094",
-      "downloaded_at": "2026-09-29T19:13:06+0000",
+      "bytes": 1859,
+      "sha256": "2961e98b5e03debe6ba3305f277ccf70166cb330ec537cc6e48f06c2f90ef3ba",
+      "downloaded_at": "2026-10-06T19:26:18+0000",
       "source": "PHAC Measles and Rubella Weekly Monitoring Report",
       "licence": "Open Government Licence - Canada"
     },
@@ -24,8 +24,8 @@
       "file": "figure3-epi-curve-yearly.csv",
       "url": "https://health-infobase.canada.ca/src/data/measles-rubella/figure3-epi-curve-yearly.csv",
       "bytes": 2203,
-      "sha256": "2d521603d332c15d98dd63d1efcb4b2e92ef60659b9693f7adf006827fa74471",
-      "downloaded_at": "2026-09-29T19:13:06+0000",
+      "sha256": "9b3aa9e6d37eae7123ea470fcfdf7abd64d9916b904877e6dae81fb1a30c78d7",
+      "downloaded_at": "2026-10-06T19:26:18+0000",
       "source": "PHAC Measles and Rubella Weekly Monitoring Report",
       "licence": "Open Government Licence - Canada"
     },
@@ -33,8 +33,8 @@
       "file": "geographic_distribution.csv",
       "url": "https://health-infobase.canada.ca/src/data/measles-rubella/geographic_distribution.csv",
       "bytes": 367,
-      "sha256": "d5da0e2e9c022488b79bc9b9e5771dacc441cac9ef997c7b4b47508b2c883adf",
-      "downloaded_at": "2026-09-29T19:13:07+0000",
+      "sha256": "8c363edca6151eec84341065fe5d2aa5bc94a88b8463f134d7db5923de080ca9",
+      "downloaded_at": "2026-10-06T19:26:18+0000",
       "source": "PHAC Measles and Rubella Weekly Monitoring Report",
       "licence": "Open Government Licence - Canada"
     },
@@ -42,8 +42,8 @@
       "file": "demographics.csv",
       "url": "https://health-infobase.canada.ca/src/data/measles-rubella/demographics.csv",
       "bytes": 2692,
-      "sha256": "59413cb177b078534ec7a1e4cea403ed2ac952e107450a469e422c825fd03147",
-      "downloaded_at": "2026-09-29T19:13:07+0000",
+      "sha256": "b0229e6cdf1dbeaebecdbc70b8f25970e19ffa67d43e49f53ab28bf9fcdd5f06",
+      "downloaded_at": "2026-10-06T19:26:19+0000",
       "source": "PHAC Measles and Rubella Weekly Monitoring Report",
       "licence": "Open Government Licence - Canada"
     },
@@ -52,16 +52,16 @@
       "url": "https://health-infobase.canada.ca/src/data/measles-rubella/outbreaks.csv",
       "bytes": 4330,
       "sha256": "beef64599e07170d98ee704a4f963bd5a5c999fa0aece778b6260bc4dae6ed7f",
-      "downloaded_at": "2026-09-29T19:13:07+0000",
+      "downloaded_at": "2026-10-06T19:26:19+0000",
       "source": "PHAC Measles and Rubella Weekly Monitoring Report",
       "licence": "Open Government Licence - Canada"
     },
     {
       "file": "Figure3-ActiveMap.csv",
       "url": "https://health-infobase.canada.ca/src/data/measles-rubella/Figure3-ActiveMap.csv",
-      "bytes": 4190,
-      "sha256": "b5dda2eb8c21fd1657e15baf890a02408debf523d1fd83e2453600218930c3f5",
-      "downloaded_at": "2026-09-29T19:13:08+0000",
+      "bytes": 4193,
+      "sha256": "cb17608cd7f0c40e24d104c1eb3cc6e51afe31c751c0318100667c83ffed37b7",
+      "downloaded_at": "2026-10-06T19:26:19+0000",
       "source": "PHAC Measles and Rubella Weekly Monitoring Report",
       "licence": "Open Government Licence - Canada"
     },
@@ -69,8 +69,8 @@
       "file": "updateDate.csv",
       "url": "https://health-infobase.canada.ca/src/data/measles-rubella/updateDate.csv",
       "bytes": 19,
-      "sha256": "972cfac629b10cac472697fcf3c53cb40cf64d1f841935c88101ea82cb085c2b",
-      "downloaded_at": "2026-09-29T19:13:08+0000",
+      "sha256": "d28eb986012e368e169a2776cbbff9c671ea905adbd56cb07252a696d9437a2f",
+      "downloaded_at": "2026-10-06T19:26:20+0000",
       "source": "PHAC Measles and Rubella Weekly Monitoring Report",
       "licence": "Open Government Licence - Canada"
     },
@@ -79,7 +79,7 @@
       "url": "https://www150.statcan.gc.ca/n1/tbl/csv/13100870-eng.zip",
       "bytes": 113425,
       "sha256": "3513aa29c484f1f2ce0ee4f20119346c92584d2b715e67fa7f4dba4e28bc364d",
-      "downloaded_at": "2026-09-29T19:13:09+0000",
+      "downloaded_at": "2026-10-06T19:26:20+0000",
       "source": "Statistics Canada table 13-10-0870-01 (PHAC cNICS)",
       "licence": "Statistics Canada Open Licence"
     }

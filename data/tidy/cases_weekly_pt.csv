@@ -504,7 +504,7 @@ week,pruid,pt,cases
 36,60,Yukon,0
 36,01,Canada,1
 37,48,Alberta,0
-37,59,British Columbia,0
+37,59,British Columbia,1
 37,46,Manitoba,0
 37,13,New Brunswick,0
 37,10,Newfoundland and Labrador,0
@@ -516,4 +516,18 @@ week,pruid,pt,cases
 37,24,Quebec,0
 37,47,Saskatchewan,0
 37,60,Yukon,0
-37,01,Canada,0
+37,01,Canada,1
+38,48,Alberta,0
+38,59,British Columbia,0
+38,46,Manitoba,0
+38,13,New Brunswick,0
+38,10,Newfoundland and Labrador,0
+38,61,Northwest Territories,0
+38,12,Nova Scotia,0
+38,62,Nunavut,0
+38,35,Ontario,0
+38,11,Prince Edward Island,0
+38,24,Quebec,0
+38,47,Saskatchewan,0
+38,60,Yukon,0
+38,01,Canada,0
