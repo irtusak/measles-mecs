@@ -8,7 +8,7 @@
 **A plain-language brief for public health decision-makers**
 
 Kasturi Rangarajan, Master of Public Health candidate, Simon Fraser University
-Prepared 19 September 2026 · Figures as of the PHAC report of 05 October 2026
+Prepared 19 September 2026 · Figures as of the PHAC report of 13 October 2026
 
 > This is an independent student project built with open federal data. It is not produced or endorsed by
 > the Public Health Agency of Canada, Statistics Canada, or any province or territory.
@@ -23,7 +23,7 @@ Getting that status back requires one thing above all: showing that the outbreak
 spreading in Canada for **twelve consecutive months**, backed by surveillance good enough to prove it.
 
 As of the most recent report, the last rash onset PHAC links to the outbreak was on 08 August 2026,
-in Manitoba — about 1 of the twelve months. The earliest date on which a full
+in Manitoba — about 2 of the twelve months. The earliest date on which a full
 twelve months could be demonstrated is 08 August 2027, and the clock is fragile: a single new case linked
 to the same chain of transmission resets it.
 
@@ -54,7 +54,7 @@ The multi-jurisdictional outbreak that began in October 2024 has accounted for *
 across 10 jurisdictions**. Because transmission of that strain continued for more than twelve
 months, Canada no longer met the definition of elimination, and the status was lost in November 2025.
 
-The outbreak has since been declared over in most provinces. 4 cases remain active, in British Columbia and Ontario, across 3 health units. 1 new confirmed case was reported in the latest week.
+The outbreak has since been declared over in most provinces. 3 cases remain active, in British Columbia and Ontario, across 2 health units. No new confirmed cases were reported in the latest week.
 PHAC's published outbreak table does not link these to the outbreak strain; if it does, the twelve-month
 clock resets.
 
@@ -67,7 +67,7 @@ Of the 1,121 confirmed and probable cases reported in 2026:
   being imported.
 - **41% were school-aged children** (5 to 17 years), and a further 20% were under
   five.
-- **78 people were hospitalized.** 4 babies were born with congenital measles. No deaths were reported.
+- **78 people were hospitalized.** No cases of congenital measles were reported. No deaths were reported.
 
 The pattern is not random. Measles is concentrating in people with no protection at all.
 
@@ -164,7 +164,7 @@ coverage before it shows up as an outbreak.
 ## Sources
 
 - Public Health Agency of Canada, *Measles and Rubella Weekly Monitoring Report*, data as of
-  05 October 2026. Contains information licensed under the Open Government Licence – Canada.
+  13 October 2026. Contains information licensed under the Open Government Licence – Canada.
 - Adapted from Statistics Canada, table 13-10-0870-01 *Vaccine coverage estimates for recommended vaccines
   in children and pregnant women* (childhood National Immunization Coverage Survey), 2021 cycle.
   This does not constitute an endorsement by Statistics Canada of this product.
