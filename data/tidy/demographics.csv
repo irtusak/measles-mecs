@@ -1,38 +1,38 @@
 characteristic,category,count,percentage_num,percentage_label
-Total number of cases,NA,1121,NA,NA
-Age group,<1 years,55,5,5
+Total number of cases,NA,1124,NA,NA
+Age group,<1 years,56,5,5
 Age group,1 to 4 years,164,15,15
 Age group,5 to 17 years,458,41,41
-Age group,18 to 54 years,413,37,37
-Age group,Born before 1970 (≥ 55 years),31,3,3
+Age group,18 to 54 years,414,37,37
+Age group,Born before 1970 (≥ 55 years),32,3,3
 Age group,Unknown,0,0,0
-Sex,Male,609,54,54
-Sex,Female,512,46,46
+Sex,Male,610,54,54
+Sex,Female,514,46,46
 Sex,Other/unspecified,0,0,0
 Sex,Unknown,0,0,0
 Province or territory,Alberta,311,28,28
 Province or territory,British Columbia,50,4,4
-Province or territory,Manitoba,680,61,61
+Province or territory,Manitoba,680,60,60
 Province or territory,New Brunswick,1,NA,<1
 Province or territory,Nova Scotia,10,NA,<1
-Province or territory,Ontario,33,3,3
-Province or territory,Quebec,31,3,3
+Province or territory,Ontario,35,3,3
+Province or territory,Quebec,32,3,3
 Province or territory,Saskatchewan,5,NA,<1
-Exposure source,Exposed outside of Canada,38,3,3
-Exposure source,"Exposed in Canada, epidemiologically and/or virologically linked",1072,96,96
+Exposure source,Exposed outside of Canada,39,3,3
+Exposure source,"Exposed in Canada, epidemiologically and/or virologically linked",1074,96,96
 Exposure source,Unknown or pending exposure source,11,NA,<1
-Vaccination status,Unvaccinated,964,86,86
+Vaccination status,Unvaccinated,965,86,86
 Vaccination status,1 dose,48,4,4
 Vaccination status,2 or more doses,54,5,5
-Vaccination status,Unknown,55,5,5
+Vaccination status,Unknown,57,5,5
 Genotypes,B3,18,2,2
 Genotypes,D8,585,52,52
 Genotypes,Undetermined,95,8,8
-Genotypes,Pending,64,6,6
+Genotypes,Pending,67,6,6
 Genotypes,N/A,359,32,32
 Hospitalizations,All,78,7,7
 Congenital measles cases,Laboratory-confirmed acute,4,NA,<1
 Congenital measles cases,Probable acute,0,0,0
 Congenital measles cases,Retrospective,0,0,0
 Deaths,All,0,0,0
-Countries of travel,"Bangladesh, Cameroon, Chad, Guatemala, India, Japan, Mexico, Pakistan, Sint Maarten, Spain, Thailand, Togo, Turkiye, United States, Vietnam",NA,NA,NA
+Countries of travel,"Bangladesh, Cameroon, Chad, Guatemala, India, Japan, Mexico, Pakistan, Sint Maarten, Spain, Thailand, Togo, Turkiye, United States, Vietnam",0,NA,NA

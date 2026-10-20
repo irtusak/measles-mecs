@@ -48,7 +48,7 @@ PRUID,Province/territory_EN,HRUID,Health region,Number of active cases
 35,Ontario,3547,North Bay Parry Sound District Health Unit,
 35,Ontario,3556,Northeastern Public Health,
 35,Ontario,3549,Northwestern Health Unit,
-35,Ontario,3551,City of Ottawa Health Unit,
+35,Ontario,3551,City of Ottawa Health Unit,1-4
 35,Ontario,3553,Peel Regional Health Unit,
 35,Ontario,3565,Waterloo Health Unit,
 35,Ontario,3557,Renfrew County and District Health Unit,
@@ -74,7 +74,7 @@ PRUID,Province/territory_EN,HRUID,Health region,Number of active cases
 24,Quebec,2413,Région de Laval,
 24,Quebec,2404,Région de la Mauricie et du Centre-du-Québec,
 24,Quebec,2416,Région de la Montérégie,
-24,Quebec,2406,Région de Montréal,
+24,Quebec,2406,Région de Montréal,1-4
 24,Quebec,2410,Région du Nord-du-Québec,
 24,Quebec,2417,Région du Nunavik,
 24,Quebec,2407,Région de l'Outaouais,
