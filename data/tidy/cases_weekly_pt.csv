@@ -555,7 +555,21 @@ week,pruid,pt,cases
 40,62,Nunavut,0
 40,35,Ontario,2
 40,11,Prince Edward Island,0
-40,24,Quebec,1
+40,24,Quebec,2
 40,47,Saskatchewan,0
 40,60,Yukon,0
-40,01,Canada,3
+40,01,Canada,4
+41,48,Alberta,0
+41,59,British Columbia,0
+41,46,Manitoba,0
+41,13,New Brunswick,0
+41,10,Newfoundland and Labrador,0
+41,61,Northwest Territories,0
+41,12,Nova Scotia,0
+41,62,Nunavut,0
+41,35,Ontario,0
+41,11,Prince Edward Island,0
+41,24,Quebec,1
+41,47,Saskatchewan,0
+41,60,Yukon,0
+41,01,Canada,1
