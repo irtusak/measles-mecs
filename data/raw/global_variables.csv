@@ -1,26 +1,26 @@
 Full description,Variable name,Value,Value_fr,Comments
 Year of report,report_year,2026,,
-Week of report,report_week,41,,
-Week start date,week_start,2026-10-11,,
-Week end date,week_end,2026-10-17,,
-,active_cases_start,2026-09-05,,
+Week of report,report_week,42,,
+Week start date,week_start,2026-10-18,,
+Week end date,week_end,2026-10-24,,
+,active_cases_start,2026-09-12,,
 ,measles_annual_total,1126,,Validation check: measles_annual_confirm + measles_annual_probable
 Measles - Total annual confirmed cases,measles_annual_confirm,1045,,
 ,measles_annual_probable,81,,
 ,measles_annual_pt,"Alberta, British Columbia, Manitoba, New Brunswick, Nova Scotia, Ontario, Quebec, Saskatchewan","Alberta, Colombie-Britannique, Manitoba, Nouveau-Brunswick, Nouvelle-Écosse, Ontario, Québec, Saskatchewan",
 ,measles_annual_pt_count,8,,
-,measles_new_total,2,,Validation check: measles_new_confirm + measles_new_probable
-Measles - New confirmed cases this week,measles_new_confirm,2,,
+,measles_new_total,0,,Validation check: measles_new_confirm + measles_new_probable
+Measles - New confirmed cases this week,measles_new_confirm,0,,
 Measles - New probable cases this week,measles_new_probable,0,,
-Measles - PTs with new confirmed cases,measles_new_pt,Quebec,Québec,
-Measles - PTs with new confirmed cases,measles_new_pt_count,1,,
+Measles - PTs with new confirmed cases,measles_new_pt,,Québec,
+Measles - PTs with new confirmed cases,measles_new_pt_count,0,,
 ,measles_new2025_total,0,,"Removed in May 2026; NEW VAR (created Jan 19, 2026) "
 ,measles_new2025_confirm,0,,"Removed in May 2026; NEW VAR (created Jan 19, 2026) "
 ,measles_new2025_probable,0,,"Removed in May 2026; NEW VAR (created Jan 19, 2026) "
-,measles_active_total,7,,
-,measles_active_confirm,7,,
+,measles_active_total,6,,
+,measles_active_confirm,6,,
 ,measles_active_probable,0,,
-,measles_active_phu_count,5,,
+,measles_active_phu_count,4,,
 ,measles_active_pt,"British Columbia, Ontario, Quebec","Colombie-Britannique, Ontario, Québec",
 ,measles_active_pt_count,3,,
 ,measles_outbreak_num_over5,0,,2026 only for NB2024A
