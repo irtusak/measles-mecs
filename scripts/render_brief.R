@@ -95,6 +95,20 @@ new_sentence <- if (meta$new_confirmed == 0) {
           meta$new_confirmed, plural(meta$new_confirmed, ""),
           plural(meta$new_confirmed, "was", "were"))
 }
+# Whether every jurisdiction in PHAC's outbreak table now lists the outbreak as
+# over. The national date is from PHAC's 19 October 2026 news release, not the
+# data files, so it is only stated while the data agree.
+outbreak_over <- all(grepl("declared over|No secondary cases", outbk$description_en))
+over_sentence <- if (outbreak_over) {
+  paste("PHAC declared the outbreak over nationally on 19 October 2026, and its outbreak table no",
+        "longer lists it as active in any province or territory.")
+} else {
+  "The outbreak has since been declared over in most provinces."
+}
+clock_months_n <- floor(clock$months_elapsed)
+clock_months_sentence <- if (clock_months_n == 0) "less than one full month of the twelve so far" else
+  sprintf("%d full month%s of the twelve so far", clock_months_n, plural(clock_months_n, ""))
+
 deaths_sentence <- if (deaths == 0) "No deaths were reported." else
   sprintf("%d death%s %s reported.", deaths, plural(deaths, ""), plural(deaths, "was", "were"))
 congen_sentence <- if (congen == 0) "No cases of congenital measles were reported." else
@@ -127,7 +141,8 @@ vals <- list(
   clock_last_onset  = longd(clock$last_onset),
   clock_province    = last_onset$province,
   clock_verify      = longd(clock$earliest_verify),
-  clock_months      = floor(clock$months_elapsed),
+  clock_months      = clock_months_sentence,
+  over_sentence     = over_sentence,
   year_table_rows   = paste(year_rows, collapse = "\n")
 )
 

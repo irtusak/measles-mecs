@@ -76,6 +76,13 @@ CLOCK <- elimination_clock(last_onset_row$last_rash_onset_year,
                            as_of = as.Date(AS_OF))
 CLOCK_PROVINCE <- last_onset_row$province
 
+# True when PHAC's outbreak table lists the multi-jurisdictional outbreak as
+# over (or never spread) in every jurisdiction it reached. The national
+# declaration date is not in the data files; it comes from PHAC's news release
+# of 19 October 2026 and is shown only while the data agree.
+OUTBREAK_OVER <- nrow(outbreak) > 0 &&
+  all(grepl("declared over|No secondary cases", outbreak$description_en))
+
 fmt_pct  <- function(x, d = 1) ifelse(is.na(x), "—", sprintf(paste0("%.", d, "f%%"), x))
 fmt_num  <- function(x) ifelse(is.na(x), "—", format(x, big.mark = ","))
 
@@ -172,6 +179,7 @@ body > .container-fluid { padding: 0; display: flex; flex-direction: column;
   border-radius: 5px; margin-top: 4px; }
 .verdict-bad  { background: #FBEAE3; color: #7D2F0E; border: 1px solid #D55E00; }
 .verdict-good { background: #E4F4EE; color: #04543F; border: 1px solid #009E73; }
+.verdict-progress { background: #FDF3E1; color: #6B4200; border: 1px solid #B36B00; }
 .smallnote { font-size: 0.88rem; color: #55606E; }
 .gba { font-size: 0.93rem; color: #3D4854; }
 .gba p { margin-bottom: 10px; }
@@ -267,6 +275,12 @@ ui <- page_fluid(
             "The headline numbers from the latest weekly PHAC report, the long view since ",
             "elimination was achieved in 1998, and how far Canada has come through the ",
             "12-month clock needed to regain that status."),
+          if (OUTBREAK_OVER) p(class = "lede",
+            strong("PHAC declared the multi-jurisdictional outbreak over on 19 October 2026."),
+            " That does not restore elimination status by itself: transmission of the outbreak ",
+            "strain has to stay interrupted for 12 consecutive months. ",
+            tags$a(href = "https://www.canada.ca/en/public-health/news/2026/10/multi-jurisdictional-measles-outbreak-is-over.html",
+                   target = "_blank", rel = "noopener", "PHAC news release")),
           layout_column_wrap(
             width = 1/4, fill = FALSE,
             value_box(title = paste0("Confirmed cases in ", meta$report_year),
@@ -278,7 +292,8 @@ ui <- page_fluid(
                       value = fmt_num(meta$active_total),
                       theme = STAT_THEME, class = "stat stat-active",
                       p(class = "statnote", meta$active_pt)),
-            value_box(title = "Outbreak total since Oct 2024",
+            value_box(title = if (OUTBREAK_OVER) "Outbreak total, Oct 2024 to Oct 2026"
+                              else "Outbreak total since Oct 2024",
                       value = fmt_num(meta$mj_outbreak_total),
                       theme = STAT_THEME, class = "stat stat-context",
                       p(class = "statnote", paste0("across ",
@@ -304,7 +319,7 @@ ui <- page_fluid(
           ),
           layout_columns(
             col_widths = c(7, 5),
-            card(card_header("Who is being infected"),
+            card(card_header(paste("Who was infected in", meta$report_year)),
                  plotOutput("plot_demo", height = "300px"),
                  card_footer(class = "smallnote",
                    paste0("Confirmed and probable cases in ", meta$report_year, "."))),
@@ -547,7 +562,8 @@ server <- function(input, output, session) {
       p("To regain elimination status, Canada must show that transmission of the ",
         "outbreak strain has been interrupted for ", strong("12 consecutive months"),
         ", verified by adequate surveillance."),
-      div(class = "verdict verdict-bad",
+      # Amber, not red: with the outbreak over, the clock shows progress, not harm.
+      div(class = "verdict verdict-progress",
           sprintf("%d of 12 months since the last outbreak-linked case", months_done),
           tags$div(style = "font-weight:400;font-size:0.86rem;margin-top:4px;",
                    paste0("as of the latest PHAC report, ",

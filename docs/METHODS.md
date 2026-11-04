@@ -38,13 +38,19 @@ Full URLs, file-by-file contents and licences are in [`data/SOURCES.md`](../data
 `data/raw/manifest.json`. The app itself makes no network requests; it reads only the tidy files written by
 `scripts/prepare_data.R`.
 
-### One claim that is not in the data files
+### Two claims that are not in the data files
 
 The statement that Canada lost measles elimination status in **November 2025** does not appear in any file
 in `data/raw/`. It comes from the determination by the Pan American Health Organization's Regional
 Verification Commission and PHAC's response. It is treated here as background context, and should be cited
 to the primary announcement before this work is submitted anywhere. Every *number* in the dashboard comes
 from the data files.
+
+The national declaration that the outbreak was over, on **19 October 2026**, is also not in the data files.
+It comes from PHAC's news release *Multi-jurisdictional Measles Outbreak is Over*
+(https://www.canada.ca/en/public-health/news/2026/10/multi-jurisdictional-measles-outbreak-is-over.html).
+The dashboard and brief state it only while PHAC's outbreak table lists the outbreak as over in every
+jurisdiction it reached, so a reversal in the data removes the claim rather than contradicting it.
 
 ### "Real-time" surveillance
 

@@ -8,7 +8,7 @@
 **A plain-language brief for public health decision-makers**
 
 Kasturi Rangarajan, Master of Public Health candidate, Simon Fraser University
-Prepared 19 September 2026 · Figures as of the PHAC report of {{as_of_long}}
+Prepared 19 September 2026, revised 4 November 2026 · Figures as of the PHAC report of {{as_of_long}}
 
 > This is an independent student project built with open federal data. It is not produced or endorsed by
 > the Public Health Agency of Canada, Statistics Canada, or any province or territory.
@@ -23,7 +23,7 @@ Getting that status back requires one thing above all: showing that the outbreak
 spreading in Canada for **twelve consecutive months**, backed by surveillance good enough to prove it.
 
 As of the most recent report, the last rash onset PHAC links to the outbreak was on {{clock_last_onset}},
-in {{clock_province}} — about {{clock_months}} of the twelve months. The earliest date on which a full
+in {{clock_province}} — {{clock_months}}. The earliest date on which a full
 twelve months could be demonstrated is {{clock_verify}}, and the clock is fragile: a single new case linked
 to the same chain of transmission resets it.
 
@@ -51,7 +51,7 @@ The multi-jurisdictional outbreak that began in October 2024 has accounted for *
 across {{mj_pt_count}} jurisdictions**. Because transmission of that strain continued for more than twelve
 months, Canada no longer met the definition of elimination, and the status was lost in November 2025.
 
-The outbreak has since been declared over in most provinces. {{active_sentence}} {{new_sentence}}
+{{over_sentence}} {{active_sentence}} {{new_sentence}}
 PHAC's published outbreak table does not link these to the outbreak strain; if it does, the twelve-month
 clock resets.
 
@@ -167,8 +167,11 @@ coverage before it shows up as an outbreak.
   This does not constitute an endorsement by Statistics Canada of this product.
 - Transmission parameters: Anderson & May (1991); Guerra et al. (2017), *Lancet Infectious Diseases*.
   Vaccine effectiveness: Canadian Immunization Guide; CDC Pink Book.
-- The loss of elimination status in November 2025 is not recorded in the open data files used here. It
-  comes from the announcement by the Pan American Health Organization's Regional Verification Commission
-  and PHAC's response to it. **Verify and cite the primary announcement before submitting this brief.**
+- Two dates are not recorded in the open data files used here and come from PHAC's news releases:
+  the loss of elimination status (*Statement from the Public Health Agency of Canada on Canada's Measles
+  Elimination Status*, 10 November 2025,
+  https://www.canada.ca/en/public-health/news/2025/11/statement-from-the-public-health-agency-of-canada-on-canadas-measles-elimination-status.html)
+  and the end of the outbreak (*Multi-jurisdictional Measles Outbreak is Over*, 19 October 2026,
+  https://www.canada.ca/en/public-health/news/2026/10/multi-jurisdictional-measles-outbreak-is-over.html).
 
 Full methods, assumptions and limitations are in the **Methods & data** tab.

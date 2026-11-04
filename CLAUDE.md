@@ -477,3 +477,21 @@ run.**
   (the exposed one was deleted). A manual run with the new `redeploy` switch published from CI for the
   first time, so from now on the Tuesday refresh updates the live app as well as the repository. The
   first attempt returned HTTP 401 from a mis-pasted value; re-entering the token and secret fixed it.
+
+## 2026-11-04 — The outbreak is over
+
+- **[M]** The 3 November refresh committed PHAC's 2 November data but the deploy failed:
+  `Unsupported R version 4.6.2 for operating system jammy`. `setup-r` was on `'release'`, which moved to
+  4.6.2. It is now pinned to `'4.6.1'`, the version the 27 October deploy used. Raise it only once
+  shinyapps.io supports the newer release.
+- **[M]** PHAC declared the multi-jurisdictional outbreak over on 19 October 2026 (news release, cited in
+  METHODS and the brief). That date is not in the data files, so the app and brief state it only while
+  `outbreaks.csv` lists every jurisdiction as "declared over" or "No secondary cases" (`OUTBREAK_OVER` in
+  `app.R`, `outbreak_over` in `render_brief.R`). If PHAC reopens it, the claim disappears by itself.
+- **[M]** Wording that assumed an ongoing outbreak: the outbreak-total card reads "Oct 2024 to Oct 2026",
+  "Who is being infected" became "Who was infected in <year>", and the clock box is amber
+  (`verdict-progress`, contrast-tested) instead of red, since it now shows progress.
+- **[M]** The brief said "about 2 of the twelve months" when 2.8 had passed, because the count is floored.
+  It now says "2 full months of the twelve so far". The November 2025 citation note is resolved: both PHAC
+  releases are linked in the brief's sources.
+- **[M]** All five suites pass (server 295, contrast 38). The Overview was checked in Chrome locally.
