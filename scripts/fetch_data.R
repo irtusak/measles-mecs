@@ -95,13 +95,42 @@ for (f in phac_files) {
 
 message("Fetching Statistics Canada cNICS coverage table...")
 zip_path <- file.path(raw_dir, "13100870-eng.zip")
-rec <- download_one(statcan_url, zip_path)
+# Download to a temporary file first, so a failed attempt can never truncate
+# the committed copy. StatCan refused GitHub's runners with "SSL connect error"
+# on 2026-11-04 (twice) while answering normally elsewhere, so try three times.
+tmp_zip <- file.path(tempdir(), basename(zip_path))
+rec <- NULL
+for (attempt in 1:3) {
+  rec <- download_one(statcan_url, tmp_zip)
+  if (!is.null(rec)) break
+  if (attempt < 3) { message("    retrying in ", 20 * attempt, "s"); Sys.sleep(20 * attempt) }
+}
 if (!is.null(rec)) {
+  file.copy(tmp_zip, zip_path, overwrite = TRUE)
+  rec$file    <- basename(zip_path)
   rec$source  <- "Statistics Canada table 13-10-0870-01 (PHAC cNICS)"
   rec$licence <- "Statistics Canada Open Licence"
   records[[length(records) + 1]] <- rec
   utils::unzip(zip_path, exdir = file.path(raw_dir, "cnics"))
   message("  unzipped to data/raw/cnics/")
+} else {
+  # The coverage survey is biennial and the table changes rarely, so keep the
+  # last real download rather than block the weekly PHAC update. Nothing is
+  # invented: the manifest says which copy was used and when it was fetched.
+  prev <- tryCatch(read_json(file.path(raw_dir, "manifest.json"))$files, error = function(e) list())
+  prev <- Filter(function(f) identical(f$file, basename(zip_path)), prev)
+  if (length(prev) == 1 && file.exists(zip_path) && file.size(zip_path) > 0 &&
+      identical(sha256(zip_path), prev[[1]]$sha256)) {
+    rec <- prev[[1]]
+    rec$reused_previous_download <- TRUE
+    rec$note <- paste("Statistics Canada could not be reached; kept the copy downloaded",
+                      prev[[1]]$downloaded_at)
+    records[[length(records) + 1]] <- rec
+    message("  WARNING: StatCan unreachable. Kept the copy downloaded ", prev[[1]]$downloaded_at,
+            " (checksum matches the manifest).")
+  } else {
+    message("  no verified previous copy to fall back on")
+  }
 }
 
 manifest <- list(

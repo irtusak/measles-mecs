@@ -495,3 +495,8 @@ run.**
   It now says "2 full months of the twelve so far". The November 2025 citation note is resolved: both PHAC
   releases are linked in the brief's sources.
 - **[M]** All five suites pass (server 295, contrast 38). The Overview was checked in Chrome locally.
+- **[M]** The first redeploy after the R pin failed earlier, at the download: Statistics Canada refused
+  GitHub's runner with `SSL connect error`, twice in a row, while answering normally from the Mac.
+  `fetch_data.R` now downloads the cNICS zip to a temp file, tries three times, and if StatCan stays
+  unreachable keeps the committed copy, but only when its SHA-256 matches the manifest. The manifest marks
+  it `reused_previous_download`. The eight PHAC files are still all required. Tested both paths in a copy.
