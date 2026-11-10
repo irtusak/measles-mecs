@@ -26,9 +26,9 @@ Vaccination status,1 dose,Statut vaccinal,1 dose,48,4
 Vaccination status,2 or more doses,Statut vaccinal,2 doses ou plus,55,5
 Vaccination status,Unknown,Statut vaccinal,Inconnu,58,5
 Genotypes,B3,Génotypes,B3,18,2
-Genotypes,D8,Génotypes,D8,585,52
+Genotypes,D8,Génotypes,D8,587,52
 Genotypes,Undetermined,Génotypes,Indéterminé,95,8
-Genotypes,Pending,Génotypes,En attente,69,6
+Genotypes,Pending,Génotypes,En attente,67,6
 Genotypes,N/A,Génotypes,s.o.,359,32
 Hospitalizations,All,Hospitalisations,Total,79,7
 Congenital measles cases,Laboratory-confirmed acute,Cas de rougeole congénitale,Confirmé en laboratoire aiguë,4,<1
