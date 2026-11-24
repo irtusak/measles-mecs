@@ -592,7 +592,7 @@ server <- function(input, output, session) {
                 meta$active_total, if (meta$active_total == 1) "" else "s",
                 meta$active_pt, meta$new_confirmed)),
       p(class = "smallnote",
-        strong("Our calculation, not a PHAC determination."),
+        strong("This dashboard's calculation, not a PHAC determination."),
         " See the panel below for how it is worked out.")
     )
   })
@@ -609,7 +609,7 @@ server <- function(input, output, session) {
         ", which ends ", strong(format(CLOCK$last_onset, "%d %B %Y")),
         " \u2014 and adds twelve months."),
       tags$ul(
-        tags$li(strong("It is our calculation, not a PHAC determination"),
+        tags$li(strong("It is this dashboard's calculation, not a PHAC determination"),
                 " and not a decision of the regional verification commission."),
         tags$li("The published data do not confirm genotype-level linkage of every chain ",
                 "of transmission."),
